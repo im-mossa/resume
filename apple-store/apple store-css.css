@@ -1,0 +1,299 @@
+@font-face {
+    font-family: Ubuntu;
+    src: url(./src/fonts/Ubuntu-Regular.ttf);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #fff;
+    font-family: Ubuntu;
+    vertical-align: top;
+}
+
+nav {
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: block;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    z-index: 9;
+    padding: 15px;
+}
+
+#logo {
+    width: 40px;
+}
+
+
+nav ul {
+    list-style: none;
+}
+
+nav ul li {
+    /* width: 100%; */
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.margin1 {
+    margin: 0 40px;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+.main-title {
+    font-size: 4em;
+    text-align: center;
+    margin: 60px 0;
+}
+
+.top-container,
+.middle-container {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.top-left {
+    display: inline-block;
+    width: 30%;
+    height: 300px;
+    margin: 50px;
+    text-align: center;
+    vertical-align: top;
+}
+
+#imge1 {
+    width: 80%;
+}
+
+#imge2 {
+    width: 100%;
+}
+
+#imge1,
+#imge2 {
+    margin-bottom: 30px;
+}
+
+.display-size {
+    font-size: 10px;
+}
+
+.s-logan {
+    margin: 10px 0 10px;
+    font-size: 30px;
+}
+
+.price {
+    font-size: 20px;
+}
+
+.top-rigth {
+    display: inline-block;
+    width: 30%;
+    height: 300px;
+    margin: 50px;
+    text-align: center;
+    vertical-align: top;
+}
+
+#compare {
+    background-color: #fafafa;
+    padding: 50px;
+}
+
+.middle-left,
+.middle-center,
+.middle-right {
+    width: 30%;
+    display: inline-block;
+    padding: 10px;
+    vertical-align: top;
+}
+
+.middle-left {
+    margin-top: 9px;
+}
+
+.middle-center {
+    margin-top: 3px;
+}
+
+.color-circle {
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    margin: 25px 1px;
+    display: inline-block;
+}
+
+.color1 {
+    background-color: #abaeb3;
+}
+
+.color2 {
+    background-color: #e2e3e4;
+}
+
+.hr {
+    margin: 10px 0;
+}
+
+.compare-item {
+    margin-bottom: 50px;
+}
+
+.compare-item:first-child {
+    margin-top: 40px;
+}
+
+#first-item {
+    margin-top: 18%;
+}
+
+.bottom-container {
+    width: 96%;
+    margin: 1% auto 0;
+    text-align: center;
+}
+
+.bottom-left,
+.bottom-right {
+    background-color: #f2f2f2;
+    width: 47%;
+    margin: 1%;
+    vertical-align: top;
+    display: inline-block;
+}
+
+.text-item-box {
+    padding: 10%;
+}
+
+.text-item-box>h2,
+.text-item-box>h3 {
+    margin-bottom: 30px;
+}
+
+#mac-image {
+    margin-top: -50px;
+}
+
+.text-item-box h2 {
+    font-size: 26px;
+}
+
+.text-item-box h3 {
+    font-size: 36px;
+}
+
+.bottom-item-box-image {
+    position: relative;
+}
+
+.text-item-box-absolute {
+    position: absolute;
+    top: 40%;
+    width: 90%;
+    padding: 5%;
+    color: #fafafa;
+}
+
+.text-item-box-absolute h2 {
+    font-size: 46px;
+    margin-bottom: 15px;
+}
+
+.text-item-box-absolute p {
+    font-weight: bold;
+}
+
+footer {
+    background-color: #f5f5f7;
+    text-align: center;
+    padding: 50px;
+    font-size: 18px;
+}
+
+@media only screen and (max-width: 768px) {
+    .nav-media {
+        max-width: 30%;
+        font-size: 1em;
+    }
+
+    .nav-media:first-child {
+        width: 2%;
+    }
+
+    .nav-media:nth-child(2) {
+        width: 20%;
+    }
+
+    /* #home>img {
+        width: 100%;
+    } */
+
+    .main-title {
+        font-size: 2em;
+    }
+
+    .top-container,
+    .middle-container {
+        width: 100%;
+    }
+
+    .top-left,
+    .top-rigth {
+        display: block;
+        width: 90%;
+        margin: 0 auto 30px;
+    }
+
+    .s-logan {
+        font-size: 30px;
+    }
+
+    #compare {
+        padding: 20px;
+    }
+
+    .middle-container {
+        width: 100%;
+    }
+
+    .middle-left,
+    .middle-center,
+    .middle-right {
+        width: 92%;
+        display: block;
+    }
+
+    .bottom-left,
+    .bottom-right {
+        width: 90%;
+        /* height: 488px; */
+        margin: 0 5% 5%;
+        display: block;
+    }
+    /* .bottom-item-box-image {
+        margin: 0 5%;
+        width: 100%;
+        height: 100%;
+    } */
+
+    .text-item-box-absolute {
+        top: 28%;
+    }
+    .text-item-box-absolute h2{
+        font-size: 40px;
+    }
+}

@@ -1,0 +1,209 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: font a;
+    src: url(../font/Oswald-VariableFont_wght.ttf);
+}
+
+body {
+    background-color: #333;
+    font-family: font a;
+}
+
+main {
+    margin-left: 38px;
+}
+
+hr {
+    border-color: #808080;
+    margin: 0 auto;
+    height: 2px;
+    width: 95%;
+}
+
+i.fa {
+    color: #bb86fc;
+}
+
+#container {
+    width: 95%;
+    padding: 1%;
+}
+
+#left-side {
+    background-color: #666;
+    display: inline-block;
+    width: 30%;
+    height: auto;
+    margin: 0.25%;
+    vertical-align: top;
+    border-radius: 10px;
+}
+
+#profile-box {
+    position: relative;
+
+}
+
+#profile-image {
+    position: relative;
+    border-radius: 10px 10px 0 0;
+}
+
+#profile-name {
+    width: 99%;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    font-size: 1em;
+    padding: 2px;
+    text-align: center;
+    bottom: 5px;
+    left: 0;
+}
+
+#description-box {
+    margin-top: -10px;
+    list-style: none;
+    padding: 10px;
+}
+
+#description-box>li>i {
+    font-size: 1em;
+}
+
+#description-box>li>span {
+    color: #fff;
+    margin-left: 10px;
+    font-size: 1.2em;
+}
+
+#skills {
+    padding: 5px;
+    margin-top: -10px;
+    padding: 10px;
+    color: #fff;
+}
+
+.fa-asterisk {
+    font-size: 20px;
+}
+
+.fa-globe {
+    font-size: 20px;
+}
+
+.item-title {
+    font-size: 1.4em;
+}
+
+.item1 {
+    font-size: 1em;
+}
+
+.skills-item {
+    margin-top: 0px;
+}
+
+.progress-box {
+    background-color: white;
+    border-radius: 15px;
+    width: 100%;
+    text-align: center;
+    font-size: 0.8em;
+    line-height: 10px;
+}
+
+.progress-bar {
+    background-color: #bb86fc;
+    border-radius: 20px;
+    padding: 10px;
+    line-height: 3px;
+}
+
+.pb100 {
+    width: 96% auto;
+}
+
+.pb80 {
+    width: 80%;
+}
+
+.pb70 {
+    width: 70%;
+}
+
+.pb60 {
+    width: 60%;
+}
+
+#right-side {
+    display: inline-block;
+    vertical-align: top;
+    width: 65%;
+}
+
+#right-side article {
+    background-color: #666;
+    border-radius: 10px;
+    margin: 0.5%;
+    height: auto;
+    width: 95%;
+    color: #fff;
+    padding: 24px;
+    font-size: 1.3em;
+}
+
+#right-side>article>h1>i {
+    font-size: 2.5em;
+}
+
+.article-item>h3,
+.article-item>h5,
+.article-item>p {
+    margin: 18px 0;
+}
+
+.label {
+    background-color: #bb86fc;
+    border-radius: 5px;
+    padding: 0px 5px;
+}
+
+.head-title {
+    font-size: 1.8em;
+}
+
+#store-link {
+    text-decoration: none;
+    color: #bb86fc;
+}
+
+#footer {
+    display: block;
+    background: #bb86fc;
+    width: 110%;
+    height: 40px;
+    text-align: center;
+    color: #eee;
+    padding: 10px 0;
+}
+
+#footer a {
+    color: #eee;
+    text-decoration: none;
+}
+
+@media only screen and (max-width: 800px) {
+    #left-side {
+        display: block;
+        width: 99%;
+    }
+    #right-side {
+        display: block;
+        width: 90%;
+    }
+}
