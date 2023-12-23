@@ -201,9 +201,13 @@ i.fa {
     #left-side {
         display: block;
         width: 99%;
+        margin: 10px 0;
     }
     #right-side {
         display: block;
         width: 90%;
+    }
+    #right-side>article {
+        margin: 10px 0;
     }
 }
