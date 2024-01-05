@@ -1,0 +1,47 @@
+
+body {
+    background-image: none;
+    background: #fff;
+}
+
+#holder-section {
+    background-color:#fff;
+    height: 100%;
+}
+
+#maine-section {
+    width: 100%;
+    border: none;
+    min-height: auto;
+    box-shadow: none;
+}
+
+input[type = 'text'],
+input[type = 'number'] {
+    width: 100%;
+    border: none;
+    box-shadow: none;
+    background-color: #fff;
+}
+
+.diisp-none-print {
+    display: none;
+}
+#name3 td,
+ td input {
+    font-size: 1.25em;
+}
+
+#result-table thead {
+    background-color: #ccc;
+    color: #000;
+}
+
+#result-table tbody tr:nth-child(2n) {
+    background-color: #aaa;
+}
+
+#tfoot {
+    background-color: #ccc;
+    color: #000;
+}

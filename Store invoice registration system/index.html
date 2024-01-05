@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css.css">
+    <link rel="shortcut icon" href="./fruit-icon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="./print-css.css" media="print">
+    <title>Store invoice registration system</title>
+</head>
+
+<body>
+    <header></header>
+    <main>
+        <section id="holder-section">
+            <section id="maine-section">
+                <form action="" method="get">
+                    <table>
+                        <thead>
+                            <tr id="name3">
+                                <td class="title">نام مشتری: </td>
+                                <td>
+                                    <input type="text" name="customerName" class="content customerName">
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody class="diisp-none-print">
+                            <tr>
+                                <td colspan="2">
+                                    <hr>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="title">نوع محصول: </td>
+                                <td>
+                                    <input type="text" name="productName" class="productName">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="title">وزن (کیلو)/ تعداد محصول: </td>
+                                <td>
+                                    <input type="number" name="productQTY"
+                                    class="productQTY">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="title">قیمت (تومان): </td>
+                                <td>
+                                    <input type="number" name="productPrice"
+                                    class="productPrice">
+                                </td>
+                            </tr>
+                            <tr>
+                            </tr>
+                        </tbody>
+                        <tfoot class="diisp-none-print">
+                            <td colspan="2">
+                                <input type="button" name="button" class="btn1" id="submit-btn" value="ثبت" onclick="dataInput()">
+                            </td>
+                        </tfoot>
+                    </table>
+                    <br class="diisp-none-print">
+                    <hr>
+                    <br class="diisp-none-print">
+                </form>
+                <table id="result-table">
+                    <thead>
+                        <tr>
+                            <th>محصول</th>
+                            <th>قیمت</th>
+                            <th>کیلو</th>
+                            <th>مجموع</th>
+                        </tr>
+                    </thead>
+                    <tbody id="result-body">
+                    </tbody>
+                    <tfoot >
+                        <tr>
+                            <td id="tfoot" colspan="4"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <div class="diisp-none-print">
+                    <input type="button" name="print-button" class="btn1" id="btn2" value="پرینت فاکتور">
+                </div>
+                <br>
+                <br>
+            </section>
+        </section>
+    </main>
+    <footer></footer>
+    <script src="./js1.js"></script>
+</body>
+
+</html>

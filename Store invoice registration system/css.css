@@ -1,0 +1,110 @@
+@font-face {
+    font-family: yekan;
+    src: url(./Yekan.ttf);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: yekan;
+}
+
+body {
+    background-color: #eee;
+    direction: rtl;
+    background-image: url(./store.jpg);
+    background-attachment: fixed;
+}
+
+#holder-section {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 200%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+#maine-section {
+    width: 400px;
+    height: auto;
+    border: 1.5px solid #eee;
+    min-height: 300px;
+    margin: 20px auto;
+    box-shadow: 1px 1px 5px 5px #aaa;
+    border-radius: 5px;
+    background-color: #fff;
+    padding: 20px;
+}
+table {
+    width: 100%;
+}
+
+.title {
+    font-size: 15px;
+    width: 25%;
+}
+
+/* .content {
+    width: 80%;
+} */
+
+input[type = 'text'],
+input[type = 'number'] {
+    width: 100%;
+    border: 1px solid #aaa;
+    border-radius: 3px;
+    padding: 5px;
+    box-shadow: 1px 1px 1px 1px #eee;
+    margin: 15px auto;
+}
+
+.btn1 {
+    background-color: #4285F4;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    float: left;
+    border-bottom: 6px solid #295397;
+    cursor: pointer;
+}
+
+.btn1:active {
+    margin-top: 6px;
+    border-bottom: none;
+}
+
+#btn2 {
+    display: none;
+    margin-top: 10px;
+}
+
+#result-table {
+    border-collapse: collapse;
+}
+
+#result-table tr td{
+    text-align: center;
+    padding: 3px;
+}
+
+#result-table thead {
+    background-color: #4285F4;
+    color: #fff;
+}
+
+#result-table tbody tr:nth-child(2n) {
+    background-color: #aaa;
+}
+
+#tfoot {
+    background-color: #4285F4;
+    color: #fff;
+}
+
+@media only screen and (max-width:420px) {
+    #maine-section{
+        width: 80%;
+    }
+}
