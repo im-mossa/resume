@@ -10,11 +10,22 @@ submitBtn.onclick = function() {
     const productPrice = document.querySelector(".productPrice");
     let currentSum = productPrice.value * productQTY.value;
     const tfoot = document.getElementById("tfoot");
-    // const newTr = document.createElement("tr");
-    // const newTd = document.createElement("td");
-    // newTd.innerText = productName;
-    // newTr.appendChild(newTd);
-    // result1Ele.appendChild(newTr);
+    if(customerNameEle.value == "") {
+        alert("لطفا نام مشتری را وارد کنید");
+        return;
+    } 
+    if(productName.value == "") {
+        alert("لطفا نام محصول را وارد کنید");
+        return;
+    }
+    if(productQTY.value == "") {
+        alert("لطفا تعداد محصول را وارد کنید");
+        return;
+    }
+    if(productPrice.value == "") {
+        alert("لطفا قیمت محصول را وارد کنید")
+        return;
+    }
     let newRecord = "<tr>";
     newRecord += "<td>" + productName.value +"</td>";
     newRecord += "<td>" + productPrice.value +"</td>";
