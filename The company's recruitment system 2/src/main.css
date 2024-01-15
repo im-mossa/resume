@@ -1,0 +1,151 @@
+@font-face {
+  font-family: Arimo;
+  src: url(./font/static/Arimo-Regular.ttf);
+}
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Arimo;
+}
+
+body {
+  background-color: #eee;
+}
+
+header {
+  padding: 10px;
+  border-bottom: 1px solid #aaa;
+  box-shadow: 0px 1px 3px 3px #ccc;
+  background-color: #fff;
+}
+
+header img {
+  display: inline-block;
+}
+
+header h3 {
+  display: inline-block;
+  vertical-align: top;
+  font-size: 1.7em;
+  margin-left: 27%;
+}
+
+main {
+  margin: 0 auto;
+}
+
+#right-section {
+  display: inline-block;
+  vertical-align: top;
+  margin: 2% 2.5%;
+  width: 50%;
+  height: 100%;
+  background-color: #fff;
+  padding: 15px;
+  box-shadow: 1px 1px 6px 6px #aaa;
+  border-radius: 10px;
+  font-size: larger;
+}
+
+table {
+  width: 100%;
+}
+
+.title {
+  width: 65%;
+}
+
+.content {
+  width: 35%;
+}
+
+input[type="number"],
+input[type="text"],
+select {
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  box-shadow: 1px 1px 1px 1px #eee;
+  padding: 10px;
+  font-size: large;
+  width: 90%;
+  /* margin-bottom: 10px; */
+  margin: 10px auto;
+}
+
+input[type="number"] {
+  width: 82%;
+}
+
+input[type="checkbox"] {
+  margin-bottom: 10px;
+}
+
+#submit-btn {
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: medium;
+  background-color: #979393;
+  color: #fff;
+  border-bottom: 4px solid #484848;
+  margin: 10px 27px;
+  float: right;
+}
+
+#submit-btn:active {
+  border-bottom: none;
+  margin-top: 14px;
+}
+
+#left-section {
+  vertical-align: top;
+  display: inline-block;
+  margin: 2% 0.5%;
+  width: 38%;
+  height: 260px;
+  padding: 15px;
+  text-align: center;
+}
+
+#result-message {
+  font-size: 24px;
+}
+
+@media only screen and (max-width:1070px) {
+  
+  header h3 {
+    vertical-align: baseline;
+    font-size: large;
+    margin-left: 0%;
+  }
+  
+  #right-section {
+    margin: 8% 3.5%;
+    width: 85%;
+    font-size: small;
+  }
+  
+  input[type="number"],
+  input[type="text"],
+  select {
+    padding: 5px;
+    font-size: small;
+    width: 90%;
+  }
+
+  #submit-btn {
+    font-size: small;
+    margin: 10px auto;
+  }
+
+  #left-section {
+    display: block;
+    margin: 5% auto;
+    width: 80%;
+  }
+  
+  #result-message {
+    font-size: 14px;
+  }
+}
+

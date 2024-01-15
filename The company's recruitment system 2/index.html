@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./src/img/logo company.png" type="image/x-icon">
+    <link rel="stylesheet" href="src/main.css" />
+    <title>MAS company</title>
+  </head>
+  <body>
+    <header>
+      <img
+        src="src/img/mas logo 1.png"
+        alt="logo"
+        width="100px"
+        height="30px"
+      />
+      <h3>Company employment review form</h3>
+    </header>
+    <main>
+      <section id="right-section">
+        <table>
+          <tr>
+            <td class="title">
+            <label for="degree">degree : </label>
+            </td>
+            <td class="content">
+              <select name="degree" id="degree">
+                <option value="0" selected>choose your degree</option>
+                <option value="1">No degree</option>
+                <option value="2">diploma</option>
+                <option value="3">Bachelor Degree</option>
+                <option value="4">Masters</option>
+                <option value="5">P.H.D</option>
+                <option value="6">Higher than P.H.D</option>
+            </td>
+          </tr>
+          <tr>
+            <td class="title">
+            <label for="age">age : </label>
+            </td>
+            <td class="content">
+            <input type="number" name="age" id="age" min="14" max="70">
+            </td>
+          </tr>
+          <tr>
+            <td class="title">
+            <label for="location">Is the location of the company close to your place of residence?</label>
+            </td>
+            <td class="content">
+              <input type="radio" name="location" class="location" id="location-yes" value="yes" required>yes
+              <input type="radio" name="location" class="location" id="location-no" value="no" required>no
+            </td>
+          </tr>
+          <tr>
+            <td class="title">
+              <label for="year">Year of entering the labor market (ad) : </label>
+            </td>
+            <td class="content"><input type="number" name="year" id="year" min="1974"></td>
+          </tr>
+          <tr>
+            <td class="title">
+              <label for="salary">proposed salary ($) : </label>
+            </td>
+            <td class="content">
+              <input type="number" name="salary" id="salary" min="1000">
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <input type="button" id="submit-btn" class="btn" value="Check the conditions">
+            </td>
+          </tr>
+        </table>
+        </select>
+      </section>
+      <section id="left-section">
+        <img id="result-image" width="30%"><br><br>
+        <h3 id="result-message"></h3>
+      </section>
+    </main>
+    <script src="src/main.js"></script>
+  </body>
+</html>
