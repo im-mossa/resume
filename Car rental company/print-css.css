@@ -2,31 +2,33 @@
   width: 200px;
 }
 
-/* .container-rent > div:not(#),
-#img1,
-#Return,
-#print,
-section:nth-child(3),
-section:nth-child(4),
-section:nth-child(5),
-section:nth-child(6),
-.container-text1,
-#container-text5,
-#text10,
-.div2,
-footer {
-  display: none;
-} */
+body {
+  background-color: white;
+}
+
+main > .result-section {
+  border: none;
+}
+
+.result-section > .result-box {
+  text-align: start;
+  background-color: white;
+  border: none;
+}
+
+.result-text {
+  color: black;
+  font-size: 20px;
+}
 
 #img1,
-.container-rent > #container-part1,
-.container-rent > .container-part2,
-.container-rent > #submitButton,
-.container-text1,
+.container-rent,
 #container-text2,
 #container-text3,
 #section1,
+.container-text1,
 #container-text5,
 footer {
   display: none;
+  
 }
