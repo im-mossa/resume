@@ -769,7 +769,7 @@ footer {
 
   .container-rent > .information-section {
     display: none;
-    margin: 0px 0px 0px 2px;
+    margin: 0px auto;
   }
 
   #container-part1 {
