@@ -11,7 +11,7 @@
 
 header {
   background-color: rgb(255, 255, 255);
-  height: 25px;
+  height: 50px;
 }
 
 #logo {
@@ -20,39 +20,234 @@ header {
 
 body {
   position: relative;
-  background-color: #fff;
+  background-color: gray;
 }
 
 #img1 {
   position: absolute;
   z-index: -1;
   width: 100%;
-  height: 512px;
+  height: 580px;
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
 
 .container-rent {
   position: absolute;
-  width: 90%;
-  height: 380px;
+  width: 1200px;
+  height: 420px;
   top: 80px;
   padding: 40px;
-  margin-left: 2%;
+  margin-left: 110px;
   background-color: #ffffff81;
   border-radius: 10px;
+  transition: height 0.3s ease;
+}
+
+.part-box {
+  height: 50px;
+  margin: -20px 0 0 0;
+  overflow: hidden;
+}
+
+.choose-section {
+  margin: 0 100px 0 0px;
+}
+
+.header-car-section {
+  margin: -30px auto 0px;
+}
+
+.car-item {
+  margin: 0px 10px 20px 10px;
+  display: inline-block;
+  width: 110px;
+  height: 180px;
+}
+
+.car-item-display {
+  opacity: 0.3;
+}
+
+.a {
+  position: absolute;
+  text-decoration: none;
+  border: 5px solid #000000;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 110px;
+  height: 160px;
+}
+
+.car-item-selected {
+  border: 5px solid red;
+  position: absolute;
+  text-decoration: none;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 110px;
+  height: 160px;
+  opacity: 0.6;
+}
+
+.car-item-head {
+  background-color: #000000;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  color: #fff;
+  height: 80px;
+  padding: 0px 0px;
+}
+
+.car-item-image {
+  position: relative;
+}
+
+.car-item-image {
+  width: 190px;
+  border-radius: 10%;
+  border: 3px solid #333;
+  position: relative;
+  top: -35px;
+  left: 0px;
+}
+
+.car-item h5 {
+  background-color: #fff;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  position: relative;
+  font-size: 13px;
+  padding: 85px 5px 10px;
+  color: black;
+  height: 35px;
+  bottom: 130px;
+  z-index: -1;
+}
+
+.information-section,
+main > .result-section {
+  width: 1100px;
+  height: 440px;
+  border: 1px solid #aaa;
+  border-radius: 10px;
+  background-color: #fff;
+  padding: 5px;
+}
+
+.container-rent > .information-section {
+  display: none;
+  margin: -40px 0px 0px 36px;
+}
+
+main > .result-section {
+  display: none;
+  position: absolute;
+  top: 100px;
+  right: 7px;
+  left: 10px;
+}
+
+.Identity-information,
+.rental-information,
+main > .result-section {
+  padding: 5px;
+}
+
+.table1,
+.table2,
+.result-section > .result-box {
+  text-align: start;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
+  width: 850px;
+  height: 150px;
+  margin: 5px auto;
+  padding: 10px 0 0 30px;
+}
+
+.table2 > div,
+.table1 > div {
+  margin: 10px auto 5px;
+}
+
+.result-section > .result-box {
+  position: absolute;
+  top: 15px;
+  right: 10px;
+  left: 10px;
+  text-align: center;
+  padding: 20px 0 0 0;
+  height: 360px;
+  line-height: 40px;
+}
+
+.input,
+.label {
+  padding: 0px 0 0 30px;
+}
+
+.input {
+  margin: 10px auto;
+  padding: 10px;
+  background-color: rgb(210, 210, 210);
+  border: none;
+  border-radius: 5px;
+  width: 250px;
+  height: 10px;
+  color: black;
+  font-size: large;
+}
+
+.label {
+  color: #fff;
+  font-size: medium;
+}
+
+#submit1 {
+  display: block;
+  border: none;
+  background-color: gray;
+  color: #fff;
+  width: 200px;
+  height: 35px;
+  border-radius: 10px;
+  margin: -35px 0 0px 540px;
+  font-size: large;
+}
+
+#submit1:active {
+  background-color: rgb(249, 248, 248);
+  color: #000;
+}
+
+.table2 > div > .submit {
+  display: block;
+  border: none;
+  background-color: gray;
+  color: #fff;
+  width: 200px;
+  height: 35px;
+  border-radius: 10px;
+  margin: -45px 0 0px 540px;
+  font-size: large;
+}
+
+.table2 > div > .submit:active {
+  background-color: rgb(249, 248, 248);
+  color: #000;
 }
 
 .container-rent > div {
   text-align: center;
-  margin: 3%;
+  margin: 2px;
 }
 
 .container-part2 {
   position: absolute;
   right: 2%;
   left: 2%;
-  top: 0%;
+  top: 60px;
   bottom: 0em;
   display: none;
 }
@@ -95,10 +290,27 @@ body {
   margin: 0 auto;
 }
 
-#Return,
-#print {
+#Return,#Return1,#Return2,
+.result-box > .print {
+  background-color: gray;
+  margin: 0px 0px 0px 150px;
+  padding: 0 0 0px 0;
   display: none;
-  width: 30%;
+  width: 200px;
+  height: 35px;
+}
+
+.Return-infotmation {
+  background-color: gray;
+  margin: 10px 0px 0px 150px;
+  padding: 0 0 0px 0;
+  display: none;
+  width: 200px;
+  height: 35px;
+}
+
+.result-text {
+  color: white;
 }
 
 #result1 {
@@ -110,33 +322,6 @@ body {
   width: 100px;
   height: 70px;
   border-radius: 10px;
-}
-
-.tr-line3 {
-  font-weight: bolder;
-  margin: 0 0 0 0px;
-}
-
-.input {
-  margin: 0%;
-  padding: 10px;
-  border: none;
-  border-radius: 10px;
-  font-size: large;
-  color: #aaa;
-  background-color: rgba(255, 255, 255, 0.873);
-}
-
-#carModel {
-  width: 500px;
-}
-
-#vanModel {
-  width: 500px;
-}
-
-#pickUpModel {
-  width: 500px;
 }
 
 .container-text1 {
@@ -156,7 +341,7 @@ body {
 #container-text2 {
   position: relative;
   text-align: initial;
-  top: 33em;
+  top: 32em;
   background-color: #ffffff83;
   height: 170px;
 }
@@ -172,6 +357,10 @@ body {
 
 .text2 {
   font-size: 1.5em;
+}
+
+#container-text3 {
+  margin-top: 80px;
 }
 
 .img2 {
@@ -302,20 +491,287 @@ footer {
   #img1 {
     width: 100%;
     height: 330px;
+    display: none;
   }
 
   .container-rent {
     width: 92%;
-    height: 300px;
+    height: 290px;
     top: 25px;
     padding: 5px;
     margin-left: 2.5%;
   }
 
-  tr {
-    display: block;
+  .part-box {
+    height: 0px;
+    transition: height 0.3 ease;
   }
-  
+
+  .choose-section {
+    margin: 0 50px 0 -60px;
+  }
+
+  .header-car-section {
+    margin: 0px 0px 0px 0px;
+  }
+
+  .car-item {
+    margin: 0px 0px 0px 10px;
+    display: inline-block;
+    width: 100px;
+    height: 180px;
+  }
+
+  .car-item-display {
+    opacity: 0.3;
+  }
+
+  .a {
+    position: absolute;
+    text-decoration: none;
+    border: 5px solid #000000;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 100px;
+    height: 160px;
+  }
+
+  .car-item-selected {
+    border: 5px solid red;
+    position: absolute;
+    text-decoration: none;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 100px;
+    height: 160px;
+    opacity: 0.6;
+  }
+
+  .car-item-head {
+    background-color: #000000;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    color: #fff;
+    height: 80px;
+    padding: 0px 0px;
+  }
+
+  .car-item-image {
+    position: relative;
+  }
+
+  .car-item-image {
+    width: 90px;
+    border-radius: 10%;
+    border: 3px solid #333;
+    position: relative;
+    top: -35px;
+    left: 0px;
+  }
+
+  .car-item h5 {
+    background-color: #fff;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    position: relative;
+    font-size: 13px;
+    padding: 85px 5px 10px;
+    color: black;
+    height: 35px;
+    bottom: 130px;
+    z-index: -1;
+  }
+
+  .information-section {
+    width: 240px;
+    height: 720px;
+    border: 1px solid #aaa;
+    border-radius: 10px;
+    margin: 0px auto;
+    background-color: #fff;
+    padding: 25px;
+  }
+
+  main > .result-section {
+    width: 240px;
+    height: 720px;
+    border: 1px solid #aaa;
+    border-radius: 10px;
+    margin: -20px auto;
+    background-color: #fff;
+    padding: 25px;
+  }
+
+  .information-section {
+    display: none;
+  }
+
+  main > .result-section {
+    display: none;
+  }
+
+  .Identity-information,
+  .rental-information,
+  main > .result-section {
+    padding: 5px;
+  }
+
+  .table1,
+  .table2,
+  .result-section > .result-box {
+    text-align: start;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    border-radius: 10px;
+    width: 240px;
+    height: 310px;
+    margin: 0 0 0 -5px;
+    padding: 0px 0px 0 0px;
+  }
+
+  .result-section > .result-box {
+    margin: 0px 0px 0px 5px;
+    text-align: center;
+    padding: 10px;
+    width: 200px;
+    height: 680px;
+    line-height: 40px;
+  }
+
+  .result-box > .print {
+    margin: 0 0 0 0;
+  }
+
+  .header-information {
+    font-size: 20px;
+  }
+
+  .input,
+  .label {
+    margin: 0px 0px;
+  }
+
+  .input {
+    background-color: rgb(210, 210, 210);
+    border-radius: 5px;
+    width: 100px;
+    height: 13px;
+    color: black;
+    font-size: large;
+  }
+
+  .label {
+    color: #fff;
+    font-size: 20px;
+  }
+
+  .label1 {
+    text-align: center;
+    margin: 0 0 0 10px;
+  }
+
+  .table2 > div > .startDate0 {
+    margin: 0 0 0 35px;
+    width: 150px;
+  }
+
+  .label2 {
+    margin: 0 0 0 80px;
+  }
+
+  .table2 > div > .endDate0 {
+    margin: 0 0 0 35px;
+    width: 150px;
+  }
+
+  .label3 {
+    margin: 0 0 0 30px;
+  }
+
+  #label3 {
+    margin: 0 0px 0 10px;
+  }
+
+  .table2 > div > .submit {
+    float: inline-end;
+    border: none;
+    background-color: gray;
+    color: #fff;
+    width: 170px;
+    height: 34px;
+    border-radius: 5px;
+    padding: 0 0 5px 0;
+    margin: -80px 35px 0px 0px;
+    font-size: 13px;
+  }
+
+  .table2 > div > .cost {
+    margin: 60px 0px 0 35px;
+    width: 150px;
+  }
+
+  .table2 > div > .submit:active {
+    background-color: rgb(249, 248, 248);
+    color: #000;
+  }
+
+  .label4 {
+    margin: 0 0px 0 40px;
+  }
+
+  .table1 > .f-name-car {
+    margin: 0 0 0 35px;
+    width: 150px;
+  }
+
+  .label5 {
+    margin: 0 0 0 30px;
+  }
+
+  .table1 > .l-name-car {
+    margin: 0 0 0 35px;
+    width: 150px;
+  }
+
+  .label6 {
+    margin: 0 0 0 25px;
+  }
+
+  .table1 > .phone-car {
+    margin: 0 0 0 35px;
+    width: 150px;
+  }
+
+  .label7 {
+    margin: 0 0 0 50px;
+  }
+
+  .table1 > .address-car {
+    margin: 0 0 0 35px;
+    width: 150px;
+  }
+
+  #submit1 {
+    display: block;
+    border: none;
+    background-color: gray;
+    color: #fff;
+    width: 100px;
+    height: 35px;
+    border-radius: 10px;
+    margin: -35px 0 0px 10px;
+    font-size: medium;
+  }
+
+  .container-part2 {
+    top: 0px;
+  }
+
+  .container-rent > .information-section {
+    display: none;
+    margin: 0px 0px 0px 2px;
+  }
+
   #container-part1 {
     margin-top: 60px;
   }
@@ -327,35 +783,26 @@ footer {
     height: 70px;
   }
 
-  .img-car > td >img {
-    margin: 0 auto;
-    width: 65px;
-    height: 50px;
-  }
-
-  .img-car > td {
-    font-size: 10px;
-  }
-
-  .tr-line3 {
-    margin: 0px 0px 0 0px;
-  }
-
-  .tr-line4 {
-    margin: 0 0px 0px 0px;
-  }
-
   .btn1 {
     margin: 0 20px 0px 25px;
     padding: 0 0px 0 0;
-    font-size: 10px;
+    font-size: 20px;
     width: 83px;
     height: 33px;
   }
 
-  #Return {
+  #Return,#Return1,#Return2 {
     display: none;
-    width: 30%;
+    width: 100px;
+    margin: 10px 0 0 130px;
+    font-size: large;
+  }
+
+  .Return-infotmation {
+    display: none;
+    width: 200px;
+    margin: 30px 0 0 0px;
+    font-size: 20px;
   }
 
   #result1 {
@@ -365,22 +812,8 @@ footer {
 
   .input {
     font-size: 10px;
-    width: 70px;
-  }
-
-  #carModel {
-    height: 37.5px;
-    width: 80px;
-  }
-
-  #vanModel {
-    height: 37.5px;
-    width: 80px;
-  }
-
-  #pickUpModel {
-    height: 37.5px;
-    width: 80px;
+    width: 100px;
+    margin: 5px 0 5px 0;
   }
 
   .container-text1-1 {
@@ -412,7 +845,7 @@ footer {
   #container-text2 {
     text-align: center;
     top: 20.6em;
-    height: 210px;
+    height: 130px;
   }
 
   .text2-1 {
@@ -425,7 +858,7 @@ footer {
   }
 
   #container-text3 {
-    margin-top: 135px;
+    margin-top: 240px;
   }
 
   #section1 {
@@ -451,7 +884,7 @@ footer {
     background: rgb(0, 0, 0);
     background: linear-gradient(
       180deg,
-      /* rgba(0, 0, 0, 1) 0%, */ rgba(0, 0, 0, 0.7596288515406162) 35%,
+      rgba(0, 0, 0, 0.7596288515406162) 35%,
       rgba(0, 0, 0, 0.4963235294117647) 72%,
       rgba(0, 0, 0, 0) 100%
     );
@@ -467,7 +900,7 @@ footer {
   }
 
   .text5 {
-    bottom: 9.1em;
+    bottom: 9.15em;
   }
 
   .text6 {
