@@ -19,428 +19,640 @@
     <link rel="stylesheet" href="./print-css.css" media="print" />
     <title>Mohammad car rental company</title>
   </head>
-  <body>
+  <body id="body">
     <header>
       <img src="./src/img/logo.png" alt="this is logo" id="logo" />
-      <h3></h3>
     </header>
     <main>
-      <img src="./src/img/01_Ferrari_SF90_03.webp" alt="image" id="img1" />
-      <section class="container-rent">
-        <div id="container-part1">
-          <button type="button" class="btn" onclick="fCar()">
-            <i class="fa fa-car-side icon" id="btn-car"></i>car
-          </button>
-          <button type="button" class="btn" onclick="fVan()">
-            <i class="fa fa-shuttle-van icon"></i>van
-          </button>
-          <button type="button" class="btn" onclick="fPickUp()">
-            <i class="fa fa-truck-pickup icon"></i>pickup
-          </button>
-        </div>
-        <br />
-        <div class="container-part2" id="container-car">
-          <form>
-            <table>
-              <tr class="img-car part2">
-                <td>
-                  <img
-                    src="./src/img/benz-cls.jpeg"
-                    alt="benz-cls"
-                    class="img5"
-                  /><br />benz-cls<br />110$
-                </td>
-                <td>
-                  <img
-                    src="./src/img/benz-E350.jpeg"
-                    alt="benz-E350"
-                    class="img5"
-                  /><br />benz-E350<br />100$
-                </td>
-                <td>
-                  <img
-                    src="./src/img/bmw-528.jpeg"
-                    alt="bmw-528"
-                    class="img5"
-                  /><br />bmw-528<br />100$
-                </td>
-                <td>
-                  <img
-                    src="./src/img/bmw-i8.jpeg"
-                    alt="bmw-i8"
-                    class="img5"
-                  /><br />bmw-i8<br />200$
-                </td>
-              </tr>
-              <tr class="img-car part2">
-                <td>
-                  <img
-                    src="./src/img/bmw-x6.jpeg"
-                    alt="bmw-x6"
-                    class="img5"
-                  /><br />bmw-x6<br />105$
-                </td>
-                <td>
-                  <img
-                    src="./src/img/porsche-911.jpeg"
-                    alt="porsche-91"
-                    class="img5"
-                  /><br />porsche-91<br />110$
-                </td>
-                <td>
-                  <img
-                    src="./src/img/porsche-boxster.jpeg"
-                    alt="porsche-boxster"
-                    class="img5"
-                  /><br />p-boxster<br />150$
-                </td>
-                <td>
-                  <img
-                    src="./src/img/prado-4X.jpeg"
-                    alt="prado-4X"
-                    class="img5"
-                  /><br />prado-4X<br />100$
-                </td>
-              </tr>
-              <tr class="part2 tr-line3">
-                <td colspan="2">
-                  <label for="carModel" class="container-text1-1"
-                    >select</label
-                  >
-                </td>
-                <td>
-                  <label for="startDate" class="container-text1-2"
-                    >Pick-up date</label
-                  >
-                </td>
-                <td>
-                  <label for="endDate" class="container-text1-3"
-                    >Return date</label
-                  >
-                </td>
-              </tr>
-              <tr class="part2 tr-line4">
-                <td colspan="2">
-                  <select name="Pick-up & Return" class="input" id="carModel">
-                    <option value="benz-cls">benz-cls</option>
-                    <option value="benz-E350">benz-E350</option>
-                    <option value="bmw-528">bmw-528</option>
-                    <option value="bmw-i8">bmw-i8</option>
-                    <option value="bmw-x6">bmw-x6</option>
-                    <option value="porsche-91">porsche-91</option>
-                    <option value="porsche-boxster">porsche-boxster</option>
-                    <option value="prado-4X">prado-4X</option>
-                  </select>
-                </td>
-                <td>
+      <div class="part-box">
+        <img src="./src/img/01_Ferrari_SF90_03.webp" alt="image" id="img1" />
+        <section class="container-rent container-rent-display">
+          <div id="container-part1">
+            <button type="button" class="btn" onclick="fCar()">
+              <i class="fa fa-car-side icon"></i>car
+            </button>
+            <button type="button" class="btn" onclick="fVan()">
+              <i class="fa fa-shuttle-van icon"></i>van
+            </button>
+            <button type="button" class="btn" onclick="fPickUp()">
+              <i class="fa fa-truck-pickup icon"></i>pickup
+            </button>
+          </div>
+          <br />
+          <div class="container-part2" id="container-car">
+            <!-- cars section -->
+            <h2 class="header-car-section">
+              Please select the car you want to rent
+            </h2>
+            <div class="choose-section">
+              <!-- car item 1 -->
+              <div class="car-item">
+                <a class="a" href="#" onclick="selectCar('bmw-i8',this)"
+                  ><div class="car-item-head">
+                    <h4>BMW I8 2015</h4>
+                  </div>
+                  <div>
+                    <img
+                      src="./src/img/bmw-i8.jpeg"
+                      alt="i8-image"
+                      class="car-item-image img5"
+                    />
+                  </div>
+                  <h5>Car rental $200 per day</h5></a
+                >
+              </div>
+              <!-- car item 2 -->
+              <div class="car-item">
+                <a class="a" href="#" onclick="selectCar('bmw-x6',this)"
+                  ><div class="car-item-head">
+                    <h4>BMW X6 2012</h4>
+                  </div>
+                  <div>
+                    <img
+                      src="./src/img/bmw-x6.jpeg"
+                      alt="x6-image"
+                      class="car-item-image img5"
+                    />
+                  </div>
+                  <h5>Car rental $105 per day</h5></a
+                >
+              </div>
+              <!-- car item 3 -->
+              <div class="car-item">
+                <a class="a" href="#" onclick="selectCar('bmw-528',this)"
+                  ><div class="car-item-head">
+                    <h4>BMW 528 2013</h4>
+                  </div>
+                  <div>
+                    <img
+                      src="./src/img/bmw-528.jpeg"
+                      alt="x6-image"
+                      class="car-item-image img5"
+                    />
+                  </div>
+                  <h5>Car rental $100 per day</h5></a
+                >
+              </div>
+              <!-- car item 4 -->
+              <div class="car-item">
+                <a class="a" href="#" onclick="selectCar('benz-E350',this)"
+                  ><div class="car-item-head">
+                    <h4>BENZ E350 2014</h4>
+                  </div>
+                  <div>
+                    <img
+                      src="./src/img/benz-E350.jpeg"
+                      alt="x6-image"
+                      class="car-item-image img5"
+                    />
+                  </div>
+                  <h5>Car rental $100 per day</h5></a
+                >
+              </div>
+              <br />
+              <!-- car item 5 -->
+              <div class="car-item">
+                <a class="a" href="#" onclick="selectCar('prado-4X',this)"
+                  ><div class="car-item-head">
+                    <h4>PRADO 4X 2015</h4>
+                  </div>
+                  <div>
+                    <img
+                      src="./src/img/prado-4X.jpeg"
+                      alt="prado-4X image"
+                      class="car-item-image img5"
+                    />
+                  </div>
+                  <h5>Car rental $100 per day</h5></a
+                >
+              </div>
+              <!-- car item 6 -->
+              <div class="car-item">
+                <a class="a" href="#" onclick="selectCar('porsche-911',this)"
+                  ><div class="car-item-head">
+                    <h4>PORSCHE 911 2012</h4>
+                  </div>
+                  <div>
+                    <img
+                      src="./src/img/porsche-911.jpeg"
+                      alt="porsche-911 image"
+                      class="car-item-image img5"
+                    />
+                  </div>
+                  <h5>Car rental $110 per day</h5></a
+                >
+              </div>
+              <!-- car item 7 -->
+              <div class="car-item">
+                <a
+                  class="a"
+                  href="#"
+                  class="item-a"
+                  onclick="selectCar('porsche-boxster',this)"
+                >
+                  <div class="car-item-head">
+                    <h4>PORSCHE BOXTER 2014</h4>
+                  </div>
+                  <div>
+                    <img
+                      src="./src/img/porsche-boxster.jpeg"
+                      alt="porsche-boxster image"
+                      class="car-item-image img5"
+                    />
+                  </div>
+                  <h5>Car rental $150 per day</h5></a
+                >
+              </div>
+              <!-- car item 8 -->
+              <div class="car-item">
+                <a class="a" href="#" onclick="selectCar('benz-cls',this)"
+                  ><div class="car-item-head">
+                    <h4>BENZ CLS 2010</h4>
+                  </div>
+                  <div>
+                    <img
+                      src="./src/img/benz-cls.jpeg"
+                      alt="benz-cls"
+                      class="car-item-image img5"
+                    />
+                  </div>
+                  <h5>Car rental $110 per day</h5></a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="information-section" id="information-car">
+            <div class="rental-information">
+              <h1 class="header-information">Calculate the cost of renting a car</h1>
+              <form action="" method="get" id="form">
+                <div class="table2">
+                  <div>
+                    <label class="label label1" for="startDate"
+                      >Rental date from: </label
+                    ><input
+                      class="startDate0 input"
+                      type="datetime-local"
+                      id="startDate"
+                    /><label class="label label2" for="endDate">to: </label
+                    ><input class="input endDate0" type="datetime-local" id="endDate" />
+                  </div>
+                  <div>
+                    <label class="label label3" for="cost">Car rental fee: </label
+                    ><input
+                      class="input cost"
+                      type="number"
+                      id="cost"
+                      readonly
+                      disabled
+                    />
+                    <button
+                      type="button"
+                      class="btn btn1 submit"
+                      onclick="calculateTotalRentPrice(carModel, document.getElementById('startDate').value, document.getElementById('endDate').value)"
+                    >
+                      Cost calculation
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="Identity-information">
+              <h1 class="header-information">Car rental information</h1>
+              <form action="" method="get" id="form">
+                <div class="table1">
+                  <label class="label label4" for="first-name">First name: </label>
                   <input
-                    type="datetime-local"
-                    name="pick-up-date"
-                    class="input"
-                    id="startDate"
+                    class="input f-name-car"
+                    type="text"
+                    name="first-name"
+                    id="f-name"
                   />
-                </td>
-                <td>
+                  <label class="label label5" for="secend-name">Secend name: </label>
                   <input
-                    type="datetime-local"
-                    name="Return-date"
-                    class="input"
-                    id="endDate"
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>
+                    class="input l-name-car"
+                    type="text"
+                    name="secend-name"
+                    id="l-name"
+                  /><br />
+                  <label class="label label6" for="phone"
+                  >Phone Number:
+                  </label>
+                  <input class="input phone-car" type="tel" name="phone" id="phone" />
+                  <label class="label label7" for="address">Address: </label>
+                  <input type="text" class="input address-car" id="address" name="address">
                   <button
                     type="button"
-                    id=""
-                    class="btn btn1"
+                    id="Return"
+                    class="btn btn1 Return"
                     onclick="displayBlock()"
                   >
                     Return
                   </button>
-                </td>
-                <td></td>
-                <td></td>
-                <td>
                   <button
                     type="button"
-                    id="btn1"
-                    class="btn btn1"
-                    onclick="displaynone()"
+                    id="submit1"
+                    class="btn btn1 submit0"
+                    onclick="submitRent()"
                   >
-                    submit
+                    car rental
                   </button>
-                </td>
-                <td></td>
-              </tr>
-            </table>
-          </form>
-        </div>
-        <div class="container-part2" id="container-van">
-          <form>
-            <table>
-              <tr class="img-car part2">
-                <td>
-                  <img
-                    src="./src/img/24_frd_trn_cargo_mr_lwb_oxwh_rpro-removebg-preview.png"
-                    alt="ford-cargo"
-                    class="img5"
-                  /><br />ford-cargo<br />200$
-                </td>
-                <td>
-                  <img
-                    src="./src/img/white-van-big-removebg-preview.png"
-                    alt="ford-passenger"
-                    class="img5"
-                  /><br />f-passenger<br />250$
-                </td>
-                <td>
-                  <img
-                    src="./src/img/WEB_2020_Volkswagen_Crafter_by_P-removebg-preview.png"
-                    alt="Volkswagen_Crafter"
-                    class="img5"
-                  /><br />v_crafter<br />220$
-                </td>
-                <td>
-                  <img
-                    src="./src/img/Ford_Transit_Dropside-removebg-preview.png"
-                    alt="Ford Transit Dropside"
-                    class="img5"
-                  /><br />f-dropside<br />180$
-                </td>
-              </tr>
-              <tr class="img-car part2">
-                <td>
-                  <img
-                    src="./src/img/transit-curtain_hire_08-551x413-removebg-preview.png"
-                    alt="ford-curtain"
-                    class="img5"
-                  /><br />ford-curtain<br />200$
-                </td>
-                <td>
-                  <img
-                    src="./src/img/ford-connect-removebg-preview.png"
-                    alt="ford-connect"
-                    class="img5"
-                  /><br />ford-connect<br />180$
-                </td>
-              </tr>
-              <tr class="part2 tr-line3">
-                <td colspan="2">
-                  <label for="vanModel" class="container-text1-1">select</label>
-                </td>
-                <td>
-                  <label for="startDate1" class="container-text1-2"
-                    >Pick-up date</label
-                  >
-                </td>
-                <td>
-                  <label for="endDate1" class="container-text1-3"
-                    >Return date</label
-                  >
-                </td>
-                <td></td>
-              </tr>
-              <tr class="part2 tr-line4">
-                <td colspan="2">
-                  <select name="Pick-up & Return" class="input" id="vanModel">
-                    <option value="ford-cargo">ford-cargo</option>
-                    <option value="ford-passenger">ford-passenger</option>
-                    <option value="Volkswagen_Crafter">
-                      Volkswagen_Crafter
-                    </option>
-                    <option value="Ford-Dropside">Ford-Dropside</option>
-                    <option value="ford-curtain">ford-curtain</option>
-                    <option value="ford-connect">ford-connect</option>
-                  </select>
-                </td>
-                <td>
-                  <input
-                    type="datetime-local"
-                    name="pick-up-date"
-                    class="input"
-                    id="startDate1"
-                  />
-                </td>
-                <td>
-                  <input
-                    type="datetime-local"
-                    name="Return-date"
-                    class="input"
-                    id="endDate1"
-                  />
-                </td>
-              </tr>
-              <tr>
-                  <td>
+                </div>
+              </div>
+              </form>
+          </div>
+          <div class="container-part2" id="container-van">
+            <!-- vans section -->
+            <h2 class="header-car-section">
+              Please select the van you want to rent
+            </h2>
+            <div class="choose-section">
+              <!-- van item 1 -->
+              <div class="car-item">
+                <a class="a" href="#" onclick="selectVan('ford-cargo',this)"
+                  ><div class="car-item-head">
+                    <h4>ford-cargo 2020</h4>
+                  </div>
+                  <div>
+                    <img
+                      src="./src/img/24_frd_trn_cargo_mr_lwb_oxwh_rpro-removebg-preview.png"
+                      alt="ford-cargo-image"
+                      class="car-item-image img5"
+                    />
+                  </div>
+                  <h5>van rental $200 per day</h5></a
+                >
+              </div>
+              <!-- van item 2 -->
+              <div class="car-item">
+                <a class="a" href="#" onclick="selectVan('f-passenger',this)"
+                  ><div class="car-item-head">
+                    <h4>f-passenger 2020</h4>
+                  </div>
+                  <div>
+                    <img
+                      src="./src/img/white-van-big-removebg-preview.png"
+                      alt="f-passenger-image"
+                      class="car-item-image img5"
+                    />
+                  </div>
+                  <h5>van rental $250 per day</h5></a
+                >
+              </div>
+              <!-- van item 3 -->
+              <div class="car-item">
+                <a class="a" href="#" onclick="selectVan('v_crafter',this)"
+                  ><div class="car-item-head">
+                    <h4>v_crafter 2020</h4>
+                  </div>
+                  <div>
+                    <img
+                      src="./src/img/WEB_2020_Volkswagen_Crafter_by_P-removebg-preview.png"
+                      alt="v_crafter-image"
+                      class="car-item-image img5"
+                    />
+                  </div>
+                  <h5>van rental $220 per day</h5></a
+                >
+              </div>
+              <!-- van item 4 -->
+              <div class="car-item">
+                <a class="a" href="#" onclick="selectVan('f-dropside',this)"
+                  ><div class="car-item-head">
+                    <h4>f-dropside 2020</h4>
+                  </div>
+                  <div>
+                    <img
+                      src="./src/img/Ford_Transit_Dropside-removebg-preview.png"
+                      alt="f-dropside-image"
+                      class="car-item-image img5"
+                    />
+                  </div>
+                  <h5>van rental $180 per day</h5></a
+                >
+              </div>
+              <br />
+              <!-- van item 5 -->
+              <div class="car-item">
+                <a class="a" href="#" onclick="selectVan('ford-curtain',this)"
+                  ><div class="car-item-head">
+                    <h4>ford-curtain 2020</h4>
+                  </div>
+                  <div>
+                    <img
+                      src="./src/img/transit-curtain_hire_08-551x413-removebg-preview.png"
+                      alt="ford-curtain-image"
+                      class="car-item-image img5"
+                    />
+                  </div>
+                  <h5>van rental $200 per day</h5></a
+                >
+              </div>
+              <!-- van item 6 -->
+              <div class="car-item">
+                <a class="a" href="#" onclick="selectVan('ford-connect',this)"
+                  ><div class="car-item-head">
+                    <h4>ford-connect 2020</h4>
+                  </div>
+                  <div>
+                    <img
+                      src="./src/img/ford-connect-removebg-preview.png"
+                      alt="ford-connect-image"
+                      class="car-item-image img5"
+                    />
+                  </div>
+                  <h5>van rental $180 per day</h5></a
+                >
+              </div>
+            </div>
+            </div> 
+            <div class="information-section" id="information-van">
+              <div class="rental-information">
+                <h1 class="header-information">Calculate the cost of renting a van</h1>
+                <form action="" method="get" id="form">
+                  <div class="table2">
+                    <div>
+                      <label class="label label1" for="startDate1"
+                        >Rental date from: </label
+                      ><input
+                        class="startDate0 input"
+                        type="datetime-local"
+                        id="startDate1"
+                      /><label class="label label2" for="endDate1">to: </label
+                      ><input class="input endDate0" type="datetime-local" id="endDate1" />
+                    </div>
+                    <div>
+                      <label class="label label3" for="cost1">van rental fee: </label
+                      ><input
+                        class="input cost"
+                        type="number"
+                        id="cost1"
+                        readonly
+                        disabled
+                      />
+                      <button
+                        type="button"
+                        class="btn btn1 submit"
+                        onclick="calculateTotalRentPrice1(vanModel, document.getElementById('startDate1').value, document.getElementById('endDate1').value)"
+                      >
+                        Cost calculation
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="Identity-information">
+                <h1 class="header-information">van rental information</h1>
+                <form action="" method="get" id="form">
+                  <div class="table1">
+                    <label class="label label4" for="f-name1">First name: </label>
+                    <input
+                      class="input f-name-car"
+                      type="text"
+                      name="first-name"
+                      id="f-name1"
+                    />
+                    <label class="label label5" for="l-name1">Secend name: </label>
+                    <input
+                      class="input l-name-car"
+                      type="text"
+                      name="secend-name"
+                      id="l-name1"
+                    /><br />
+                    <label class="label label6" for="phone1"
+                    >Phone Number:
+                    </label>
+                    <input class="input phone-car" type="tel" name="phone" id="phone1" />
+                    <label class="label label7" for="address1">Address: </label>
+                    <input type="text" class="input address-car" id="address1" name="address">
                     <button
                       type="button"
-                      class="btn btn1"
+                      id="Return1"
+                      class="btn btn1 Return"
                       onclick="displayBlock()"
                     >
                       Return
                     </button>
-                  </td>
-                  <td></td>
-                  <td></td>
-                  <td>
                     <button
                       type="button"
-                      class="btn btn1"
-                      onclick="displaynone1()"
+                      id="submit1"
+                      class="btn btn1 submit0"
+                      onclick="submitRent1()"
                     >
-                      submit
+                      van rental
                     </button>
-                  </td>
-              </tr>
-            </table>
-          </form>
-        </div>
-        <div class="container-part2" id="container-pick-up">
-          <form>
-            <table>
-              <tr class="img-car part2">
-                <td>
-                  <img
-                    src="./src/img/2021_ram_ram_1500_sideview-removebg-preview.png"
-                    alt="dodge-ram-1"
-                    class="img5"
-                  /><br />d-ram-1<br />200$
-                </td>
-                <td>
-                  <img
-                    src="./src/img/2008_dodge_ram_1500_sideview.png"
-                    alt="dodge-ram-2"
-                    class="img5"
-                  /><br />d-ram-2<br />180$
-                </td>
-                <td>
-                  <img
-                    src="./src/img/2021-Ford-F-150-color-Oxford-Whi-removebg-preview.png"
-                    alt="ford-f150"
-                    class="img5"
-                  /><br />f-150<br />180$
-                </td>
-                <td>
-                  <img
-                    src="./src/img/2022-ford-maverick-side-view-car-removebg-preview.png"
-                    alt="ford-maverick"
-                    class="img5"
-                  /><br />f-maverick<br />160$
-                </td>
-              </tr>
-              <tr class="img-car part2">
-                <td>
-                  <img
-                    src="./src/img/toyota_tacoma_2023-removebg-preview.png"
-                    alt="toyota-tacoma"
-                    class="img5"
-                  /><br />t-tacoma<br />160$
-                </td>
-                <td>
-                  <img
-                    src="./src/img/toyota_hilux_2024-removebg-preview.png"
-                    alt="toyota-hilux"
-                    class="img5"
-                  /><br />t-hilux<br />140$
-                </td>
-              </tr>
-              <tr class="part2 tr-line3">
-                <td colspan="2">
-                  <label for="pickUpModel" class="container-text1-1"
-                    >select</label
+                  </div>
+                </div>
+                </form>
+            </div>
+            <div class="container-part2" id="container-pick-up">
+              <!-- pick ups section -->
+              <h2 class="header-car-section">
+                Please select the pick up you want to rent
+              </h2>
+              <div class="choose-section">
+                <!-- pick up item 1 -->
+                <div class="car-item">
+                  <a class="a" href="#" onclick="selectPickUp('dodge-ram-2020',this)"
+                    ><div class="car-item-head">
+                      <h4>dodge ram 1500 2020</h4>
+                    </div>
+                    <div>
+                      <img
+                        src="./src/img/2021_ram_ram_1500_sideview-removebg-preview.png"
+                        alt="dodge-ram-1"
+                        class="car-item-image img5"
+                      />
+                    </div>
+                    <h5>pick up rental $200 per day</h5></a
                   >
-                </td>
-                <td>
-                  <label for="startDate2" class="container-text1-2"
-                    >Pick-up date</label
+                </div>
+                <!-- pick up item 2 -->
+                <div class="car-item">
+                  <a class="a" href="#" onclick="selectPickUp('dodge-ram-2008',this)"
+                    ><div class="car-item-head">
+                      <h4>dodge ram 1500 2008</h4>
+                    </div>
+                    <div>
+                      <img
+                        src="./src/img/2008_dodge_ram_1500_sideview.png"
+                        alt="dodge-ram-2"
+                        class="car-item-image img5"
+                      />
+                    </div>
+                    <h5>pick up rental $110 per day</h5></a
                   >
-                </td>
-                <td>
-                  <label for="endDate2" class="container-text1-3"
-                    >Return date</label
+                </div>
+                <!-- pick up item 3 -->
+                <div class="car-item">
+                  <a class="a" href="#" onclick="selectPickUp('ford-150',this)"
+                    ><div class="car-item-head">
+                      <h4>ford 150 2021</h4>
+                    </div>
+                    <div>
+                      <img
+                        src="./src/img/2021-Ford-F-150-color-Oxford-Whi-removebg-preview.png"
+                        alt="f-150-image"
+                        class="car-item-image img5"
+                      />
+                    </div>
+                    <h5>pick up rental $220 per day</h5></a
                   >
-                </td>
-              </tr>
-              <tr class="part2 tr-line4">
-                <td colspan="2">
-                  <select
-                    name="Pick-up & Return"
-                    class="input"
-                    id="pickUpModel"
+                </div>
+                <!-- pick up item 4 -->
+                <div class="car-item">
+                  <a class="a" href="#" onclick="selectPickUp('ford-maverick',this)"
+                    ><div class="car-item-head">
+                      <h4>ford maverick 2022</h4>
+                    </div>
+                    <div>
+                      <img
+                        src="./src/img/2022-ford-maverick-side-view-car-removebg-preview.png"
+                        alt="f-maverick-image"
+                        class="car-item-image img5"
+                      />
+                    </div>
+                    <h5>pick up rental $180 per day</h5></a
                   >
-                    <option value="dodge-ram-1">dodge-ram-1</option>
-                    <option value="dodge-ram-2">dodge-ram-2</option>
-                    <option value="ford-f150">ford-f150</option>
-                    <option value="ford-maverick">ford-maverick</option>
-                    <option value="toyota-tacoma">toyota-tacoma</option>
-                    <option value="toyota-hilux">toyota-hilux</option>
-                  </select>
-                </td>
-                <td>
-                  <input
-                    type="datetime-local"
-                    name="pick-up-date"
-                    class="input"
-                    id="startDate2"
-                  />
-                </td>
-                <td>
-                  <input
-                    type="datetime-local"
-                    name="Return-date"
-                    class="input"
-                    id="endDate2"
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <button
-                    type="button"
-                    class="btn btn1"
-                    onclick="displayBlock()"
+                </div>
+                <br />
+                <!-- pick up item 5 -->
+                <div class="car-item">
+                  <a class="a" href="#" onclick="selectPickUp('toyota-tacoma',this)"
+                    ><div class="car-item-head">
+                      <h4>toyota tacoma 2023</h4>
+                    </div>
+                    <div>
+                      <img
+                        src="./src/img/toyota_tacoma_2023-removebg-preview.png"
+                        alt="toyota-tacoma-image"
+                        class="car-item-image img5"
+                      />
+                    </div>
+                    <h5>pick up rental $180 per day</h5></a
                   >
-                    Return
-                  </button>
-                </td>
-                <td></td>
-                <td></td>
-                <td>
-                  <button
-                    type="button"
-                    class="btn btn1"
-                    onclick="displaynone2()"
+                </div>
+                <!-- pick up item 6 -->
+                <div class="car-item">
+                  <a class="a" href="#" onclick="selectPickUp('toyota-hilux',this)"
+                    ><div class="car-item-head">
+                      <h4>toyota hilux 2024</h4>
+                    </div>
+                    <div>
+                      <img
+                        src="./src/img/toyota_hilux_2024-removebg-preview.png"
+                        alt="toyota-hilux-image"
+                        class="car-item-image img5"
+                      />
+                    </div>
+                    <h5>pick up rental $160 per day</h5></a
                   >
-                    submit
-                  </button>
-                </td>
-              </tr>
-            </table>
-          </form>
-        </div>
-        <div><p id="result1"></p></div>
-        <div id="submitButton">
+                </div>
+              </div>
+              </div> 
+              <div class="information-section" id="information-pick-up">
+                <div class="rental-information">
+                  <h1 class="header-information">Calculate the cost of renting a pick up</h1>
+                  <form action="" method="get" id="form">
+                    <div class="table2">
+                      <div>
+                        <label class="label label1" for="startDate2"
+                          >Rental date from: </label
+                        ><input
+                          class="startDate0 input"
+                          type="datetime-local"
+                          id="startDate2"
+                        /><label class="label label2" for="endDate2">to: </label
+                        ><input class="input endDate0" type="datetime-local" id="endDate2" />
+                      </div>
+                      <div>
+                        <label class="label label3" id="label3" for="cost2">pick up rental fee: </label
+                        ><input
+                          class="input cost"
+                          type="number"
+                          id="cost2"
+                          readonly
+                          disabled
+                        />
+                        <button
+                          type="button"
+                          class="btn btn1 submit"
+                          onclick="calculateTotalRentPrice2(pickUpModel, document.getElementById('startDate2').value, document.getElementById('endDate2').value)"
+                        >
+                          Cost calculation
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="Identity-information">
+                  <h1 class="header-information">pick up rental information</h1>
+                  <form action="" method="get" id="form">
+                    <div class="table1">
+                      <label class="label label4" for="f-name2">First name: </label>
+                      <input
+                        class="input f-name-car"
+                        type="text"
+                        name="first-name"
+                        id="f-name2"
+                      />
+                      <label class="label label5" for="l-name2">Secend name: </label>
+                      <input
+                        class="input l-name-car"
+                        type="text"
+                        name="secend-name"
+                        id="l-name2"
+                      /><br />
+                      <label class="label label6" for="phone2"
+                      >Phone Number:
+                      </label>
+                      <input class="input phone-car" type="tel" name="phone" id="phone2" />
+                      <label class="label label7" for="address2">Address: </label>
+                      <input type="text" class="input address-car" id="address2" name="address">
+                      <button
+                        type="button"
+                        id="Return2"
+                        class="btn btn1 Return"
+                        onclick="displayBlock()"
+                      >
+                        Return
+                      </button>
+                      <button
+                        type="button"
+                        id="submit1"
+                        class="btn btn1 submit0"
+                        onclick="submitRent2()"
+                      >
+                        pick up rental
+                      </button>
+                    </div>
+                  </div>
+                  </form>
+              </div>
+        </section>
+      </div>
+      <!-- result section -->
+      <div class="result-section">
+        <div class="result-box">
+          <p class="result-text"></p>
           <button
-            type="button"
-            name="print-button"
-            class="btn btn1 dNone"
-            id="print"
-            onclick="p()"
+          type="button"
+          name="print-button"
+          class="btn btn1 dNone print"
           >
-            Print invoice</button
-          ><br />
+          Print invoice</button
+            >
           <button
-            type="button"
-            id="Return"
-            class="btn btn1 dNone"
-            onclick="displayBlock()"
+          type="button"
+          class="btn btn1 Return-infotmation"
+          onclick="displayBlock()"
           >
-            Return
+          Return
           </button>
         </div>
-      </section>
+      </div>
+      </div>
+        </section>
+      </div >
       <section>
         <div class="container-text1">
           <p class="text1">DON'T RENT A CAR.</p>
@@ -513,7 +725,7 @@
         </div>
       </section>
     </main>
-    <footer><p id="text9">Developed by <a href="../index.html">MSS</a></p></footer>
+    <footer><p id="text9">Developed by mss</p></footer>
     <script src="src/main.js"></script>
   </body>
 </html>
