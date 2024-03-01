@@ -345,6 +345,10 @@ function reserveCar() {
       resultText.innerHTML = `The car model ${carModel} was successfully reserved from ${startDate.toLocaleDateString()} to ${endDate.toLocaleDateString()} in the name of ${fName} ${lName}.Deliver the car to your home within the next two hours and provide the required documents.`;
 
       carsInventory[carModel]--;
+      selectedCarEle.classList.add("car-item-display");
+      rentalCars.push(carModel); // اضافه کردن نام خودرو به لیست rentalCars
+
+
 
       // تعیین تاریخ انقضای رزرو (یک روز بعد از تاریخ پایان رزرو)
       const expirationDate = new Date(endDate);
@@ -390,6 +394,9 @@ function reserveVan() {
       resultText.innerHTML = `The van model ${vanModel} was successfully reserved from ${startDate1.toLocaleDateString()} to ${endDate1.toLocaleDateString()} in the name of ${fName1} ${lName1}.Deliver the van to your home within the next two hours and provide the required documents.`;
 
       vansInventory[vanModel]--;
+      selectedVanEle.classList.add("car-item-display");
+      rentalVans.push(vanModel); // اضافه کردن نام خودرو به لیست rentalCars
+
 
       // تعیین تاریخ انقضای رزرو (یک روز بعد از تاریخ پایان رزرو)
       const expirationDate1 = new Date(endDate1);
@@ -435,6 +442,10 @@ function reservePickUp() {
       resultText.innerHTML = `The pick up model ${pickUpModel} was successfully reserved from ${startDate2.toLocaleDateString()} to ${endDate2.toLocaleDateString()} in the name of ${fName2} ${lName2}.Deliver the pick up to your home within the next two hours and provide the required documents.`;
 
       pickUpInventory[pickUpModel]--;
+      selectedPickUpEle.classList.add("car-item-display");
+      rentalPickUps.push(pickUpModel); // اضافه کردن نام خودرو به لیست rentalCars
+
+
 
       // تعیین تاریخ انقضای رزرو (یک روز بعد از تاریخ پایان رزرو)
       const expirationDate2 = new Date(endDate2);
@@ -554,12 +565,10 @@ function submitRent() {
   if (fName == "" || lName == "" || phone == "" || address == "") {
     alert("The information entered is incorrect.");
   } else {
-    selectedCarEle.classList.add("car-item-display");
     informationSection.style.display = "none";
     returnButtonInfotmation.style.display = "block";
     printButton.style.display = "block";
     reserveCar();
-    rentalCars.push(carModel); // اضافه کردن نام خودرو به لیست rentalCars
   }
 }
 
@@ -572,12 +581,10 @@ function submitRent1() {
   if (fName1 == "" || lName1 == "" || phone1 == "" || address1 == "") {
     alert("The information entered is incorrect.");
   } else {
-    selectedVanEle.classList.add("car-item-display");
     informationSection1.style.display = "none";
     returnButtonInfotmation.style.display = "block";
     printButton.style.display = "block";
     reserveVan();
-    rentalVans.push(vanModel); // اضافه کردن نام خودرو به لیست rentalCars
   }
 }
 
@@ -590,13 +597,41 @@ function submitRent2() {
   if (fName2 == "" || lName2 == "" || phone2 == "" || address2 == "") {
     alert("The information entered is incorrect.");
   } else {
-    selectedPickUpEle.classList.add("car-item-display");
     informationSection2.style.display = "none";
     returnButtonInfotmation.style.display = "block";
     printButton.style.display = "block";
     reservePickUp();
-    rentalPickUps.push(pickUpModel); // اضافه کردن نام خودرو به لیست rentalCars
   }
+}
+
+function returnCar(carModel) {
+  console.log(
+    `The car model ${carModel} was returned to the list of available cars.`
+  );
+  costOfCars.set(carModel, costOfCars.get(carModel) + 1); // افزایش تعداد ماشین‌ها
+  console.log(
+    `${carModel} model number of cars now: ${costOfCars.get(carModel)}`
+  );
+}
+
+function returnVan(vanModel) {
+  console.log(
+    `The van model ${vanModel} was returned to the list of available vans.`
+  );
+  costOfVans.set(vanModel, costOfVans.get(vanModel) + 1); // افزایش تعداد ماشین‌ها
+  console.log(
+    `${vanModel} model number of vans now: ${costOfVans.get(vanModel)}`
+  );
+}
+
+function returnPickUp(pickUpModel) {
+  console.log(
+    `The pick up model ${pickUpModel} was returned to the list of available pick ups.`
+  );
+  costOfPickUps.set(pickUpModel, costOfPickUps.get(pickUpModel) + 1); // افزایش تعداد ماشین‌ها
+  console.log(
+    `${pickUpModel} model number of pick ups now: ${costOfPickUps.get(pickUpModel)}`
+  );
 }
 
 // ابتدا یک تابع برای بررسی اعتبار تاریخ رزرو ایجاد می‌کنیم
