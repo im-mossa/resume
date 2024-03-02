@@ -15,7 +15,7 @@ const returnButtonPickUp = document.querySelector("#Return2");
 const returnButtonInfotmation = document.querySelector(".Return-infotmation");
 const printButton = document.querySelector(".print");
 
-printButton.addEventListener("click", function() {
+printButton.addEventListener("click", function () {
   // مخفی کردن دکمه‌ها
   printButton.style.display = "none";
   returnButtonInfotmation.style.display = "none";
@@ -36,14 +36,14 @@ function fCar() {
   returnButton.style.display = "block";
 
   // اولین چک کنیم که آیا یک event listener قبلاً اضافه شده یا نه
-  if (!window.adjustContainerHeightAdded) {
+  if (!window.adjustContainerHeightCarAdded) {
     // اضافه کردن event listener به resize
-    window.addEventListener('resize', adjustContainerHeight);
-    window.adjustContainerHeightAdded = true; // فلگ برای نشان دادن اینکه event listener اضافه شده است
+    window.addEventListener("resize", adjustContainerHeightCar);
+    window.adjustContainerHeightCarAdded = true; // فلگ برای نشان دادن اینکه event listener اضافه شده است
   }
 
   // تابع adjustContainerHeight برای تنظیم ارتفاع
-  function adjustContainerHeight() {
+  function adjustContainerHeightCar() {
     if (window.innerWidth < 1440) {
       containerRent.style.height = "823px";
       partBox.style.height = "540px";
@@ -52,9 +52,9 @@ function fCar() {
       partBox.style.height = "";
     }
   }
-  
+
   // تنظیم ارتفاع هم به هنگام بارگذاری
-  adjustContainerHeight();
+  adjustContainerHeightCar();
 }
 
 function fVan() {
@@ -64,15 +64,15 @@ function fVan() {
   returnButtonVan.style.display = "block";
   resultSection.style.display = "none";
 
-   // اولین چک کنیم که آیا یک event listener قبلاً اضافه شده یا نه 
-    if (!window.adjustContainerHeightAdded) {
+  // اولین چک کنیم که آیا یک event listener قبلاً اضافه شده یا نه
+  if (!window.adjustContainerHeightVanAdded) {
     // اضافه کردن event listener به resize
-    window.addEventListener('resize', adjustContainerHeight);
-    window.adjustContainerHeightAdded = true; // فلگ برای نشان دادن اینکه event listener اضافه شده است
+    window.addEventListener("resize", adjustContainerHeightVan);
+    window.adjustContainerHeightVanAdded = true; // فلگ برای نشان دادن اینکه event listener اضافه شده است
   }
 
   // تابع adjustContainerHeight برای تنظیم ارتفاع
-  function adjustContainerHeight() {
+  function adjustContainerHeightVan() {
     if (window.innerWidth < 1440) {
       containerRent.style.height = "623px";
       partBox.style.height = "340px";
@@ -81,9 +81,9 @@ function fVan() {
       partBox.style.height = "";
     }
   }
-  
+
   // تنظیم ارتفاع هم به هنگام بارگذاری
-  adjustContainerHeight();
+  adjustContainerHeightVan();
 }
 
 function fPickUp() {
@@ -94,15 +94,15 @@ function fPickUp() {
   returnButtonPickUp.style.display = "block";
   resultSection.style.display = "none";
 
-   // اولین چک کنیم که آیا یک event listener قبلاً اضافه شده یا نه 
-    if (!window.adjustContainerHeightAdded) {
+  // اولین چک کنیم که آیا یک event listener قبلاً اضافه شده یا نه
+  if (!window.adjustContainerHeightPickUpAdded) {
     // اضافه کردن event listener به resize
-    window.addEventListener('resize', adjustContainerHeight);
-    window.adjustContainerHeightAdded = true; // فلگ برای نشان دادن اینکه event listener اضافه شده است
+    window.addEventListener("resize", adjustContainerHeightPickUp);
+    window.adjustContainerHeightPickUpAdded = true; // فلگ برای نشان دادن اینکه event listener اضافه شده است
   }
 
   // تابع adjustContainerHeight برای تنظیم ارتفاع
-  function adjustContainerHeight() {
+  function adjustContainerHeightPickUp() {
     if (window.innerWidth < 1440) {
       containerRent.style.height = "623px";
       partBox.style.height = "340px";
@@ -111,9 +111,9 @@ function fPickUp() {
       partBox.style.height = "";
     }
   }
-  
+
   // تنظیم ارتفاع هم به هنگام بارگذاری
-  adjustContainerHeight();
+  adjustContainerHeightPickUp();
 }
 
 function displayBlock() {
@@ -133,7 +133,7 @@ function displayBlock() {
   // اولین چک کنیم که آیا یک event listener قبلاً اضافه شده یا نه
   if (!window.adjustContainerHeightAdded) {
     // اضافه کردن event listener به resize
-    window.addEventListener('resize', adjustContainerHeight);
+    window.addEventListener("resize", adjustContainerHeight);
     window.adjustContainerHeightAdded = true; // فلگ برای نشان دادن اینکه event listener اضافه شده است
   }
 
@@ -147,7 +147,7 @@ function displayBlock() {
       partBox.style.height = "";
     }
   }
-  
+
   // تنظیم ارتفاع هم به هنگام بارگذاری
   adjustContainerHeight();
 }
@@ -197,16 +197,15 @@ function selectVan(name1, ele1) {
   informationSection1.style.display = "block";
   resultSection.style.display = "none";
 
-
-   // اولین چک کنیم که آیا یک event listener قبلاً اضافه شده یا نه 
-   if (!window.adjustContainerHeightAdded) {
+  // اولین چک کنیم که آیا یک event listener قبلاً اضافه شده یا نه
+  if (!window.adjustContainerHeightVan1Added) {
     // اضافه کردن event listener به resize
-    window.addEventListener('resize', adjustContainerHeight);
-    window.adjustContainerHeightAdded = true; // فلگ برای نشان دادن اینکه event listener اضافه شده است
+    window.addEventListener("resize", adjustContainerHeightVan1);
+    window.adjustContainerHeightVan1Added = true; // فلگ برای نشان دادن اینکه event listener اضافه شده است
   }
 
   // تابع adjustContainerHeight برای تنظیم ارتفاع
-  function adjustContainerHeight() {
+  function adjustContainerHeightVan1() {
     if (window.innerWidth < 1440) {
       containerRent.style.height = "823px";
       partBox.style.height = "540px";
@@ -215,9 +214,9 @@ function selectVan(name1, ele1) {
       partBox.style.height = "";
     }
   }
-  
+
   // تنظیم ارتفاع هم به هنگام بارگذاری
-  adjustContainerHeight();
+  adjustContainerHeightVan1();
 }
 
 let pickUpModel;
@@ -242,16 +241,15 @@ function selectPickUp(name2, ele2) {
   informationSection2.style.display = "block";
   resultSection.style.display = "none";
 
-
-   // اولین چک کنیم که آیا یک event listener قبلاً اضافه شده یا نه 
-   if (!window.adjustContainerHeightAdded) {
+  // اولین چک کنیم که آیا یک event listener قبلاً اضافه شده یا نه
+  if (!window.adjustContainerHeightPickUp1Added) {
     // اضافه کردن event listener به resize
-    window.addEventListener('resize', adjustContainerHeight);
-    window.adjustContainerHeightAdded = true; // فلگ برای نشان دادن اینکه event listener اضافه شده است
+    window.addEventListener("resize", adjustContainerHeightPickUp1);
+    window.adjustContainerHeightPickUp1Added = true; // فلگ برای نشان دادن اینکه event listener اضافه شده است
   }
 
   // تابع adjustContainerHeight برای تنظیم ارتفاع
-  function adjustContainerHeight() {
+  function adjustContainerHeightPickUp1() {
     if (window.innerWidth < 1440) {
       containerRent.style.height = "873px";
       partBox.style.height = "590px";
@@ -262,9 +260,9 @@ function selectPickUp(name2, ele2) {
       informationSection2.style.height = "";
     }
   }
-  
+
   // تنظیم ارتفاع هم به هنگام بارگذاری
-  adjustContainerHeight();
+  adjustContainerHeightPickUp1();
 }
 
 const carsInventory = {
@@ -293,7 +291,7 @@ function returnCar(carModel) {
 const vansInventory = {
   "ford-cargo": 1,
   "f-passenger": 1,
-  "v_crafter": 1,
+  v_crafter: 1,
   "f-dropside": 1,
   "ford-curtain": 1,
   "ford-connect": 1,
@@ -348,8 +346,6 @@ function reserveCar() {
       selectedCarEle.classList.add("car-item-display");
       rentalCars.push(carModel); // اضافه کردن نام خودرو به لیست rentalCars
 
-
-
       // تعیین تاریخ انقضای رزرو (یک روز بعد از تاریخ پایان رزرو)
       const expirationDate = new Date(endDate);
       expirationDate.setDate(expirationDate.getDate() + 1);
@@ -389,7 +385,10 @@ function reserveVan() {
   resultSection.style.display = "block";
 
   // بررسی اعتبار تاریخ‌های ورودی
-  if (isValidReservationDate1(startDate1) && isValidReservationDate1(endDate1)) {
+  if (
+    isValidReservationDate1(startDate1) &&
+    isValidReservationDate1(endDate1)
+  ) {
     if (vansInventory[vanModel] > 0 && startDate1 < endDate1) {
       resultText.innerHTML = `The van model ${vanModel} was successfully reserved from ${startDate1.toLocaleDateString()} to ${endDate1.toLocaleDateString()} in the name of ${fName1} ${lName1}.Deliver the van to your home within the next two hours and provide the required documents.`;
 
@@ -397,14 +396,17 @@ function reserveVan() {
       selectedVanEle.classList.add("car-item-display");
       rentalVans.push(vanModel); // اضافه کردن نام خودرو به لیست rentalCars
 
-
       // تعیین تاریخ انقضای رزرو (یک روز بعد از تاریخ پایان رزرو)
       const expirationDate1 = new Date(endDate1);
       expirationDate1.setDate(expirationDate1.getDate() + 1);
       resultText.innerHTML += `<br>Expiry date of reservation: ${expirationDate1.toLocaleDateString()}`;
 
       // محاسبه قیمت کل کرایه ماشین برای روز‌های رزرو شده
-      const totalPrice1 = calculateTotalRentPrice1(vanModel, startDate1, endDate1);
+      const totalPrice1 = calculateTotalRentPrice1(
+        vanModel,
+        startDate1,
+        endDate1
+      );
       resultText.innerHTML += `<br>Total price of van model rental ${vanModel} for reserved days: ${totalPrice1} dollars`;
 
       // تابع setTimeout برای انجام عملیاتی که باید بعد از یک روز انجام شود (بازگرداندن ماشین به لیست)
@@ -437,7 +439,10 @@ function reservePickUp() {
   resultSection.style.display = "block";
 
   // بررسی اعتبار تاریخ‌های ورودی
-  if (isValidReservationDate2(startDate2) && isValidReservationDate2(endDate2)) {
+  if (
+    isValidReservationDate2(startDate2) &&
+    isValidReservationDate2(endDate2)
+  ) {
     if (pickUpInventory[pickUpModel] > 0 && startDate2 < endDate2) {
       resultText.innerHTML = `The pick up model ${pickUpModel} was successfully reserved from ${startDate2.toLocaleDateString()} to ${endDate2.toLocaleDateString()} in the name of ${fName2} ${lName2}.Deliver the pick up to your home within the next two hours and provide the required documents.`;
 
@@ -445,15 +450,17 @@ function reservePickUp() {
       selectedPickUpEle.classList.add("car-item-display");
       rentalPickUps.push(pickUpModel); // اضافه کردن نام خودرو به لیست rentalCars
 
-
-
       // تعیین تاریخ انقضای رزرو (یک روز بعد از تاریخ پایان رزرو)
       const expirationDate2 = new Date(endDate2);
       expirationDate2.setDate(expirationDate2.getDate() + 1);
       resultText.innerHTML += `<br>Expiry date of reservation: ${expirationDate2.toLocaleDateString()}`;
 
       // محاسبه قیمت کل کرایه ماشین برای روز‌های رزرو شده
-      const totalPrice2 = calculateTotalRentPrice2(pickUpModel, startDate2, endDate2);
+      const totalPrice2 = calculateTotalRentPrice2(
+        pickUpModel,
+        startDate2,
+        endDate2
+      );
       resultText.innerHTML += `<br>Total price of pick up model rental ${pickUpModel} for reserved days: ${totalPrice2} dollars`;
 
       // تابع setTimeout برای انجام عملیاتی که باید بعد از یک روز انجام شود (بازگرداندن ماشین به لیست)
@@ -510,7 +517,7 @@ function calculateTotalRentPrice1(vanModel, startDate1, endDate1) {
   const rentalPrices1 = {
     "ford-cargo": 200,
     "f-passenger": 250,
-    "v_crafter": 220,
+    v_crafter: 220,
     "f-dropside": 180,
     "ford-curtain": 200,
     "ford-connect": 180,
@@ -630,7 +637,9 @@ function returnPickUp(pickUpModel) {
   );
   costOfPickUps.set(pickUpModel, costOfPickUps.get(pickUpModel) + 1); // افزایش تعداد ماشین‌ها
   console.log(
-    `${pickUpModel} model number of pick ups now: ${costOfPickUps.get(pickUpModel)}`
+    `${pickUpModel} model number of pick ups now: ${costOfPickUps.get(
+      pickUpModel
+    )}`
   );
 }
 
