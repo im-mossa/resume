@@ -291,7 +291,7 @@ function returnCar(carModel) {
 const vansInventory = {
   "ford-cargo": 1,
   "f-passenger": 1,
-  v_crafter: 1,
+  "v_crafter": 1,
   "f-dropside": 1,
   "ford-curtain": 1,
   "ford-connect": 1,
