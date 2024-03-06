@@ -181,6 +181,7 @@ a {
   
   .btn-submit {
     margin: 2% 0px 0 65%;
+    height: 30px;
   }
 
   .btn-delete {
