@@ -1,0 +1,98 @@
+#body{
+    margin: 20px;
+    background-color: blueviolet;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.button{
+    margin-top: 10px;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 20px;
+    border-color: rgb(158, 132, 160);
+    width: 10%;
+    padding: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+.button:active {
+    background-color: black;
+    color: white;
+}
+#startGame {
+    display: none;
+}
+#historyArea{
+    margin-top: 20px;
+    padding: 5px;
+}
+#game{
+    background-color: darkmagenta;
+    border-style: groove;
+    border-radius: 20px;
+    border-width: 5px;
+    border-color: transparent;
+    padding: 10px;
+}
+#statusArea{
+    font-size: x-large;
+}
+#footerArea{
+    text-align: center;
+    margin-top: 5px;
+    font-size: large;
+    font-style: italic;
+}
+#userguess{
+    border-style: solid;
+    border-color: rgb(158, 132, 160);
+    border-width: 5px;
+    border-radius: 20px;
+    padding: 5px;
+    text-align: center;
+    width: 30%;
+}
+
+#historyList {
+    width: 345px;
+    height: 50px;
+    background-color: rgb(173, 170, 170);
+    border: 2px solid black;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+.redHeart {
+    width: 65px;
+    height: 45px;
+    margin: 2px;
+}
+
+#footer {
+    width: 100%;
+    text-align: center;
+    position: fixed;
+    bottom: 0px;
+    background-color: #fbfafa;
+    margin: 0 0 0 -20px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+@media only screen and (max-width: 800px) {
+    .button{
+        width: 40%;
+    }
+    #statusArea{
+        width: 80%;
+    }
+    #historyList {
+        width: 125%;
+    }
+    .redHeart {
+        width: 90%;
+    }
+}

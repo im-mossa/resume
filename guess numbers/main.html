@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./src/image/dice.png" type="image/x-icon">
+    <link rel="stylesheet" href="./src/main.css">
+    <title>guess numbers</title>
+</head>
+<body id="body">
+    <main>
+        <div id="game">
+            <h1 id="title">number guessing game</h1>
+            <div id="statusArea">
+                <p>inter a number between 1-10 and click the button...</p>
+                <input type="number" id="userguess" min="0" max="10">
+                <button id="buttonArea" class="button test">guess</button>
+                <button id="startGame" class="button test" onclick="startGame(location.reload())">start game</button>
+                <div id="historyArea">
+                    <h2 class="test" id="Result">your previse guesses</h2>
+                    <div id="historyList">
+                        <div><img src="src/image/png-transparent-love-hearts-love-hearts-red-heart-love-heart-computer-icons-thumbnail-removebg-preview.png" alt="this is a image" class="redHeart"></div>
+                        <div><img src="src/image/png-transparent-love-hearts-love-hearts-red-heart-love-heart-computer-icons-thumbnail-removebg-preview.png" alt="this is a image" class="redHeart"></div>
+                        <div><img src="src/image/png-transparent-love-hearts-love-hearts-red-heart-love-heart-computer-icons-thumbnail-removebg-preview.png" alt="this is a image" class="redHeart"></div>
+                        <div><img src="src/image/png-transparent-love-hearts-love-hearts-red-heart-love-heart-computer-icons-thumbnail-removebg-preview.png" alt="this is a image" class="redHeart"></div>
+                        <div><img src="src/image/png-transparent-love-hearts-love-hearts-red-heart-love-heart-computer-icons-thumbnail-removebg-preview.png" alt="this is a image" class="redHeart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer><p id="footer">Developed by<a href="../index.html">MSS</a></p></footer>
+    <script src="./src/main.js"></script>
+</body>
+</html>
