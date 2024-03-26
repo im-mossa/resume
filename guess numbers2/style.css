@@ -1,0 +1,173 @@
+*{
+    margin: 0 auto;
+    padding: 0 auto;
+}
+
+body {
+    background-color: #222f3e;
+    font-size: 18px;
+    font-family: "Sacramento", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+}
+
+#mainBox {
+    width: 90%;
+    min-height: 400px;
+    padding: 25px;
+    margin: 25px;
+    border-radius: 40px;
+    font-size: 30px;
+    animation: pulsate 1.5s infinite alternate;  
+    border: 0.2rem solid #fff;
+    padding: 0.4em;
+    box-shadow: 0 0 .2rem #fff,
+                0 0 .2rem #fff,
+                0 0 2rem #bc13fe,
+                0 0 0.8rem #bc13fe,
+                0 0 2.8rem #bc13fe,
+                inset 0 0 1.3rem #bc13fe; 
+}
+
+.neonText {
+    text-align: center;
+    color: #fff;
+    text-shadow:
+    0 0 7px #fff,
+    0 0 10px #fff,
+    0 0 21px #fff,
+    0 0 42px #bc13fe,
+    0 0 82px #bc13fe,
+    0 0 92px #bc13fe,
+    0 0 102px #bc13fe,
+    0 0 151px #bc13fe;
+}
+
+@keyframes pulsate {      
+    100% {
+
+        text-shadow:
+        0 0 4px #fff,
+        0 0 11px #fff,
+        0 0 19px #fff,
+        0 0 40px #bc13fe,
+        0 0 80px #bc13fe,
+        0 0 90px #bc13fe,
+        0 0 100px #bc13fe,
+        0 0 150px #bc13fe;
+    
+    }
+    
+    0% {  
+    text-shadow:
+    0 0 2px #fff,
+    0 0 4px #fff,
+    0 0 6px #fff,
+    0 0 10px #bc13fe,
+    0 0 45px #bc13fe,
+    0 0 55px #bc13fe,
+    0 0 70px #bc13fe,
+    0 0 80px #bc13fe;  
+}}
+
+#mainNumber {
+    text-align: center;
+    color: #fff;
+    font-size: 50px;
+    box-shadow: none;
+    animation: none;
+}
+
+#guessNumberHolder {
+    text-align: center;
+}
+
+#guessNumber {
+    width: 500px;
+    padding: 25px 10px;
+    font-size: 40px;
+    text-align: center;
+    border-radius: 16px;
+    animation: pulsate 1.5s infinite alternate;  
+    border: 0.2rem solid #fff;
+    padding: 0.4em;
+    box-shadow: 0 0 .2rem #fff,
+                0 0 .2rem #fff,
+                0 0 2rem #bc13fe,
+                0 0 0.8rem #bc13fe,
+                0 0 2.8rem #bc13fe,
+                inset 0 0 1.3rem #bc13fe; 
+}
+
+#guessButton {
+    padding: 25px 10px;
+    font-size: 32px;
+    margin: 25px;
+    background-color: #bc13fe;
+    border-radius: 24px;
+    animation: pulsate 1.5s infinite alternate;  
+    border: none;
+    cursor: pointer;
+    padding: 0.4em;
+    box-shadow: 0 0 .2rem #fff,
+                0 0 .2rem #fff,
+                0 0 2rem #bc13fe,
+                0 0 0.8rem #bc13fe,
+                0 0 2.8rem #bc13fe,
+                inset 0 0 1.3rem #bc13fe; 
+}
+
+#guessButton:active {
+    background-color: #6a0f8f;
+}
+
+#Result {
+    text-align: center;
+    color: #fff;
+    font-size: 50px;
+}
+
+#footer {
+    width: 100%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 15px;
+    text-align: center;
+    position: fixed;
+    bottom: 0px;
+    left: 0;
+    background-color: #fbfafa;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+@media only screen and (max-width: 800px) {
+    #mainBox {
+        width: 80%;
+        min-height: 400px;
+        font-size: 20px;
+    }
+    #mainNumber {
+        font-size: 40px;
+    }
+    .heart {
+        width: 25px;
+    }
+    #guessNumber {
+        width: 200px;
+        padding: 5px 10px;
+        font-size: 36px;
+    }
+    #guessButton {
+        padding: 15px 5px;
+        font-size: 16px;
+        margin: 25px;
+        border-radius: 8px;
+    }
+    #Result {
+        font-size: 40px;
+    }
+}

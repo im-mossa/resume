@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>guess numbers2</title>
+    <link rel="shortcut icon" href="src/image/dice.png" type="image/x-icon">
+    <link rel="stylesheet" href="./style.css">
+    <link href='https://fonts.googleapis.com/css?family=Sacramento:400' rel='stylesheet' type='text/css'>
+</head>
+<body>
+    <main id="mainBox">
+        <h1 class="neonText">guess numbers</h1>
+        <br>
+        <header id="topHeader">
+            <img src="./src/image/heart.png" id="heart1" class="heart" alt="this is a image" width="50px">
+            <img src="./src/image/heart.png" id="heart2" class="heart" alt="this is a image" width="50px">
+            <img src="./src/image/heart.png" id="heart3" class="heart" alt="this is a image" width="50px">
+            <img src="./src/image/heart.png" id="heart4" class="heart" alt="this is a image" width="50px">
+            <img src="./src/image/heart.png" id="heart5" class="heart" alt="this is a image" width="50px">
+        </header>
+        <section id="mainSection">
+            <p id="mainNumber">inter a number between 1-10 and click the button...</p>
+            <br>
+            <div id="guessNumberHolder">
+                <input type="number" name="" id="guessNumber" min="0" max="10">
+                <br>
+                <input type="button" value="click here" id="guessButton" onclick="guessNumber()">
+            </div>
+            <br>
+            <p id="Result"></p>
+        </section>
+    </main>
+    <footer><p id="footer">Developed by<a href="../index.html">MSS</a></p></footer>
+    <script src="./logic.js"></script>
+</body>
+</html>
