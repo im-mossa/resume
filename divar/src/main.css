@@ -228,7 +228,7 @@ article {
     border-left: 2px solid #e9e9e9;
     padding: 20px;
     position: fixed; /* تغییر این خط */
-    top: 100px; /* تغییر به موقعیت دلخواه شما */
+    top: 70px; /* تغییر به موقعیت دلخواه شما */
     right: 20px; /* تغییر به موقعیت دلخواه شما */
 }
 
@@ -282,8 +282,8 @@ article {
 /*Items Section*/
 
 .item {
-    width: calc((50% - 30px) / 3); /* تعیین عرض ثابت برای آیتم‌ها (سه آیتم در هر خط) */
-    height: 200px;
+    width: calc((60% - 30px) / 3); /* تعیین عرض ثابت برای آیتم‌ها (سه آیتم در هر خط) */
+    height: 250px;
     margin: 20px;
     flex: 1 1 auto;
     flex-grow: 1; /* تعیین flex-grow به یک برای همه‌ی آیتم‌ها */
