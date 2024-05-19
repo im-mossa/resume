@@ -13,13 +13,12 @@ body, html {
 /* background => space image */
 #background {
     background-image: url('./assets/background.jpg');
-    height: 110vh;
-    width: 110vw;
+    height: 1000px;
+    width: 2000px;
     background-size: cover;
     background-repeat: repeat-y;
     animation: moveBackground 10s linear infinite;
     overflow: hidden;
-    /* position: relative; */
 }
 
 /* animation of background */
@@ -63,4 +62,26 @@ body, html {
 #health-container img {
     width: 5vw; /* 5% of viewport width */
     height: auto; /* maintain aspect ratio */
+}
+
+@media only screen and (max-width: 400px) {
+
+    /* heart */
+    .heart {
+        width: 25px;
+    }
+    
+    /* rocket */
+    #spaceship {
+        width: 50px;
+    }
+    
+    /* enemy */
+    #enemy {
+        width: 50px;
+    }
+    
+    #health-container img {
+        width: 25px; /* 5% of viewport width */
+    }
 }
