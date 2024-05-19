@@ -1,0 +1,66 @@
+* {
+    padding: 0;
+    margin: 0;
+    cursor: none;
+}
+
+/* body */
+body, html {
+    height: 100%;
+    overflow: hidden;
+}
+
+/* background => space image */
+#background {
+    background-image: url('./assets/background.jpg');
+    height: 110vh;
+    width: 110vw;
+    background-size: cover;
+    background-repeat: repeat-y;
+    animation: moveBackground 10s linear infinite;
+    overflow: hidden;
+    /* position: relative; */
+}
+
+/* animation of background */
+@keyframes moveBackground {
+    0% {
+        background-position: bottom;
+    }
+    100% {
+        background-position: top;
+    }
+}
+
+/* heart */
+.heart {
+    width: 50px;
+}
+
+/* rocket */
+#spaceship {
+    width: 10vw;
+    height: auto;
+    position: absolute;
+}
+
+/* enemy */
+#enemy {
+    width: 10vw;
+    height: auto;
+    position: absolute;
+}
+
+/* heart image */
+#health-container {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    gap: 5px;
+}
+
+#health-container img {
+    width: 5vw; /* 5% of viewport width */
+    height: auto; /* maintain aspect ratio */
+}
