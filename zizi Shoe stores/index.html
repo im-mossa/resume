@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./src/style.css">
+    <link rel="shortcut icon" href="./src/img/fav2.png" type="image/x-icon">
+    <title>zizi</title>
+</head>
+<body>
+    <header class="remove">
+      <div id="header-container">
+        <div id="cart-icon-holder">
+            <a href="#container-Shoes">
+                <i class="fas fa-cart-shopping" id="cart-shopping" onclick="clearData()"></i>
+            </a>
+        </div>
+        <div id="search-bar">
+            <form action="" method="get">
+                <input type="text" placeholder="" id="search-title"/>
+                <a href="#container-Shoes" id="inter"><i class="fas fa-search"></i></a>
+            </form>
+        </div>
+        <div id="Retainer-brand">
+            <a href="#container-Shoes" onclick="resetData()"><img src="./src/img/zizi-banner2.png" alt="this is brand" id="brand"></a>
+        </div>
+    </div>
+          <div class="main-content">
+              <section class="slideshow">
+                  <div class="slideshow-inner">
+                    <div class="slides">
+                      <div class="slide is-active ">
+                        <div class="slide-content">
+                          <div class="caption">
+                            <div class="title">حراج فصل</div>
+                            <div class="text">
+                              <p>تا 75% تخفیف</p>
+                            </div> 
+                            <a href="#container-Shoes" class="btn" onclick="changeFilter(this,'auction','')">
+                              <span class="btn-inner">کلیک کنید</span>
+                            </a>
+                          </div>
+                        </div>
+                        <div class="image-container"> 
+                          <img src="./src/img/slide show 1.jpg" alt="" class="image" />
+                        </div>
+                      </div>
+                      <div class="slide">
+                        <div class="slide-content">
+                          <div class="caption">
+                            <div class="title">به هوای بهار</div>
+                            <div class="text">
+                              <p>!بهار را با کفشی جدید شروع کنید</p>
+                            </div> 
+                            <a href="#container-Shoes" class="btn"  onclick="changeFilter(this,'shoeType','Spring special')">
+                              <span class="btn-inner">کلیک کنید</span>
+                            </a>
+                          </div>
+                        </div>
+                        <div class="image-container">
+                          <img src="./src/img/slide show 2.jpg" alt="" class="image" />
+                        </div>
+                      </div>
+                      <div class="slide">
+                        <div class="slide-content">
+                          <div class="caption">
+                            <div class="title">کفش های بچگانه</div>
+                            <div class="text">
+                              <p>خرید از برند های محبوب</p>
+                            </div> 
+                            <a href="#container-Shoes" class="btn"  onclick="changeFilter(this,'shoeType','Baby shoes')">
+                              <span class="btn-inner">کلیک کنید</span>
+                            </a>
+                          </div>
+                        </div>
+                        <div class="image-container">
+                          <img src="./src/img/slide show 3.jpg" alt="" class="image" />
+                        </div>
+                      </div>
+                      <div class="slide">
+                        <div class="slide-content">
+                          <div class="caption">
+                            <div class="title">کفش طبی</div>
+                            <div class="text">
+                              <p>برای مراقبت از پاهایتان</p>
+                            </div> 
+                            <a href="#container-Shoes" class="btn"  onclick="changeFilter(this,'shoeType','Orthopedic Shoe')">
+                              <span class="btn-inner">کلیک کنید</span>
+                            </a>
+                          </div>
+                        </div>
+                        <div class="image-container"> 
+                          <img src="./src/img/slide show 4.jpg" alt="" class="image" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="pagination">
+                      <div class="item is-active"> 
+                        <span class="icon">1</span>
+                      </div>
+                      <div class="item">
+                        <span class="icon">2</span>
+                      </div>
+                      <div class="item">
+                        <span class="icon">3</span>
+                      </div>
+                      <div class="item">
+                        <span class="icon">4</span>
+                      </div>
+                    </div>
+                    <div class="arrows">
+                      <div class="arrow prev">
+                        <span class="svg svg-arrow-left">
+                          <svg version="1.1" id="svg4-Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="14px" height="26px" viewBox="0 0 14 26" enable-background="new 0 0 14 26" xml:space="preserve"> <path d="M13,26c-0.256,0-0.512-0.098-0.707-0.293l-12-12c-0.391-0.391-0.391-1.023,0-1.414l12-12c0.391-0.391,1.023-0.391,1.414,0s0.391,1.023,0,1.414L2.414,13l11.293,11.293c0.391,0.391,0.391,1.023,0,1.414C13.512,25.902,13.256,26,13,26z"/> </svg>
+                          <span class="alt sr-only"></span>
+                        </span>
+                      </div>
+                      <div class="arrow next">
+                        <span class="svg svg-arrow-right">
+                          <svg version="1.1" id="svg5-Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="14px" height="26px" viewBox="0 0 14 26" enable-background="new 0 0 14 26" xml:space="preserve"> <path d="M1,0c0.256,0,0.512,0.098,0.707,0.293l12,12c0.391,0.391,0.391,1.023,0,1.414l-12,12c-0.391,0.391-1.023,0.391-1.414,0s-0.391-1.023,0-1.414L11.586,13L0.293,1.707c-0.391-0.391-0.391-1.023,0-1.414C0.488,0.098,0.744,0,1,0z"/> </svg>
+                          <span class="alt sr-only"></span>
+                        </span>
+                      </div>
+                    </div>
+                  </div> 
+              </section>
+          </div>
+          <div id="holder-categoryCard">
+            <a href="#container-Shoes" class="categoryCard"  onclick="changeFilter(this,'shoeType','ankle-b')">
+              <div>
+                <div>
+                  <img src="./src/img/نیم بوت مردانه.png" alt="نیم بوت مردانه">
+                </div>
+                <div>
+                  <h4>نیم بوت مردانه</h4>
+                </div>
+              </div>
+            </a>
+            <a href="#container-Shoes" class="categoryCard"  onclick="changeFilter(this,'shoeType','boots')">
+              <div>
+                <div>
+                  <img src="./src/img/بوت مردانه.png" alt="بوت">
+                </div>
+                <div>
+                  <h4>بوت</h4>
+                </div>
+              </div>
+            </a>
+            <a href="#container-Shoes"  class="categoryCard"  onclick="changeFilter(this,'shoeType','formal shoes')">
+              <div>
+                <div>
+                  <img src="./src/img/کفش رسمی مردانه.png" alt="کفش رسمی مردانه">
+                </div>
+                <div>
+                  <h4>کفش رسمی</h4>
+                </div>
+              </div>
+            </a>
+            <a href="#container-Shoes"  class="categoryCard"  onclick="changeFilter(this,'shoeType','Slippers')">
+              <div>
+                <div>
+                  <img src="./src/img/دم پایی مردانه.png" alt="دم پایی">
+                </div>
+                <div>
+                  <h4>دم پایی</h4>
+                </div>
+              </div>
+            </a>
+            <a href="#container-Shoes"  class="categoryCard"  onclick="changeFilter(this,'shoeType','casual shoes')">
+              <div>
+                <div>
+                  <img src="./src/img/کفش روزمره مردانه.png" alt="کفش روزمره مردانه">
+                </div>
+                <div>
+                  <h4>کفش روزمره</h4>
+                </div>
+              </div>
+            </a>
+            <a href="#container-Shoes"  class="categoryCard"  onclick="changeFilter(this,'shoeType','sport shoes')">
+              <div>
+                <div>
+                  <img src="./src/img/categoryCard.png" alt="کفش اسپرت">
+                </div>
+                <div>
+                  <h4>کفش اسپرت</h4>
+                </div>
+              </div>
+            </a>
+          </div>
+    </header>
+    <aside id="aside-container" class="remove">
+      <div id="title-aside">فیلتر ها</div>
+      <nav>
+        <br>
+        <br>
+        <div>
+          <div>
+            <b class="sub-headings brand-title sub-headings-brand">برند<i class="fa-solid fa-chevron-down brand-title float-left sub-headings-brand" id="arrow-brands"></i></b>
+          </div>
+          <div id="select-brand">
+            <div>
+              <input type="checkbox" name="Adidas" id="Adidas" class="brand" onclick="changeFilter(this,'brand','Adidas')">
+              <label for="Adidas" class="brand-title">آدیداس</label>
+              <label for="Adidas" class="float-left brand-title">Adidas</label>
+            </div>
+            <hr class="hr-aside">
+            <div>
+              <input type="checkbox" name="Puma" id="Puma" class="brand" onclick="changeFilter(this,'brand','Puma')">
+              <label for="Puma" class="brand-title">پوما</label>
+              <label for="Puma" class="float-left brand-title">Puma</label>
+            </div>
+            <hr class="hr-aside">
+            <div>
+              <input type="checkbox" name="361 Degrees" id="361 Degrees" class="brand" onclick="changeFilter(this,'brand','361 Degrees')">
+              <label for="361 Degrees" class="brand-title">۳۶۱ درجه</label>
+              <label for="361 Degrees" class="float-left brand-title">361 Degrees</label>
+            </div>
+            <hr class="hr-aside">
+            <div>
+              <input type="checkbox" name="nike" id="nike" class="brand" onclick="changeFilter(this,'brand','nike')">
+              <label for="nike" class="brand-title">نایک</label>
+              <label for="nike" class="float-left brand-title">nike</label>
+            </div>
+            <hr class="hr-aside">
+            <div>
+              <input type="checkbox" name="I-RUNNER" id="I-RUNNER" class="brand" onclick="changeFilter(this,'brand','I-RUNNER')">
+              <label for="I-RUNNER" class="brand-title">آی-رانر</label>
+              <label for="I-RUNNER" class="float-left brand-title">I-RUNNER</label>
+            </div>
+            <hr class="hr-aside">
+            <div>
+              <input type="checkbox" name="All Star" id="All Star" class="brand" onclick="changeFilter(this,'brand','All Star')">
+              <label for="All Star" class="brand-title">ال استار</label>
+              <label for="All Star" class="float-left brand-title">All Star</label>
+            </div>
+            <hr class="hr-aside">
+            <div>
+              <input type="checkbox" name="Smart" id="Smart" class="brand" onclick="changeFilter(this,'brand','Smart')">
+              <label for="Smart" class="brand-title">اسمارت</label>
+              <label for="Smart" class="float-left brand-title">Smart</label>
+            </div>
+            <hr class="hr-aside">
+            <div>
+              <input type="checkbox" name="Timberland" id="Timberland" class="brand" onclick="changeFilter(this,'brand','Timberland')">
+              <label for="Timberland" class="brand-title">تیمبرلند</label>
+              <label for="Timberland" class="float-left brand-title">Timberland</label>
+            </div>
+            <hr class="hr-aside">
+            <div>
+              <input type="checkbox" name="Charmara" id="Charmara" class="brand" onclick="changeFilter(this,'brand','Charmara')">
+              <label for="Charmara" class="brand-title">چرم آرا</label>
+              <label for="Charmara" class="float-left brand-title">Charmara</label>
+            </div>
+            <hr class="hr-aside">
+          </div>
+        </div>
+        <hr class="hr-aside">
+        <div>
+          <b class="sub-headings brand-title Price-range-sub-headings">محدوده قیمت<i class="fa-solid fa-chevron-down brand-title float-left Price-range-sub-headings" id="arrow-brands"></i></b>
+          <div class="range-slider">
+            <div class="labels">
+                <span>ارزان‌ترین</span>
+                <span>گران‌ترین</span>
+            </div>
+            <div class="slider-container">
+                <div class="range-track"></div>
+                <div class="range-progress"></div>
+                <div class="thumb" id="min-thumb"></div>
+                <div class="thumb" id="max-thumb"></div>
+            </div>
+            <div class="range-values">
+              <div id="container-min">
+                <span>تومان</span>
+                <input type="number" name="" id="min-price" class="input-price" onkeyup="changeFilter(this,'minPrice', this.value)" disabled>
+                <span>از</span>
+            </div>
+                <div id="container-max">
+                    <span>تومان</span>
+                    <input type="number" name="" id="max-price" class="input-price" onkeyup="changeFilter(this,'maxPrice', this.value)" disabled> 
+                    <span>تا</span>
+                </div>
+            </div>
+            <div class="markers"></div>
+        </div>
+          </div>
+        </div>
+        <hr class="hr-aside">
+        <div id="container-switch">
+          <label class="switch">
+            <input type="checkbox" id="Available-Products"  onclick="changeFilter(this,'WarehouseInventory', this.value)">
+            <span class="slider round"></span>
+          </label>
+          <b class="sub-headings brand-title">فقط کالاهای موجود</b>
+        </div>
+      </nav>
+    </aside>
+    <main id="container-Shoes" class="remove">
+      
+    </main>
+    <script src="./src/slide show/slide show.js"></script>
+    <script src="./src/models/shoe.js"></script>
+    <script src="./src/shoeHandler/shoeHandler.js"></script>
+    <script src="./src/aside/aside.js"></script>
+    <script src="./src/SelectItem/SelectItem.js"></script>
+    <script src="./src/addToCart/addToCart.js"></script>
+    <script src="./src/data/data.js"></script>
+</body>
+</html>
