@@ -772,10 +772,7 @@ input:checked + .slider:before {
   }
 
   #inter {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
+    left: 140px;
   }
 
   #search-bar input {
