@@ -10,13 +10,25 @@ function addToCart(item) {
         return;
     }
 
-    let quantity = quantityInput.value;
+    let quantity = parseInt(quantityInput.value, 10);
     let size = selectSize.value;
 
     if (!size) {
         alert("لطفا سایز مورد نظر را وارد کنید.");
         choose(item); // بازنشانی پنجره
         return;
+    }
+
+    let storedShoes = ShoeHandler.getDataList();
+    let shoe = storedShoes.find(sh => sh.id === item.id);
+    if (shoe && shoe.ShoeSizes && Object.keys(shoe.ShoeSizes).includes(size)) {
+        if (shoe.ShoeSizes[size] < quantity) {
+            alert(`موجودی کافی برای کالا وجود ندارد: ${item.title}, سایز: ${size}`);
+            return; // ناکافی برای خرید
+        }
+    } else {
+        console.error(`Failed to find item in inventory: ${item.title}, size: ${size}`);
+        return; // آیتم در موجودی یافت نشد
     }
 
     // افزودن آیتم به سبد خرید
@@ -26,29 +38,14 @@ function addToCart(item) {
         size: size
     });
 
+    // کاستن از موجودی
+    shoe.ShoeSizes[size] -= quantity;
+
     // ذخیره سبد خرید در sessionStorage
     sessionStorage.setItem('cart', JSON.stringify(cart));
 
-    let storedShoes = ShoeHandler.getDataList();
-
-    cart.forEach(cartItem => {
-        let shoe = storedShoes.find(item => item.id === cartItem.id);
-        if (shoe && shoe.ShoeSizes && Object.keys(shoe.ShoeSizes).includes(cartItem.size)) {
-            if (shoe.ShoeSizes[cartItem.size] >= cartItem.quantity) {
-                shoe.ShoeSizes[cartItem.size] -= cartItem.quantity;
-            } else {
-                console.error(`Insufficient inventory for item: ${cartItem.title}, size: ${cartItem.size}`);
-                return; // ناکافی برای خرید
-            }
-        } else {
-            console.error(`Failed to find item in inventory: ${cartItem.title}, size: ${cartItem.size}`);
-            return; // آیتم در موجودی یافت نشد
-        }
-    });
-
     // ذخیره کفش‌ها با مقادیر جدید در localStorage
-    
-    storedShoes = localStorage.setItem('stored', JSON.stringify(storedShoes));
+    localStorage.setItem('stored', JSON.stringify(storedShoes));
 
     // بستن پنجره انتخاب و بازگشت به لیست کفش‌ها
     clearData();
