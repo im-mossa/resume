@@ -443,10 +443,10 @@ function updateMaxPrice() {
 }
 
 document.getElementById("min-thumb").addEventListener("mouseup", updateMinPrice);
-document.getElementById("min-thumb").addEventListener("touchend", updateMinPrice);
+document.getElementById("min-thumb").addEventListener("touchstart", updateMinPrice);
 
 document.getElementById("max-thumb").addEventListener("mouseup", updateMaxPrice);
-document.getElementById("max-thumb").addEventListener("touchend", updateMaxPrice);
+document.getElementById("max-thumb").addEventListener("touchstart", updateMaxPrice);
 
 
 document.getElementById("Available-Products").addEventListener("change", function() {
