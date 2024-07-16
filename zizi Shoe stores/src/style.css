@@ -772,7 +772,7 @@ input:checked + .slider:before {
   }
 
   #inter {
-    left: 140px;
+    left: 90%;
   }
 
   #search-bar input {
