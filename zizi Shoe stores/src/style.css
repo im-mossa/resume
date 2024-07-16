@@ -37,7 +37,7 @@ body {
 
 #Retainer-brand img {
   border-radius: 10px;
-  margin: 10px 5px 0 5px;
+  margin: 3px 5px;
 }
 
 #header-container {
@@ -747,7 +747,7 @@ input:checked + .slider:before {
 
   #Retainer-brand img {
     border-radius: 5px;
-    margin: 3px 5px;
+    margin: 10px 5px 0 5px;
   }
 
   #header-container {
