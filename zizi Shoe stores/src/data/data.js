@@ -430,17 +430,23 @@ function changeFilter(ele, filterKey, value) {
     applyFilters();
 }
 
-document.getElementById("min-thumb").addEventListener("mouseup", function() {
+function updateMinPrice() {
     let minvalue = document.getElementById("min-price");
     searchKey.minPrice = parseFloat(minvalue.value) || null;
     applyFilters();
-});
+}
 
-document.getElementById("max-thumb").addEventListener("mouseup", function() {
+function updateMaxPrice() {
     let maxvalue = document.getElementById("max-price");
     searchKey.maxPrice = parseFloat(maxvalue.value) || null;
     applyFilters();
-});
+}
+
+document.getElementById("min-thumb").addEventListener("mouseup", updateMinPrice);
+document.getElementById("min-thumb").addEventListener("touchend", updateMinPrice);
+
+document.getElementById("max-thumb").addEventListener("mouseup", updateMaxPrice);
+document.getElementById("max-thumb").addEventListener("touchend", updateMaxPrice);
 
 document.getElementById("Available-Products").addEventListener("change", function() {
     searchKey.WarehouseInventory = this.checked ? 1 : undefined;
