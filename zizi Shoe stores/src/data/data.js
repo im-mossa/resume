@@ -430,13 +430,15 @@ function changeFilter(ele, filterKey, value) {
     applyFilters();
 }
 
-function updateMinPrice() {
+function updateMinPrice(event) {
+    event.preventDefault(); // جلوگیری از رفتار پیش‌فرض مرورگر
     let minvalue = document.getElementById("min-price");
     searchKey.minPrice = parseFloat(minvalue.value) || null;
     applyFilters();
 }
 
-function updateMaxPrice() {
+function updateMaxPrice(event) {
+    event.preventDefault(); // جلوگیری از رفتار پیش‌فرض مرورگر
     let maxvalue = document.getElementById("max-price");
     searchKey.maxPrice = parseFloat(maxvalue.value) || null;
     applyFilters();
@@ -444,9 +446,14 @@ function updateMaxPrice() {
 
 document.getElementById("min-thumb").addEventListener("mouseup", updateMinPrice);
 document.getElementById("min-thumb").addEventListener("touchstart", updateMinPrice);
+document.getElementById("min-thumb").addEventListener("touchend", updateMinPrice);
+// document.getElementById("min-thumb").addEventListener("touchmove", updateMinPrice);
 
 document.getElementById("max-thumb").addEventListener("mouseup", updateMaxPrice);
 document.getElementById("max-thumb").addEventListener("touchstart", updateMaxPrice);
+document.getElementById("max-thumb").addEventListener("touchend", updateMaxPrice);
+// document.getElementById("max-thumb").addEventListener("touchmove", updateMaxPrice);
+
 
 
 document.getElementById("Available-Products").addEventListener("change", function() {
