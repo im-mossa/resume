@@ -1,0 +1,860 @@
+@font-face {
+  font-family: yekan;
+  src: url(./fonts/Yekan.ttf);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: yekan;
+  /* direction: rtl; */
+}
+
+.rtl {
+  direction: rtl;
+}
+
+.float-left {
+  float: left;
+}
+
+body {
+  font: 14px/2 "Open sans", sans-serif;
+  letter-spacing: 0.05em;
+}
+
+#Retainer-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#brand {
+  width: 150px;
+  height: 50px;
+}
+
+#Retainer-brand img {
+  border-radius: 10px;
+  margin: 3px 5px;
+}
+
+#header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 10px 0px 10px;
+}
+
+#search-bar {
+  flex-grow: 1;
+  margin: 0 10px; /* حداقل 5 پیکسل فاصله از آیتم های اطراف */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#search-bar form {
+  position: relative;
+  width: 100%;
+  max-width: 400px; /* حداکثر عرض نوار جستجو */
+}
+
+#inter {
+  color: #707070; 
+  position: absolute; 
+  left: 477px; 
+  top: 50%; 
+  transform: translateY(-50%);
+}
+
+#search-bar input {
+  background-color: #f5f5f5;
+  width: 500px;
+  height: 40px;
+  border: none;
+  border-radius: 10px;
+  padding-right: 30px;
+  padding-left: 10px;
+}
+
+#cart-icon-holder {
+  display: flex;
+  align-items: center;
+}
+
+#cart-shopping {
+  margin: 25px 10px;
+  scale: 2;
+  color: #7C7F7C;
+}
+
+#cart-shopping:active {
+  color: black;
+}
+
+.btn {
+  display: inline-block;
+  padding: 13px 20px;
+  color: #fff;
+  text-decoration: none;
+  position: relative;
+  background: transparent;
+  border: 1px solid #e1e1e1;
+  font: 12px/1.2 "Oswald", sans-serif;
+  /* letter-spacing: 0.4em; */
+  text-align: center;
+  text-indent: 2px;
+  text-transform: uppercase;
+  transition: color 0.1s linear 0.05s;
+}
+
+.btn::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: #e1e1e1;
+  z-index: 1;
+  opacity: 0;
+  transition: height 0.2s ease, top 0.2s ease, opacity 0s linear 0.2s;
+}
+
+.btn::after {
+  transition: border 0.1s linear 0.05s;
+}
+
+.btn .btn-inner {
+  position: relative;
+  z-index: 2;
+}
+
+.btn:hover {
+  color: #373737;
+  transition: color 0.1s linear 0s;
+}
+
+.btn:hover::before {
+  top: 0;
+  height: 100%;
+  opacity: 1;
+  transition: height 0.2s ease, top 0.2s ease, opacity 0s linear 0s;
+}
+
+.btn:hover::after {
+  border-color: #373737;
+  transition: border 0.1s linear 0s;
+}
+
+.slideshow {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 400px; /* تغییر ارتفاع به 400 پیکسل */
+  z-index: 1;
+}
+
+.slideshow-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; /* ارتفاع 100% برای پوشش کامل درون اسلایدشو */
+}
+
+.slides {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; /* ارتفاع 100% برای پوشش کامل درون اسلایدشو */
+  z-index: 1;
+}
+
+.slide {
+  display: none;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; /* ارتفاع 100% برای پوشش کامل درون اسلایدشو */
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.slide.is-active {
+  display: block;
+}
+
+.slide.is-loaded {
+  opacity: 1;
+}
+
+.caption {
+  padding: 0 100px;
+}
+
+.image-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; /* ارتفاع 100% برای پوشش کامل درون اسلایدشو */
+  background-position: center;
+  z-index: 1;
+  background-size: cover;
+  image-rendering: optimizeQuality;
+}
+
+.image-container::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; /* ارتفاع 100% برای پوشش کامل درون اسلایدشو */
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.image {
+  width: 100%;
+  object-fit: cover;
+  height: 100%; /* ارتفاع 100% برای پوشش کامل درون اسلایدشو */
+}
+
+.slide-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; /* ارتفاع 100% برای پوشش کامل درون اسلایدشو */
+  z-index: 2;
+  color: #fff;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  margin: 0 auto 15px;
+  max-width: 1000px;
+  font: 300 50px/1.2 "Oswald", sans-serif;
+  /* letter-spacing: 0.35em; */
+  text-transform: uppercase;
+}
+
+.text {
+  margin: 0 auto;
+  max-width: 1000px;
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+.btn {
+  margin: 15px 0 0;
+  border-color: #fff;
+}
+
+.btn::before {
+  background: #fff;
+}
+
+.pagination {
+  position: absolute;
+  bottom: 35px;
+  left: 0;
+  width: 100%;
+  height: 12px;
+  cursor: default;
+  z-index: 2;
+  text-align: center;
+}
+
+.pagination .item {
+  display: inline-block;
+  padding: 15px 5px;
+  position: relative;
+  width: 46px;
+  height: 32px;
+  cursor: pointer;
+  text-indent: -999em;
+  z-index: 1;
+}
+
+.pagination .item + .item {
+  margin-left: -2px;
+}
+
+.pagination .item::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 15px;
+  left: 5px;
+  width: 36px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.5);
+  transition: background 0.2s ease;
+}
+
+.pagination .item::after {
+  width: 0;
+  background: #fff;
+  z-index: 2;
+  transition: width 0.2s ease;
+}
+
+.pagination .item:hover::before,
+.pagination .item.is-active::before {
+  background-color: #fff;
+}
+
+.arrows .arrow {
+  margin: -33px 0 0;
+  padding: 20px;
+  position: absolute;
+  top: 50%;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.arrows .prev {
+  left: 30px;
+}
+
+.arrows .prev:hover .svg {
+  left: -10px;
+}
+
+.arrows .next {
+  right: 30px;
+}
+
+.arrows .next:hover .svg {
+  left: 10px;
+}
+
+.arrows .svg {
+  position: relative;
+  left: 0;
+  width: 14px;
+  height: 26px;
+  fill: #fff;
+  transition: left 0.2s ease;
+}
+
+#holder-categoryCard {
+  margin: 10px auto;
+  width: 65%;
+}
+
+.categoryCard {
+  display: inline-block;
+  margin: 0 10px 0 10px;
+  padding: 12px 0 0 0px;
+  width: 135px;
+  height: 125px;
+  background-color: #F0F0F1;
+  border-radius: 10px;
+  text-decoration: none;
+  text-align: center;
+  color: black;
+}
+
+.categoryCard div img {
+  overflow: hidden;
+  line-height: 10px;
+  width: 110px;
+  height: 110px;
+  margin-top: -20px;
+}
+
+.categoryCard div h4 {
+  margin-top: -20px;
+}
+
+aside {
+  border: solid 1px #E0E0E2;
+  border-radius: 10px;
+  margin: 5px 10px;
+  width: 18%;
+  /* width: 270px; */
+  height: 150px;
+  float: right;
+  text-align: right;
+}
+
+/* main {
+  background-color: #37373725;
+  width: 400px;
+  height: 200px;
+} */
+
+#title-aside {
+  float: right;
+  padding: 5px 10px;
+  font-size: 20px;
+}
+
+#arrow-brands {
+  margin: 10px 0 0 5px;
+}
+
+.hr-aside {
+  border: solid 0.1px #F0F0F1;
+}
+
+.sub-headings {
+  margin-right: 5px;
+}
+
+#select-brand {
+  display: none;
+  padding: 10px;
+  height: 200px;
+  overflow-y: scroll;
+  direction: rtl;
+}
+
+.brand-title:hover {
+  cursor: pointer;
+}
+
+/* ////////////////////////////////////////////////////////////////////////////////// */
+
+
+.range-slider {
+  /* width: 80%; */
+  height: 140px;
+  max-width: 200px;
+  margin: 10px auto;
+  position: relative;
+  text-align: center;
+  display: none;
+}
+
+.labels {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.slider-container {
+  position: relative;
+  height: 20px;
+  margin-bottom: 20px;
+}
+
+.range-track {
+  position: absolute;
+  top: 50%;
+  left: 0px;
+  width: 170px;
+  height: 5px;
+  background: #ddd;
+  border-radius: 3px;
+  transform: translateY(-50%);
+}
+
+.range-progress {
+  position: absolute;
+  top: 50%;
+  height: 5px;
+  background: #007bff;
+  border-radius: 3px;
+  transform: translateY(-50%);
+}
+
+.thumb {
+  width: 15px;
+  height: 15px;
+  background: #007bff;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 2;
+}
+
+#max-thumb {
+  margin-left: -2px;
+  z-index: 2;
+}
+
+.range-values {
+  display: block;
+  justify-content: space-between;
+  padding: 0 10px;
+  margin-left: 25px;
+}
+
+.range-values > div > span {
+  margin: 0 5px;
+}
+
+
+#container-min, #container-max {
+  display: flex;
+  align-items: center;
+}
+
+.input-price {
+  width: 82px;
+  border: none;
+}
+
+.markers {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  padding: 0 10px;
+}
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+  right: 110px;
+  margin: 5px 0px 0 5px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+  border: solid 2px #A1A3A8;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 12px;
+  width: 12px;
+  left: 1px;
+  bottom: 2.5px;
+  background-color: #A1A3A8;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(20px);
+  -ms-transform: translateX(20px);
+  transform: translateX(20px);
+  background-color: white;
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 20px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* main */
+
+#container-Shoes {
+  width: 80%;
+  height: 600px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  /* justify-content: space-between; */
+  margin-left: 7px;
+  margin-top: 20px;
+}
+
+#choose-holder {
+  width: 922px;
+  height: auto;
+  background-color: #fff;
+  border: 1px solid #E0E0E2;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px 5px #888888;
+  font-size: large;
+  padding: 10px;
+  /* margin-bottom: 10px; */
+  z-index: 20;
+  position: absolute;
+  /* right: 290px; */
+  /* display: block; */
+  margin: 10px 10px 10px 270px; 
+}
+
+.cart-holder {
+  width: 922px;
+  height: auto;
+  background-color: #fff;
+  border: 1px solid #E0E0E2;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px 5px #888888;
+  font-size: large;
+  padding: 10px;
+  z-index: 20;
+  margin: 10px 10px 10px 270px; 
+}
+
+.cart-item b,
+.cart-item span,
+.cart-item a {
+  vertical-align: 25px;
+  
+}
+
+#Purchase-form-holder  table,
+#container-Shoes table {
+  margin: 0 auto;
+  font-size: larger;
+}
+
+.Purchase-form {
+  width: 400px;
+  height: 30px;
+  border: none;
+  border-radius: 5px;
+  background-color: #e1e1e1;
+  color: black;
+  font-size: large;
+
+}
+
+#red-multiplication {
+  color: red;
+}
+
+#red-multiplication:active {
+  color: black;
+}
+
+.reject {
+  display: inline-block;
+  background-color: rgb(250, 80, 80);
+  color: #000000;
+  width: 80px;
+  height: 40px;
+  border-radius: 10px;
+}
+
+.reject:active {
+  background-color: rgb(152, 0, 0);
+  color: #fff;
+}
+
+.Add-to-cart {
+  background-color: yellow;
+  display: inline-block;
+  color: #000000;
+  width: 120px;
+  height: 40px;
+  border-radius: 10px;
+}
+
+.Add-to-cart:active {
+  background-color: rgb(126, 126, 0);
+  color: #fff;
+}
+
+.accept {
+  display: inline-block;
+  background-color: rgb(0, 213, 0);
+  color: #000000;
+  width: 120px;
+  height: 40px;
+  border-radius: 10px;
+}
+
+.accept:active {
+  background-color: rgb(1, 108, 1);
+  color: #fff;
+}
+
+.shoe {
+  width: 25%;
+  height: 60%;
+  text-align: right;
+  padding: 10px;
+  /* margin: 10px; */
+  /* background-color: #2196F3; */
+  border: 1px solid #f0f0f1;
+}
+
+.shoe > a {
+  text-decoration: none;
+  color: black;
+}
+
+.shoe:hover {
+  box-shadow: 0px 0px 5px 5px #888888;
+  z-index: 10;
+}
+
+.shoe-image {
+  width: 250px;
+  height: 200px;
+  margin: 30px 14px 0 0;
+  border-radius: 10px;
+}
+
+#ads-item-template {
+  display: none;
+}
+
+@media only screen and (max-width:1070px) {
+  #Retainer-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #brand {
+    width: 100px;
+    height: 40px;
+  }
+
+  #Retainer-brand img {
+    border-radius: 5px;
+    margin: 3px 5px;
+  }
+
+  #header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+  }
+
+  #search-bar {
+    flex-grow: 1;
+    margin: 0 10px; /* حداقل 5 پیکسل فاصله از آیتم های اطراف */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #search-bar form {
+    position: relative;
+    width: 100%;
+    max-width: 400px; /* حداکثر عرض نوار جستجو */
+  }
+
+  #inter {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  #search-bar input {
+    width: 100%;
+    height: 40px;
+    border: solid 1px black;
+    border-radius: 5px;
+    padding-right: 30px;
+    padding-left: 10px;
+    box-sizing: border-box;
+  }
+
+  #cart-icon-holder {
+    display: flex;
+    align-items: center;
+  }
+
+  #cart-shopping {
+    margin: 0 15px;
+    transform: scale(1);
+  }
+
+  
+  #holder-categoryCard {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    width: 100%; /* تغییر اندازه عرض به 100% */
+  }
+
+  .categoryCard {
+    margin: 5px;
+    padding: 0px;
+    width: calc((100% / 3) - 10px); /* محاسبه عرض هر کارت به صورت داینامیک */
+    height: 125px;
+    box-sizing: border-box; /* برای اطمینان از محاسبه صحیح padding و border در عرض کارت */
+  }
+  #aside-container {
+    width: 95%;
+  }
+  #container-switch > .switch {
+    float: left;
+  }
+  .switch {
+  left: 10px;
+  margin: 5px 0px 0 -5px;
+  }
+  #container-Shoes {
+    display: flex;
+    width: 95%;
+  }
+  .shoe {
+    width: 100%;
+    height: 250px;
+    padding: 10px;
+  }
+  .shoe-image {
+    width: 200px;
+    height: 130px;
+    margin: 0px 14px 0 0;
+  }
+  #choose-holder {
+    width: 95%;
+    margin: 10px 0 0 5px; 
+  }
+  .Purchase-form {
+    width: 100px;
+  }
+  .cart-holder {
+    width: 95%;
+    margin: 10px 0 0 15px; 
+  }
+  .accept ,
+  .reject,
+  .Add-to-cart{
+    width: 60px;
+    height: 60px;
+  }
+}
