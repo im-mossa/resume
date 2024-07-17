@@ -5,6 +5,9 @@ function choose(item) {
         return;
     }
 
+    // محاسبه موجودی انبار
+    let totalInventory = Object.values(item.ShoeSizes).reduce((acc, quantity) => acc + quantity, 0);
+
     // تبدیل آبجکت shoeSizes به یک رشته قابل نمایش
     let shoeSizesString = Object.entries(item.ShoeSizes)
         .map(([size, quantity]) => `سایز ${size}: ${quantity} جفت`)
@@ -29,7 +32,7 @@ function choose(item) {
                 <br>
                 <span> برند : ${item.brand}</span>
                 <br>
-                <span> موجودی انبار : ${item.WarehouseInventory}</span>
+                <span> موجودی انبار : ${totalInventory}</span>
                 <br>
                 <span> نوع کفش : ${item.shoeType}</span>
                 <br>
@@ -92,4 +95,3 @@ function choose(item) {
     // فراخوانی تغییر رویداد برای تنظیم اولیه max و value input
     document.getElementById('select-size').dispatchEvent(new Event('change'));
 }
-
