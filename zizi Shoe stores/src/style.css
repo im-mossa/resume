@@ -471,6 +471,8 @@ aside {
   background: #007bff;
   border-radius: 3px;
   transform: translateY(-50%);
+  left: var(--range-left);
+  width: calc(var(--range-right) - var(--range-left));
 }
 
 .thumb {
