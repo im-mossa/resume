@@ -469,5 +469,7 @@ function resetData() {
     fillData(storedShoes);
 }
 
-
+function transition(ele) {
+    ele.style.transition = "all 0.3s ease";
+}
 
