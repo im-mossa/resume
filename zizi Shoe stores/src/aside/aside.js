@@ -21,12 +21,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (isBrandVisible && isPriceRangeVisible) {
             aside.style.height = "510px";
+            transition(aside);
         } else if (isBrandVisible) {
             aside.style.height = "350px";
+            transition(aside);
         } else if (isPriceRangeVisible) {
             aside.style.height = "310px";
+            transition(aside);
         } else {
             aside.style.height = "150px";
+            transition(aside);
         }
     }
 
