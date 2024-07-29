@@ -41,8 +41,8 @@ function addToCart(item) {
     // کاستن از موجودی
     shoe.ShoeSizes[size] -= quantity;
 
-    // ذخیره سبد خرید در sessionStorage
-    sessionStorage.setItem('cart', JSON.stringify(cart));
+    // ذخیره سبد خرید در setSessionCookie
+    setSessionCookie('cart', JSON.stringify(cart));
 
     // ذخیره کفش‌ها با مقادیر جدید در localStorage
     localStorage.setItem('stored', JSON.stringify(storedShoes));
@@ -143,7 +143,7 @@ function removeFromCart(index) {
     }
 
     cart.splice(index, 1);
-    sessionStorage.setItem('cart', JSON.stringify(cart));
+    setSessionCookie('cart', JSON.stringify(cart));
     localStorage.setItem('stored', JSON.stringify(storedShoes));
     displayCart();
 }
@@ -155,18 +155,12 @@ function clearData() {
     displayCart();
 }
 
-// بارگذاری سبد خرید از sessionStorage هنگام بارگذاری صفحه
-// window.onload = function() {
-//     let storedCart = JSON.parse(sessionStorage.getItem('cart')) || [];
-//     cart = storedCart;
-// }
-
 function processPayment(event) {
     event.preventDefault();
     
 
-    // حذف سبد خرید از sessionStorage
-    sessionStorage.removeItem('cart');
+    // حذف سبد خرید از deleteCookie
+    deleteCookie('cart');
     cart = [];
 
     alert('خرید با موفقیت انجام شد!');
@@ -192,8 +186,8 @@ function reject(event) {
     // ذخیره کفش‌ها با مقادیر جدید در localStorage
     localStorage.setItem('stored', JSON.stringify(storedShoes));
 
-    // حذف سبد خرید از sessionStorage
-    sessionStorage.removeItem('cart');
+    // حذف سبد خرید از deleteCookie
+    deleteCookie('cart');
     cart = [];
     resetData();
 }
