@@ -3,13 +3,11 @@
   src: url(./fonts/Yekan.ttf);
 }
 
-@keyframes slideRight {
+@keyframes slideopacity {
   0% {
-    transform: translateX(-100%);
     opacity: 0;
   }
   100% {
-    transform: translateX(0);
     opacity: 1;
   }
 }
@@ -626,7 +624,7 @@ input:checked + .slider:before {
   /* right: 290px; */
   /* display: block; */
   margin: 10px 10px 10px 270px; 
-  animation: slideRight 0.5s ease forwards;
+  animation: slideopacity 0.75s ease forwards;
 }
 
 .cart-holder {
@@ -640,7 +638,7 @@ input:checked + .slider:before {
   padding: 10px;
   z-index: 20;
   margin: 10px 10px 10px 270px; 
-  animation: slideRight 0.5s ease forwards;
+  animation: slideopacity 0.75s ease forwards;
 }
 
 .cart-item b,
@@ -724,7 +722,7 @@ input:checked + .slider:before {
   padding: 10px;
   border: 1px solid #f0f0f1;
   transition: all 0.3s ease;
-  animation: slideRight 0.5s ease forwards;
+  animation: slideopacity 0.75s ease forwards;
 }
 
 .shoe > a {
