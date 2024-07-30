@@ -23,7 +23,7 @@ function addToCart(item) {
     let shoe = storedShoes.find(sh => sh.id === item.id);
 
     if (shoe && shoe.ShoeSizes && Object.keys(shoe.ShoeSizes).includes(size)) {
-        if (typeof shoe.ShoeSizes[size] !== 'number') {
+        if (typeof shoe.ShoeSizes[size] === NaN) {
             alert(`ورودی تعداد جفت کفش ها صحیح نیست!`);
             return; // ورودی اشتباه
         }
