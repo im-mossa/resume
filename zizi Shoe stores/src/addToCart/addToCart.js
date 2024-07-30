@@ -43,8 +43,12 @@ function addToCart(item) {
     }
     
     // افزودن آیتم به سبد خرید
+    const { id,title, img, price } = item;
     cart.push({
-        ...item,
+        id: id,
+        title: title,
+        img: img,
+        price: price,
         quantity: quantity,
         size: size
     });
