@@ -5,7 +5,7 @@ function addToCart(item) {
     let quantityInput = document.getElementById("quantity-input");
     let selectSize = document.getElementById("select-size");
 
-    if (!quantityInput || !selectSize) {
+    if (!quantityInput && !selectSize) {
         console.error("عناصر ورودی مقدار و سایز پیدا نشدند.");
         return;
     }
