@@ -13,6 +13,12 @@ function addToCart(item) {
     let quantity = parseInt(quantityInput.value, 10);
     let size = selectSize.value;
 
+    // بررسی مقدار وارد شده
+        if (quantity === undefined || quantity === null || quantity === "" || isNaN(quantity)) {
+            alert(`ورودی تعداد جفت کفش ها صحیح نیست!`);
+            return; // ورودی اشتباه
+        }
+
     if (!size) {
         alert("لطفا سایز مورد نظر را وارد کنید.");
         choose(item); // بازنشانی پنجره
@@ -25,11 +31,7 @@ function addToCart(item) {
     if (shoe && shoe.ShoeSizes && Object.keys(shoe.ShoeSizes).includes(size)) {
         let shoeQuantity = shoe.ShoeSizes[size];
 
-        // بررسی مقدار وارد شده
-        if (shoeQuantity === undefined || shoeQuantity === null || shoeQuantity === "" || isNaN(shoeQuantity)) {
-            alert(`ورودی تعداد جفت کفش ها صحیح نیست!`);
-            return; // ورودی اشتباه
-        }
+        
 
         if (shoeQuantity < quantity) {
             alert(`موجودی کافی برای کالا وجود ندارد: ${item.title}, سایز: ${size}`);
