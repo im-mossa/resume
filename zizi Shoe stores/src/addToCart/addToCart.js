@@ -23,17 +23,21 @@ function addToCart(item) {
     let shoe = storedShoes.find(sh => sh.id === item.id);
 
     if (shoe && shoe.ShoeSizes && Object.keys(shoe.ShoeSizes).includes(size)) {
-        if (typeof shoe.ShoeSizes[size] === NaN) {
+        let shoeQuantity = shoe.ShoeSizes[size];
+
+        // بررسی مقدار وارد شده
+        if (shoeQuantity === undefined || shoeQuantity === null || shoeQuantity === "" || isNaN(shoeQuantity)) {
             alert(`ورودی تعداد جفت کفش ها صحیح نیست!`);
             return; // ورودی اشتباه
         }
-        if (shoe.ShoeSizes[size] < quantity) {
+
+        if (shoeQuantity < quantity) {
             alert(`موجودی کافی برای کالا وجود ندارد: ${item.title}, سایز: ${size}`);
             return; // ناکافی برای خرید
         }
     } else {
-        console.error(`Failed to find item in inventory: ${item.title}, size: ${size}`);
-        return; // آیتم در موجودی یافت نشد
+    console.error(`Failed to find item in inventory: ${item.title}, size: ${size}`);
+    return; // آیتم در موجودی یافت نشد
     }
     
     // افزودن آیتم به سبد خرید
