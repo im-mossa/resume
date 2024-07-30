@@ -26,6 +26,10 @@ function addToCart(item) {
             alert(`موجودی کافی برای کالا وجود ندارد: ${item.title}, سایز: ${size}`);
             return; // ناکافی برای خرید
         }
+        if (shoe.ShoeSizes[size] != typeof Number) {
+            alert(`ورودی تعداد جفت کفش ها صحیح نیست!`);
+            return; //ورودی اشتباه
+        }
     } else {
         console.error(`Failed to find item in inventory: ${item.title}, size: ${size}`);
         return; // آیتم در موجودی یافت نشد
