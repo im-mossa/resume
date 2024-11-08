@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>onlile shoe store | about</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="onlile shoe store">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./src/main css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- menu -->
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li>
+                    <a href="basket.html"><i class="fa fa-shopping-cart fl-r2"></i></a>
+                    <a href="#" onclick="checkUser()"><i class="fa fa-user nav-login"></i></a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <!-- about -->
+        <section>
+            <h2 class="main-title">About Us</h2>
+            <div id="about-section">
+                <div id="about-box"></div>
+            </div>
+        </section>
+    </main>
+    <!-- Map -->
+    <section class="map-box">
+        <h4>Our Address</h4>
+        <br>
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d330.4487474617009!2d51.455177466451595!3d35.80249477081845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfa!2s!4v1729416604001!5m2!1sfa!2s"
+            width="100%" height="250px" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </section>
+    <footer>
+        <div id="footer-1">
+            <h4>About Us</h4>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste, nesciunt? Similique nulla repellat quae
+                voluptates nobis aperiam. Cum dicta dolore quaerat similique, eligendi rem architecto ab molestias hic
+                dolor nulla.</p>
+        </div>
+        <div id="footer-2">
+            <h4>social</h4>
+            <nav>
+                <ul>
+                    <li><a href="https://www.instagram.com/">
+                            <i class="fa-brands fa-instagram fa-2xl"></i>
+                        </a></li>
+                    <li><a href="https://www.x.com/">
+                            <i class="fa-brands fa-twitter fa-2xl"></i>
+                        </a></li>
+                    <li><a href="https://www.linkedIn.com/">
+                            <i class="fa-brands fa-linkedin fa-2xl"></i>
+                        </a></li>
+                    <li><a href="https://www.youtube.com/">
+                            <i class="fa-brands fa-youtube fa-2xl"></i>
+                        </a></li>
+                </ul>
+            </nav>
+        </div>
+        <div id="footer-3">
+            <h4>links</h4>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+    <section id="bottom-footer">
+        <h3>Design & Develop by <a href="#">MSS</a></h3>
+    </section>
+</body>
+<!-- utils -->
+<script src="./src/utils/siteUtils.js"></script>
+<!-- global API -->
+<script src="./src/api/apiAddress.js"></script>
+<script src="./src/api/baseAPI.js"></script>
+<!-- aboutAPI -->
+<script src="./src/api/contentAPI.js"></script>
+<script src="./src/controllers/contentController.js"></script>
+<!-- main API -->
+<script src="./src/pages js/about.js"></script>
+
+</html>
