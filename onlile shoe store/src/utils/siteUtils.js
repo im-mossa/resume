@@ -68,9 +68,9 @@ showButtom = () => {
 checkUser = () => {
     const currentUser = getCookie("currentUser");
     if(currentUser == undefined || currentUser == null || currentUser == "") {
-        location.href = "../../login.html";
+        location.href = "https://muhammadsaeedsaeedyan.github.io/onlile%20shoe%20store/login.html";
     } else {
-        location.href = "../panel/panel.html";
+        location.href = "https://muhammadsaeedsaeedyan.github.io/onlile%20shoe%20store/panel/panel.html";
     }
 }
 
