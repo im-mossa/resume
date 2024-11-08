@@ -1,0 +1,13 @@
+#template {
+    display: none;
+}
+
+.width200 {
+    width: 200px;
+    margin: 5px;
+}
+
+.flex--box {
+    display: flex;
+    flex-wrap: wrap;
+}
