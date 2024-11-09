@@ -68,14 +68,14 @@ showButtom = () => {
 checkUser = () => {
     const currentUser = getCookie("currentUser");
     if(currentUser == undefined || currentUser == null || currentUser == "" || !currentUser) {
-        location.href = "../onlile%20shoe%20store/login.html";
+        location.href = "https://muhammadsaeedsaeedyan.github.io/resume/onlile%20shoe%20store/login.html";
     } else {
-        location.href = "../resume/onlile%20shoe%20store/src/panel/panel.html";
+        location.href = "https://muhammadsaeedsaeedyan.github.io/resume/onlile%20shoe%20store/src/panel/panel.html";
     }
 }
 
 logOutSystem = () => {
     deleteCookie("currentUser");
     deleteCookie("token");
-    location.href = "../resume/onlile%20shoe%20store/login.html";
+    location.href = "https://muhammadsaeedsaeedyan.github.io/resume/onlile%20shoe%20store/login.html";
 }
