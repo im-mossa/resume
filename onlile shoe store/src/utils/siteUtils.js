@@ -67,7 +67,7 @@ showButtom = () => {
 
 checkUser = () => {
     const currentUser = getCookie("currentUser");
-    if(currentUser == undefined || currentUser == null || currentUser == "") {
+    if(currentUser == undefined || currentUser == null || currentUser == "" || !currentUser) {
         location.href = "../../login.html";
     } else {
         location.href = "../panel/panel.html";
