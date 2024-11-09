@@ -388,6 +388,7 @@ footer {
 
 #main-form {
     width: 600px;
+    margin: 0 auto;
 }
 
 #login-table tr td :nth-child(n) {
