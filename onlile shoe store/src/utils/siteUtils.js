@@ -68,9 +68,9 @@ showButtom = () => {
 checkUser = () => {
     const currentUser = getCookie("currentUser");
     if(currentUser == undefined || currentUser == null || currentUser == "" || !currentUser) {
-        location.href = "../login.html";
+        location.href = "../onlile%20shoe%20store/login.html";
     } else {
-        location.href = "../panel/panel.html";
+        location.href = "../onlile%20shoe%20store/src/panel/panel.html";
     }
 }
 
