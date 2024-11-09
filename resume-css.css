@@ -13,10 +13,6 @@ body {
     font-family: font a;
 }
 
-main {
-    margin-left: 38px;
-}
-
 hr {
     border-color: #808080;
     margin: 0 auto;
@@ -29,8 +25,7 @@ i.fa {
 }
 
 #container {
-    width: 95%;
-    padding: 1%;
+    padding: 10px;
 }
 
 #left-side {
@@ -38,14 +33,13 @@ i.fa {
     display: inline-block;
     width: 30%;
     height: auto;
-    margin: 0.25%;
+    margin: 5px;
     vertical-align: top;
     border-radius: 10px;
 }
 
 #profile-box {
     position: relative;
-
 }
 
 #profile-image {
@@ -66,7 +60,6 @@ i.fa {
 }
 
 #description-box {
-    margin-top: -10px;
     list-style: none;
     padding: 10px;
 }
@@ -77,13 +70,10 @@ i.fa {
 
 #description-box>li>span {
     color: #fff;
-    margin-left: 10px;
     font-size: 1.2em;
 }
 
 #skills {
-    padding: 5px;
-    margin-top: -10px;
     padding: 10px;
     color: #fff;
 }
@@ -102,10 +92,6 @@ i.fa {
 
 .item1 {
     font-size: 1em;
-}
-
-.skills-item {
-    margin-top: 0px;
 }
 
 .progress-box {
@@ -149,7 +135,7 @@ i.fa {
 #right-side article {
     background-color: #666;
     border-radius: 10px;
-    margin: 0.5%;
+    margin: 5px;
     height: auto;
     width: 95%;
     color: #fff;
@@ -185,7 +171,6 @@ i.fa {
 #footer {
     display: block;
     background: #bb86fc;
-    width: 112%;
     height: 40px;
     text-align: center;
     color: #eee;
@@ -198,33 +183,18 @@ i.fa {
 }
 
 @media only screen and (max-width: 800px) {
-
-    main {
-        width: 90%;
-    }
-
-    #container {
-        display: grid;
-        grid-template-columns: 1fr; /* تعیین نسبت اندازه ستون‌ها */
-        gap: 10px; /* فاصله بین بخش‌ها */
-        padding: 10px;
-        margin: 0 auto; /* قرار گرفتن در مرکز صفحه */
-        max-width: 1200px; /* حداکثر عرض */
-    }
-    
     #left-side {
-        display: block;
-        width: 95%;
-        margin: 10px 0 0 7%;
+        width: 90%;
+        margin: 20px;
     }
-
     #right-side {
-        display: block;
-        width: 86%;
-        margin: 10px 0 0 7%;
+        width: 80%;
+        margin: 20px;
     }
-    
     #right-side>article {
         margin: 10px 0;
+    }
+    #footer {
+        width: 100%;
     }
 }
