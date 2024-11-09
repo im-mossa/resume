@@ -70,12 +70,12 @@ checkUser = () => {
     if(currentUser == undefined || currentUser == null || currentUser == "" || !currentUser) {
         location.href = "../onlile%20shoe%20store/login.html";
     } else {
-        location.href = "../onlile%20shoe%20store/src/panel/panel.html";
+        location.href = "../resume/onlile%20shoe%20store/src/panel/panel.html";
     }
 }
 
 logOutSystem = () => {
     deleteCookie("currentUser");
     deleteCookie("token");
-    location.href = "/onlile%20shoe%20store/login.html";
+    location.href = "../resume/onlile%20shoe%20store/login.html";
 }
