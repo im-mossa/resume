@@ -11,7 +11,7 @@ let form = document.getElementById("main-form");
                 title: "Oops...",
                 text: "Please log in to your user panel first.",
             }).then(() => {
-                location.href = "/onlile%20shoe%20store/login.html";
+                location.href = "/online%20shoe%20store/login.html";
             });
         }
     }
@@ -48,7 +48,7 @@ changeProfile = async () => {
         const currentUser = data[0];
         setCookie("currentUser", JSON.stringify(currentUser), 5);
         setCookie("token", currentUser.token, 5);
-        location.href = "/onlile%20shoe%20store/src/panel/panel.html";
+        location.href = "/online%20shoe%20store/src/panel/panel.html";
     });
 }
 

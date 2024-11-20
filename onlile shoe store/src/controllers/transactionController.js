@@ -15,7 +15,7 @@ let form = document.getElementById("main-form");
                 title: "Oops...",
                 text: "Please log in to your user panel first.",
             }).then(() => {
-                location.href = "/onlile%20shoe%20store/login.html";
+                location.href = "/online%20shoe%20store/login.html";
             });
         }
     }

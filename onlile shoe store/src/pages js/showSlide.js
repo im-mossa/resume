@@ -14,7 +14,7 @@ window.onload = async () => {
             title: "Oops...",
             text: "There is no information on this page.",
         }).then(() => {
-            location.href = "/onlile%20shoe%20store/index.html";
+            location.href = "/online%20shoe%20store/index.html";
         });
     }
 }

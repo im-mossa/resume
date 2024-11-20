@@ -18,7 +18,7 @@ login = async () => {
         const currentUser = data[0];
         setCookie("currentUser", JSON.stringify(currentUser), 5);
         setCookie("token", currentUser.token, 5);
-        location.href = "/resume/onlile%20shoe%20store/src/panel/panel.html";
+        location.href = "/resume/online%20shoe%20store/src/panel/panel.html";
     });
 }
 
