@@ -122,3 +122,8 @@ body {
     text-align: center;
     color: var(--white);
 }
+
+#resume-link {
+    text-decoration: none;
+    color: yellow;
+}
