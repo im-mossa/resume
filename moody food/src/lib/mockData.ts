@@ -1,0 +1,238 @@
+
+export const mockRecipeData: Record<string, any> = {
+  happy: {
+    id: 716429,
+    title: "Colorful Rainbow Pasta Salad",
+    image: "https://spoonacular.com/recipeImages/716429-556x370.jpg",
+    readyInMinutes: 30,
+    servings: 4,
+    summary: "This rainbow pasta salad is a vibrant, colorful dish that's perfect for when you're feeling happy and energetic. It features a variety of fresh vegetables tossed in a light vinaigrette, creating a beautiful spectrum of colors that will brighten your day.",
+    instructions: "1. Cook pasta according to package directions. Drain and cool.\n2. Chop all vegetables into small, colorful pieces.\n3. Combine pasta and vegetables in a large bowl.\n4. Whisk together olive oil, vinegar, herbs, salt and pepper.\n5. Pour dressing over pasta mixture and toss gently.\n6. Refrigerate for at least 1 hour before serving to allow flavors to blend.",
+    extendedIngredients: [
+      { id: 1, original: "8 oz rainbow fusilli pasta" },
+      { id: 2, original: "1 red bell pepper, diced" },
+      { id: 3, original: "1 orange bell pepper, diced" },
+      { id: 4, original: "1 yellow bell pepper, diced" },
+      { id: 5, original: "1 cup cherry tomatoes, halved" },
+      { id: 6, original: "1 cucumber, diced" },
+      { id: 7, original: "1/4 cup red onion, finely diced" },
+      { id: 8, original: "1/4 cup olive oil" },
+      { id: 9, original: "2 tablespoons white wine vinegar" },
+      { id: 10, original: "1 tablespoon fresh herbs (basil, parsley)" },
+    ],
+    sourceUrl: "https://spoonacular.com/recipes/rainbow-pasta-salad-716429"
+  },
+  
+  sad: {
+    id: 715424,
+    title: "Creamy Chicken Noodle Soup",
+    image: "https://spoonacular.com/recipeImages/715424-556x370.jpg",
+    readyInMinutes: 45,
+    servings: 6,
+    summary: "This comforting chicken noodle soup is the perfect remedy when you're feeling down. The warm, creamy broth and tender chicken provide a soothing experience that's like a hug in a bowl. It's a classic comfort food that's been known to lift spirits and provide nourishment.",
+    instructions: "1. In a large pot, heat oil over medium heat. Add onion, carrots and celery, cooking until softened, about 5 minutes.\n2. Add garlic and cook for another minute until fragrant.\n3. Pour in chicken broth and add chicken, herbs, salt and pepper.\n4. Bring to a boil, then reduce heat and simmer for 20 minutes.\n5. Add noodles and cook until tender, about 8 minutes.\n6. Stir in cream and heat through without boiling. Serve hot.",
+    extendedIngredients: [
+      { id: 1, original: "1 tablespoon olive oil" },
+      { id: 2, original: "1 onion, chopped" },
+      { id: 3, original: "2 carrots, sliced" },
+      { id: 4, original: "2 celery stalks, sliced" },
+      { id: 5, original: "2 cloves garlic, minced" },
+      { id: 6, original: "8 cups chicken broth" },
+      { id: 7, original: "2 cups cooked chicken, shredded" },
+      { id: 8, original: "2 cups egg noodles" },
+      { id: 9, original: "1/2 cup heavy cream" },
+      { id: 10, original: "1 teaspoon dried thyme" },
+    ],
+    sourceUrl: "https://spoonacular.com/recipes/creamy-chicken-noodle-soup-715424"
+  },
+  
+  angry: {
+    id: 716268,
+    title: "Spicy Habanero Chili",
+    image: "https://spoonacular.com/recipeImages/716268-556x370.jpg",
+    readyInMinutes: 60,
+    servings: 6,
+    summary: "This fiery habanero chili is the perfect dish for when you're feeling angry or fired up. The intense heat from the peppers helps release endorphins, which can improve your mood. This bold, spicy dish matches your intense emotions and might help you burn through them.",
+    instructions: "1. Heat oil in a large pot over medium heat. Add onion and bell pepper, sauté for 5 minutes.\n2. Add garlic and habanero peppers, cook for 1 minute.\n3. Add ground beef and cook until browned, breaking it apart.\n4. Stir in spices and cook for 1 minute until fragrant.\n5. Add tomatoes, beans and broth. Bring to a boil, then reduce heat.\n6. Simmer uncovered for 30-40 minutes, stirring occasionally.\n7. Taste and adjust seasonings. Serve with your favorite toppings.",
+    extendedIngredients: [
+      { id: 1, original: "1 tablespoon vegetable oil" },
+      { id: 2, original: "1 large onion, diced" },
+      { id: 3, original: "1 red bell pepper, diced" },
+      { id: 4, original: "4 cloves garlic, minced" },
+      { id: 5, original: "2-3 habanero peppers, finely diced (adjust to heat preference)" },
+      { id: 6, original: "1.5 pounds ground beef" },
+      { id: 7, original: "2 tablespoons chili powder" },
+      { id: 8, original: "1 tablespoon cumin" },
+      { id: 9, original: "1 teaspoon cayenne pepper" },
+      { id: 10, original: "2 cans (14.5 oz each) diced tomatoes with green chilies" },
+      { id: 11, original: "1 can (15 oz) kidney beans, drained" },
+      { id: 12, original: "1 can (15 oz) black beans, drained" },
+      { id: 13, original: "1 cup beef broth" },
+    ],
+    sourceUrl: "https://spoonacular.com/recipes/spicy-habanero-chili-716268"
+  },
+  
+  relaxed: {
+    id: 715540,
+    title: "Refreshing Mediterranean Salad with Lemon Herb Dressing",
+    image: "https://spoonacular.com/recipeImages/715540-556x370.jpg",
+    readyInMinutes: 20,
+    servings: 4,
+    summary: "This light Mediterranean salad is perfect for when you're feeling relaxed and want something refreshing yet satisfying. The crisp vegetables, tangy lemon dressing, and aromatic herbs create a balanced dish that won't weigh you down. It embodies the calm, easy-going feeling of a relaxed day.",
+    instructions: "1. In a large bowl, combine cucumber, tomatoes, bell pepper, red onion, and olives.\n2. In a small bowl, whisk together olive oil, lemon juice, herbs, garlic, salt, and pepper.\n3. Pour the dressing over the vegetables and toss gently to coat.\n4. Sprinkle with feta cheese and toss lightly.\n5. Serve immediately or refrigerate for up to an hour to allow flavors to blend.",
+    extendedIngredients: [
+      { id: 1, original: "1 large cucumber, diced" },
+      { id: 2, original: "2 cups cherry tomatoes, halved" },
+      { id: 3, original: "1 yellow bell pepper, diced" },
+      { id: 4, original: "1/4 cup red onion, thinly sliced" },
+      { id: 5, original: "1/2 cup kalamata olives, pitted and halved" },
+      { id: 6, original: "4 oz feta cheese, crumbled" },
+      { id: 7, original: "3 tablespoons extra virgin olive oil" },
+      { id: 8, original: "2 tablespoons fresh lemon juice" },
+      { id: 9, original: "1 tablespoon fresh herbs (mint, parsley, dill)" },
+      { id: 10, original: "1 clove garlic, minced" },
+    ],
+    sourceUrl: "https://spoonacular.com/recipes/mediterranean-salad-with-lemon-herb-dressing-715540"
+  },
+  
+  energetic: {
+    id: 716429,
+    title: "High-Protein Power Bowl",
+    image: "https://spoonacular.com/recipeImages/716429-556x370.jpg",
+    readyInMinutes: 35,
+    servings: 2,
+    summary: "This protein-packed power bowl is designed to maintain your high energy levels and fuel your body. Packed with lean protein, complex carbohydrates, and healthy fats, it provides sustained energy for when you're feeling energetic and ready to take on the world.",
+    instructions: "1. Cook quinoa according to package directions. Let cool slightly.\n2. Season chicken breast with salt, pepper, and paprika. Cook in a skillet over medium-high heat for 5-7 minutes per side until cooked through. Let rest for 5 minutes, then slice.\n3. In a large bowl, layer quinoa, sliced chicken, chickpeas, avocado, and vegetables.\n4. Whisk together olive oil, lemon juice, garlic, and herbs for the dressing.\n5. Drizzle dressing over bowls and top with pumpkin seeds.",
+    extendedIngredients: [
+      { id: 1, original: "1 cup quinoa, rinsed" },
+      { id: 2, original: "2 cups water or broth for cooking quinoa" },
+      { id: 3, original: "2 boneless, skinless chicken breasts" },
+      { id: 4, original: "1 can (15 oz) chickpeas, drained and rinsed" },
+      { id: 5, original: "1 avocado, sliced" },
+      { id: 6, original: "1 cup cherry tomatoes, halved" },
+      { id: 7, original: "1 cup baby spinach" },
+      { id: 8, original: "2 tablespoons olive oil" },
+      { id: 9, original: "1 tablespoon fresh lemon juice" },
+      { id: 10, original: "2 tablespoons pumpkin seeds" },
+    ],
+    sourceUrl: "https://spoonacular.com/recipes/high-protein-power-bowl-716429"
+  }
+};
+
+export const mockAlternativeRecipeData: Record<string, any> = {
+  happy: {
+    id: 718293,
+    title: "Bright Berry & Citrus Breakfast Smoothie Bowl",
+    image: "https://spoonacular.com/recipeImages/718293-556x370.jpg",
+    readyInMinutes: 15,
+    servings: 2,
+    summary: "This vibrant smoothie bowl is packed with colorful fruits that will energize your day. The combination of sweet berries, tangy citrus, and crunchy toppings creates a joyful eating experience perfect for elevating your happy mood.",
+    instructions: "1. In a blender, combine frozen berries, banana, orange juice, and yogurt.\n2. Blend until smooth but still thick, adding more liquid if necessary.\n3. Pour into bowls and arrange toppings in colorful patterns across the surface.\n4. Drizzle with honey and sprinkle with chia seeds.\n5. Enjoy immediately with a spoon.",
+    extendedIngredients: [
+      { id: 1, original: "1 cup mixed frozen berries (strawberries, blueberries, raspberries)" },
+      { id: 2, original: "1 frozen banana" },
+      { id: 3, original: "1/4 cup fresh orange juice" },
+      { id: 4, original: "1/2 cup Greek yogurt" },
+      { id: 5, original: "Fresh fruit for topping (kiwi, mango, berries)" },
+      { id: 6, original: "2 tablespoons granola" },
+      { id: 7, original: "1 tablespoon honey" },
+      { id: 8, original: "1 teaspoon chia seeds" },
+      { id: 9, original: "Fresh mint leaves for garnish" },
+    ],
+    sourceUrl: "https://spoonacular.com/recipes/bright-berry-citrus-breakfast-smoothie-bowl-718293"
+  },
+  
+  sad: {
+    id: 715928,
+    title: "Homestyle Macaroni and Cheese",
+    image: "https://spoonacular.com/recipeImages/715928-556x370.jpg",
+    readyInMinutes: 40,
+    servings: 6,
+    summary: "Few dishes provide comfort like homemade macaroni and cheese. This recipe features a rich, creamy cheese sauce coating perfectly cooked pasta. It's topped with buttery breadcrumbs for extra texture and baked until golden. This classic comfort food is scientifically proven to boost your mood through its combination of carbohydrates and dairy.",
+    instructions: "1. Preheat oven to 375°F. Cook pasta according to package directions until al dente.\n2. In a large saucepan, melt butter over medium heat. Add flour and whisk constantly for 2 minutes.\n3. Gradually whisk in milk and cook until thickened, about 5 minutes.\n4. Remove from heat and stir in cheeses until melted. Season with salt, pepper, and nutmeg.\n5. Fold in cooked pasta and transfer to a greased baking dish.\n6. Mix breadcrumbs with melted butter and sprinkle over pasta.\n7. Bake for 25-30 minutes until bubbly and golden on top.",
+    extendedIngredients: [
+      { id: 1, original: "16 oz elbow macaroni" },
+      { id: 2, original: "4 tablespoons butter, plus 2 tablespoons for topping" },
+      { id: 3, original: "1/4 cup all-purpose flour" },
+      { id: 4, original: "4 cups whole milk, warmed" },
+      { id: 5, original: "4 cups sharp cheddar cheese, grated" },
+      { id: 6, original: "1 cup gruyere cheese, grated" },
+      { id: 7, original: "1/2 teaspoon salt" },
+      { id: 8, original: "1/4 teaspoon black pepper" },
+      { id: 9, original: "Pinch of nutmeg" },
+      { id: 10, original: "1 cup panko breadcrumbs" },
+    ],
+    sourceUrl: "https://spoonacular.com/recipes/homestyle-macaroni-and-cheese-715928"
+  },
+  
+  angry: {
+    id: 716302,
+    title: "Fiery Sriracha Noodles",
+    image: "https://spoonacular.com/recipeImages/716302-556x370.jpg",
+    readyInMinutes: 25,
+    servings: 4,
+    summary: "These blazing hot noodles are designed for when you're feeling particularly fired up. The combination of multiple heat sources - sriracha, chili oil, and red pepper flakes - creates an intense dish that matches your angry energy. The endorphin rush from the capsaicin might even help improve your mood.",
+    instructions: "1. Cook noodles according to package directions. Drain and set aside.\n2. In a large wok or skillet, heat oil over high heat. Add garlic and ginger, stir for 30 seconds.\n3. Add vegetables and stir-fry for 3-4 minutes until they begin to soften.\n4. In a small bowl, whisk together sriracha, soy sauce, rice vinegar, brown sugar, and cornstarch.\n5. Pour sauce into the pan and bring to a boil, stirring constantly.\n6. Add noodles and toss to coat with the sauce. Cook for another 2 minutes.\n7. Garnish with green onions, cilantro, and additional red pepper flakes.",
+    extendedIngredients: [
+      { id: 1, original: "8 oz rice noodles" },
+      { id: 2, original: "2 tablespoons vegetable oil" },
+      { id: 3, original: "3 cloves garlic, minced" },
+      { id: 4, original: "1 tablespoon ginger, grated" },
+      { id: 5, original: "1 red bell pepper, thinly sliced" },
+      { id: 6, original: "1 cup bean sprouts" },
+      { id: 7, original: "1/4 cup sriracha sauce" },
+      { id: 8, original: "3 tablespoons soy sauce" },
+      { id: 9, original: "1 tablespoon rice vinegar" },
+      { id: 10, original: "1 teaspoon brown sugar" },
+      { id: 11, original: "1 teaspoon cornstarch" },
+      { id: 12, original: "2 teaspoons red pepper flakes" },
+      { id: 13, original: "2 tablespoons chili oil" },
+      { id: 14, original: "3 green onions, sliced" },
+      { id: 15, original: "Fresh cilantro for garnish" },
+    ],
+    sourceUrl: "https://spoonacular.com/recipes/fiery-sriracha-noodles-716302"
+  },
+  
+  relaxed: {
+    id: 716370,
+    title: "Calming Cucumber Mint Spa Water",
+    image: "https://spoonacular.com/recipeImages/716370-556x370.jpg",
+    readyInMinutes: 10,
+    servings: 4,
+    summary: "This refreshing cucumber mint water is inspired by spa treatments and designed to enhance your relaxed state. The combination of cooling cucumber, soothing mint, and citrus creates a drink that's both hydrating and calming. It's perfect for sipping while taking a moment for yourself.",
+    instructions: "1. Wash cucumber, mint leaves, and lemon thoroughly.\n2. Slice cucumber and lemon into thin rounds.\n3. Place cucumber, lemon slices, and mint leaves in a large pitcher.\n4. Fill the pitcher with filtered water.\n5. Gently muddle the ingredients to release flavor.\n6. Refrigerate for at least 1 hour, preferably 4 hours.\n7. Serve over ice, garnished with additional mint and cucumber slices.",
+    extendedIngredients: [
+      { id: 1, original: "1 medium cucumber, thinly sliced" },
+      { id: 2, original: "1 lemon, thinly sliced" },
+      { id: 3, original: "20 fresh mint leaves" },
+      { id: 4, original: "8 cups filtered water" },
+      { id: 5, original: "Ice cubes for serving" },
+      { id: 6, original: "Additional mint sprigs for garnish" },
+    ],
+    sourceUrl: "https://spoonacular.com/recipes/calming-cucumber-mint-spa-water-716370"
+  },
+  
+  energetic: {
+    id: 718394,
+    title: "Pre-Workout Energy Bites",
+    image: "https://spoonacular.com/recipeImages/718394-556x370.jpg",
+    readyInMinutes: 20,
+    servings: 12,
+    summary: "These no-bake energy bites are perfect for maintaining your high energy levels. Packed with protein, healthy fats, and natural sugars, they provide a sustained energy release to keep you going. They're portable and perfect for an on-the-go boost when you're feeling energetic and active.",
+    instructions: "1. In a large bowl, combine oats, protein powder, flaxseed, and cinnamon.\n2. Add nut butter, honey, and vanilla. Stir until well combined.\n3. Fold in chocolate chips, dried fruit, and chopped nuts.\n4. If mixture is too dry, add a splash of almond milk. If too wet, add more oats.\n5. Roll into 1-inch balls and place on a parchment-lined baking sheet.\n6. Refrigerate for at least 1 hour until firm.\n7. Store in an airtight container in the refrigerator for up to 1 week.",
+    extendedIngredients: [
+      { id: 1, original: "1 cup old-fashioned oats" },
+      { id: 2, original: "2 scoops vanilla protein powder (about 1/2 cup)" },
+      { id: 3, original: "2 tablespoons ground flaxseed" },
+      { id: 4, original: "1/2 teaspoon cinnamon" },
+      { id: 5, original: "1/2 cup natural nut butter (almond or peanut)" },
+      { id: 6, original: "1/3 cup honey or maple syrup" },
+      { id: 7, original: "1 teaspoon vanilla extract" },
+      { id: 8, original: "1/4 cup mini dark chocolate chips" },
+      { id: 9, original: "1/4 cup dried cranberries or cherries" },
+      { id: 10, original: "1/4 cup chopped nuts (almonds, walnuts)" },
+      { id: 11, original: "1-2 tablespoons almond milk (if needed)" },
+    ],
+    sourceUrl: "https://spoonacular.com/recipes/pre-workout-energy-bites-718394"
+  }
+};
