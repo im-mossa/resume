@@ -5,7 +5,7 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: '/resume/moody-food/',
+  base: '/resume/moody-food/dist',
   server: {
     host: "::",
     port: 8080,
