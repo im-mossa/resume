@@ -1,101 +1,96 @@
 import React from "react";
-// import Button from "../Ui/Button";
 import Link from "next/link";
 
 function FooterSection() {
   const footerLinks = [
     {
-      title: "درباره ما",
+      title: "About Us",
       links: [
-        { label: "موقعیت های شغلی", href: "/" },
-        { label: "تماس با ما", href: "/" },
-        { label: "همکاری با ما", href: "/" },
+        { label: "Job positions", href: "/" },
+        { label: "contact us", href: "/" },
+        { label: "Cooperate with us", href: "/" },
       ],
     },
     {
-      title: "راهنما",
+      title: "guide",
       links: [
-        { label: "نقشه ی سایت", href: "/" },
-        { label: "سوال های متداول", href: "/" },
-        { label: "حریم شخصی", href: "/" },
+        { label: "Site map", href: "/" },
+        { label: "Frequently questions", href: "/" },
+        { label: "privacy", href: "/" },
       ],
     },
     {
-      title: "رزرو",
+      title: "Social networks",
       links: [
-        { label: "رزرو هتل", href: "/" },
-        { label: "رزرو بلیط هواپیما", href: "/" },
-        { label: "رزرو بلیط قطار", href: "/" },
-      ],
-    },
-    {
-      title: "شبکه های اجتماعی",
-      links: [
-        { label: "اینستاگرام", href: "/" },
-        { label: "توییتر", href: "/" },
-        { label: "لینکدین", href: "/" },
+        { label: "Instagram", href: "https://www.instagram.com/" },
+        { label: "Twitter", href: "https://www.x.com/" },
+        { label: "LinkedIn", href: "https://www.linkedin.com/" },
       ],
     },
   ];
 
   return (
-    <div className="bg-[#a31621] py-4 flex flex-col items-center">
-      <section className="w-full max-w-xl text-center mb-6 px-6 text-white">
-        <h2 className="mb-6 text-xl">
-          به خبرنامه ی ما بپیوندید تا از آفر های تور های ایرانگردی و جهانگردی با
-          خبر شوید
-        </h2>
-        <p className="mb-6 text-lg">
-          هر زمان که بخواهید می‌توانید عضویت خود را لغو نمایید
-        </p>
-        <form action="" method="post" className="flex flex-col items-center">
-          <input
-            type="email"
-            placeholder="لطفا ایمیل خود را وارد کنید"
-            className="w-full px-5 py-2 mb-4 border border-[#cccccc] rounded outline-none placeholder-[#b1b1b1]"
-          />
-          {/* <Button buttonStyle="outline" to="/" buttonSize="medium">
-            عضویت
-          </Button> */}
-        </form>
+    <>
+      {/* Map Section */}
+      <section className="bg-[#eee] pt-5 text-center">
+        <h4 className="text-black">Our Address</h4>
+        <br />
+        <iframe
+          title="Company Location"
+          src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d330.4487474617009!2d51.455177466451595!3d35.80249477081845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfa!2s!4v1729416604001!5m2!1sfa!2s"
+          width="100%"
+          height="250px"
+          style={{ border: 0 }}
+          allowFullScreen
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        ></iframe>
       </section>
-      <div className="w-full max-w-[1000px] flex flex-wrap justify-center">
-        {footerLinks.map((section, index) => (
-          <div key={index} className="m-4 w-[160px] text-left">
-            <h2 className="mb-4 text-white">{section.title}</h2>
-            <ul>
-              {section.links.map((link, idx) => (
-                <li key={idx} className="mb-2">
-                  <Link
-                    href={link.href}
-                    className="text-white no-underline hover:text-black transition duration-300 ease-out"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-      <section className="w-full max-w-[1000px]">
-        <div className="flex flex-col justify-between items-center w-[90%] max-w-[1000px] mt-10 mx-auto">
-          <div>
-            <Link
-              href="/"
-              className="text-white ml-5 cursor-pointer no-underline text-2xl flex items-center mb-1"
-            >
-              Travel &nbsp;
-            </Link>
-          </div>
-          <small className="text-white mb-4 ml-8">Travel &copy; 2025</small>
-          {/* <div className="flex justify-between items-center w-[240px]">
-            <Link href='/' className="text-[#666] text-[24px]">
-            <i className="fab fa-facebook-f"></i></Link>
-          </div> */}
+
+      {/* Footer Links */}
+      <footer className="bg-[#eee] py-5">
+        <div className="container mx-auto grid grid-cols-1 justify-items-center sm:grid-cols-2 sm:justify-items-start md:grid-cols-3 md:justify-items-start gap-6">
+          {footerLinks.map((section, idx) => (
+            <div key={idx} className="text-justify">
+              <h4 className="mt-1 mb-4 text-black">{section.title}</h4>
+              <nav>
+                <ul className="flex flex-col space-y-2">
+                  {section.links.map((link, index) => (
+                    <li key={index}>
+                      {section.title === "Social networks" ? (
+                        <a
+                          href={link.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-block hover:scale-110 transition-transform"
+                        >
+                          <i
+                            className={`fa-brands fa-${link.label.toLowerCase()} fa-2xl text-black`}
+                          ></i>
+                        </a>
+                      ) : link.href.startsWith("http") ? (
+                        <a
+                          href={link.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-[13px] block text-black hover:font-bold"
+                        >
+                          {link.label}
+                        </a>
+                      ) : (
+                        <Link href={link.href} className="text-[13px] block text-black hover:font-bold">
+                          {link.label}
+                        </Link>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            </div>
+          ))}
         </div>
-      </section>
-    </div>
+      </footer>
+    </>
   );
 }
 
