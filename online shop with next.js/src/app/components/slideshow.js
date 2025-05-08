@@ -25,7 +25,7 @@ export default function Slideshow() {
   }
 
   return (
-    <section className="relative overflow-hidden w-[80vw] mx-auto mt-2 rounded-2xl">
+    <section className="relative overflow-hidden w-[80vw] mx-auto rounded-2xl">
       {/* رَپِر اسلایدها */}
       <div
         className="flex transition-transform duration-700 ease-in-out"
@@ -42,15 +42,16 @@ export default function Slideshow() {
             <img
               src={image}
               alt={title}
+              title={title}
               className="w-full h-full object-cover"
             />
 
             {/* باکس عنوان در بالا چپ */}
             <div className="absolute top-0 left-0 bg-white/70 backdrop-blur-sm
-                            rounded-br-2xl p-4 flex flex-col justify-center items-start z-20
-                            w-1/6 h-1/4">
-              <h2 className="text-xl font-bold text-black">{title}</h2>
-              <p className="mt-2 text-sm text-black">{subTitle}</p>
+                            rounded-br-2xl p-4 flex flex-col justify-start items-start z-20
+                            w-[10em] h-[6em]">
+              <h2 className="text-[1em] font-bold text-black">{title}</h2>
+              <p className="mt-2 text-[1em] text-black">{subTitle}</p>
             </div>
           </div>
         ))}
@@ -59,7 +60,7 @@ export default function Slideshow() {
       {/* دکمه قبلی */}
       <button
         onClick={() => setCurrent((i) => (i - 1 + slides.length) % slides.length)}
-        className="cursor-pointer absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 p-3 rounded-full hover:bg-black/70 text-white text-2xl z-30"
+        className="cursor-pointer absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 p-3 rounded-full hover:bg-black/70 text-white text-2xl z-10"
       >
         ‹
       </button>
@@ -67,7 +68,7 @@ export default function Slideshow() {
       {/* دکمه بعدی */}
       <button
         onClick={() => setCurrent((i) => (i + 1) % slides.length)}
-        className="cursor-pointer absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 p-3 rounded-full hover:bg-black/70 text-white text-2xl z-30"
+        className="cursor-pointer absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 p-3 rounded-full hover:bg-black/70 text-white text-2xl z-10"
       >
         ›
       </button>

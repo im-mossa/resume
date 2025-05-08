@@ -30,10 +30,12 @@ export default function MenuItems() {
         {/* می‌تونی اینجا آیکون هم بزاری */}
         {menuState ? (
           // <FaTimes className="text-white text-2xl" />
-          <h1 className="text-black">بستن</h1>
+          // <h1 className="text-black">بستن</h1>
+          <i className="fa fa-times text-black pt-2" aria-hidden="true"></i>
         ) : (
           // <FaBars className="text-white text-2xl" />
-          <h1 className="text-black">منو</h1>
+          // <h1 className="text-black">منو</h1>
+          <i className="fa fa-bars text-black pt-2" aria-hidden="true"></i>
         )}
       </div>
 
