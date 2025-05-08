@@ -1,10 +1,8 @@
+// src/utils/helpers.js
 import Swal from "sweetalert2";
 
 /**
- * Retrieves the value of a query parameter from the URL.
- * @param {string} name - Parameter name.
- * @param {string} [url=window.location.href] - URL to parse.
- * @returns {string|null} Parameter value or null if not present.
+ * Get query parameter value by name
  */
 export function getParameterByName(name, url = typeof window !== 'undefined' ? window.location.href : '') {
   name = name.replace(/[\[\]]/g, '\\$&');
@@ -16,93 +14,59 @@ export function getParameterByName(name, url = typeof window !== 'undefined' ? w
 }
 
 /**
- * Sets a cookie.
- * @param {string} cname - Cookie name.
- * @param {string} cvalue - Cookie value.
- * @param {number} exdays - Days until expiration.
+ * Cookie utilities
  */
 export function setCookie(cname, cvalue, exdays) {
   const d = new Date();
   d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
-  const expires = `expires=${d.toUTCString()}`;
-  document.cookie = `${cname}=${cvalue};${expires};path=/`;
+  document.cookie = `${cname}=${cvalue};expires=${d.toUTCString()};path=/`;
 }
 
-/**
- * Deletes a cookie by setting its expiration in the past.
- * @param {string} cname - Cookie name.
- */
-export function deleteCookie(cname) {
-  document.cookie = `${cname}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-}
-
-/**
- * Retrieves a cookie's value.
- * @param {string} cname - Cookie name.
- * @returns {string} Cookie value or empty string if not found.
- */
 export function getCookie(cname) {
   const name = `${cname}=`;
-  const decodedCookie = decodeURIComponent(document.cookie);
-  const ca = decodedCookie.split(';');
+  const ca = decodeURIComponent(document.cookie).split(';');
   for (let c of ca) {
     c = c.trim();
-    if (c.indexOf(name) === 0) {
-      return c.substring(name.length);
-    }
+    if (c.indexOf(name) === 0) return c.substring(name.length);
   }
   return '';
 }
 
+export function deleteCookie(cname) {
+  document.cookie = `${cname}=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;`;
+}
+
 /**
- * Displays a loading modal and hides action buttons.
+ * Show and hide loading state
  */
 export function showLoading() {
-  let timerInterval;
   Swal.fire({
     title: 'Please Wait...!',
     timer: 2000,
     timerProgressBar: true,
     didOpen: () => Swal.showLoading(),
-    willClose: () => clearInterval(timerInterval),
-  }).then((result) => {
-    if (result.dismiss === Swal.DismissReason.timer) {
-      console.log('I was closed by the timer');
-    }
-  });
-  document.querySelector('.action-btn').style.display = 'none';
-  const btn2 = document.querySelector('.action-btn2');
-  if (btn2) btn2.style.display = 'none';
-  document.querySelector('.please-wait').style.display = 'block';
+  }).then(() => {});
+  document.querySelectorAll('.action-btn, .action-btn2').forEach(btn => btn && (btn.style.display = 'none'));
+  const wait = document.querySelector('.please-wait');
+  if (wait) wait.style.display = 'block';
 }
 
-/**
- * Hides loading modal and shows action buttons.
- */
 export function showButton() {
-  document.querySelector('.action-btn').style.display = 'block';
-  const btn2 = document.querySelector('.action-btn2');
-  if (btn2) btn2.style.display = 'block';
-  document.querySelector('.please-wait').style.display = 'none';
+  document.querySelectorAll('.action-btn, .action-btn2').forEach(btn => btn && (btn.style.display = 'block'));
+  const wait = document.querySelector('.please-wait');
+  if (wait) wait.style.display = 'none';
 }
 
 /**
- * Checks if a user is logged in and redirects accordingly.
+ * User navigation
  */
 export function checkUser() {
-  const currentUser = getCookie('currentUser');
-  if (!currentUser) {
-    window.location.href = '/resume/online%20shoe%20store/login.html';
-  } else {
-    window.location.href = '/resume/online%20shoe%20store/src/panel/panel.html';
-  }
+  const user = getCookie('currentUser');
+  window.location.href = user ? '/panel' : '/login';
 }
 
-/**
- * Logs out the user by deleting cookies and redirecting to login page.
- */
 export function logOutSystem() {
   deleteCookie('currentUser');
   deleteCookie('token');
-  window.location.href = '/resume/online%20shoe%20store/login.html';
+  window.location.href = '/login';
 }

@@ -2,26 +2,18 @@
 import { useCallback } from "react";
 import Swal from "sweetalert2";
 import { getApiURL } from "../api/apiAddress";
-import { deleteCookie } from "../utils/helpers";
+import { showButton, deleteCookie } from "../utils/helpers";
 
 /**
- * Custom hook that provides API methods mirroring BaseApi class functionality.
+ * Custom hook providing HTTP methods for API interactions
  */
 export function useBaseApi() {
   const onError = useCallback(() => {
-    Swal.fire({
-      icon: "error",
-      title: "Oops...",
-      text: "Error on getting information from server!",
-    });
+    Swal.fire({ icon: "error", title: "Oops...", text: "Error on getting information from server!" });
   }, []);
 
-  const onError2 = useCallback((json) => {
-    Swal.fire({
-      icon: "error",
-      title: "Oops...",
-      text: json.message,
-    });
+  const onError2 = useCallback((message) => {
+    Swal.fire({ icon: "error", title: "Oops...", text: message });
   }, []);
 
   const onSuccess = useCallback(
@@ -32,11 +24,10 @@ export function useBaseApi() {
           callback(json.data);
           break;
         case "NOT_FOUND":
-          onError2(json);
+          onError2(json.message);
           break;
         default:
           onError();
-          break;
       }
     },
     [onError, onError2]
@@ -47,11 +38,8 @@ export function useBaseApi() {
       const url = getApiURL(suffix);
       try {
         const response = await fetch(url);
-        if (response.status === 200) {
-          onSuccess(response, callback);
-        } else {
-          onError();
-        }
+        if (response.ok) onSuccess(response, callback);
+        else onError();
       } catch {
         onError();
       }
@@ -65,23 +53,15 @@ export function useBaseApi() {
       try {
         const response = await fetch(url, {
           method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
+          headers: { Accept: "application/json", "Content-Type": "application/json" },
           body: JSON.stringify(data),
         });
-        if (response.status === 200) {
-          onSuccess(response, callback);
-          // showButton function should be defined or imported if needed
-        } else {
-          onError();
-          // showButton();
-        }
+        if (response.ok) onSuccess(response, callback);
+        else onError();
       } catch {
         onError();
-        // showButton();
       }
+      showButton();
     },
     [onSuccess, onError]
   );
@@ -92,24 +72,15 @@ export function useBaseApi() {
       try {
         const response = await fetch(url, {
           method: "PUT",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
+          headers: { Accept: "application/json", "Content-Type": "application/json", Authorization: `Bearer ${token}` },
           body: JSON.stringify(data),
         });
-        if (response.status === 200) {
-          onSuccess(response, callback);
-          // showButton();
-        } else {
-          onError();
-          // showButton();
-        }
+        if (response.ok) onSuccess(response, callback);
+        else onError();
       } catch {
         onError();
-        // showButton();
       }
+      showButton();
     },
     [onSuccess, onError]
   );
@@ -119,10 +90,9 @@ export function useBaseApi() {
       const url = getApiURL(suffix);
       const req = new XMLHttpRequest();
       req.open("PUT", url, true);
-      req.setRequestHeader("Authorization", "Bearer " + token);
-      req.setRequestHeader("Access-Control-Allow-Origin", "*");
+      req.setRequestHeader("Authorization", `Bearer ${token}`);
       req.setRequestHeader("Content-Type", "application/json");
-      req.onreadystatechange = function () {
+      req.onreadystatechange = () => {
         if (req.readyState === 4 && req.status === 200) {
           const json = JSON.parse(req.responseText);
           callback(json.data);
@@ -139,24 +109,15 @@ export function useBaseApi() {
       try {
         const response = await fetch(url, {
           method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
+          headers: { Accept: "application/json", "Content-Type": "application/json", Authorization: `Bearer ${token}` },
           body: JSON.stringify(data),
         });
-        if (response.status === 200) {
-          onSuccess(response, callback);
-          // showButton();
-        } else {
-          onError();
-          // showButton();
-        }
+        if (response.ok) onSuccess(response, callback);
+        else onError();
       } catch {
         onError();
-        // showButton();
       }
+      showButton();
     },
     [onSuccess, onError]
   );
@@ -165,15 +126,9 @@ export function useBaseApi() {
     async (suffix, token, callback) => {
       const url = getApiURL(suffix);
       try {
-        const response = await fetch(url, {
-          method: "GET",
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        });
-        if (response.status === 200) {
-          onSuccess(response, callback);
-        } else {
+        const response = await fetch(url, { method: "GET", headers: { Authorization: `Bearer ${token}` } });
+        if (response.ok) onSuccess(response, callback);
+        else {
           onError();
           deleteCookie("token");
           deleteCookie("currentUser");
@@ -187,12 +142,5 @@ export function useBaseApi() {
     [onSuccess, onError]
   );
 
-  return {
-    getData,
-    postData,
-    putDataWithToken,
-    putDataWithToken2,
-    postDataWithToken,
-    getDataWithToken,
-  };
+  return { getData, postData, putDataWithToken, putDataWithToken2, postDataWithToken, getDataWithToken };
 }

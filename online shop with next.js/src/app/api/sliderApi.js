@@ -2,14 +2,15 @@
 import { useBaseApi } from "../hooks/baseApi";
 
 export default function useSliderApi() {
-  const baseApi = useBaseApi();
+  const { getData } = useBaseApi();
 
-  const getAll = async (onSuccess) => {
-    baseApi.getData("slider", onSuccess);
+  const getAll = (onSuccess) => {
+    getData("slider", onSuccess);
+    console.log(onSuccess);
   };
 
-  const getById = async (id, onSuccess) => {
-    baseApi.getData(`slider/${id}`, onSuccess);
+  const getById = (id, onSuccess) => {
+    getData(`slider/${id}`, onSuccess);
   };
 
   return { getAll, getById };
