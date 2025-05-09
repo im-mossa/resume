@@ -1,22 +1,25 @@
+// src/components/FooterSection.jsx
+"use client";
+
 import React from "react";
 import Link from "next/link";
 
-function FooterSection() {
+export default function FooterSection() {
   const footerLinks = [
     {
       title: "About Us",
       links: [
         { label: "Job positions", href: "/" },
-        { label: "contact us", href: "/" },
+        { label: "Contact us", href: "/" },
         { label: "Cooperate with us", href: "/" },
       ],
     },
     {
-      title: "guide",
+      title: "Guide",
       links: [
-        { label: "Site map", href: "/" },
-        { label: "Frequently questions", href: "/" },
-        { label: "privacy", href: "/" },
+        { label: "Site map", href: "/sitemap" },
+        { label: "Frequently questions", href: "/faq" },
+        { label: "Privacy", href: "/privacy" },
       ],
     },
     {
@@ -44,7 +47,7 @@ function FooterSection() {
           allowFullScreen
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
-        ></iframe>
+        />
       </section>
 
       {/* Footer Links */}
@@ -66,7 +69,7 @@ function FooterSection() {
                         >
                           <i
                             className={`fa-brands fa-${link.label.toLowerCase()} fa-2xl text-black`}
-                          ></i>
+                          />
                         </a>
                       ) : link.href.startsWith("http") ? (
                         <a
@@ -78,7 +81,10 @@ function FooterSection() {
                           {link.label}
                         </a>
                       ) : (
-                        <Link href={link.href} className="text-[13px] block text-black hover:font-bold">
+                        <Link
+                          href={link.href}
+                          className="text-[13px] block text-black hover:font-bold"
+                        >
                           {link.label}
                         </Link>
                       )}
@@ -93,5 +99,3 @@ function FooterSection() {
     </>
   );
 }
-
-export default FooterSection;

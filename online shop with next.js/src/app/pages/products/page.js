@@ -1,8 +1,11 @@
 import React from "react";
+import CategorySection from "@/app/components/categorySection";
+import AllProducts from "@/app/components/allProducts";
 export default function Products() {
     return (
         <>
-            <h1>this page is products</h1>
+            <CategorySection />
+            <AllProducts />
         </>
     )
 }

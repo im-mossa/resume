@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 // import { FaBars, FaTimes } from "react-icons/fa";
 // import Button from "./Ui/Button";
+import { checkUser } from "../utils/helpers";
 
 export default function MenuItems() {
   const [menuState, setMenuState] = useState(false);
@@ -27,15 +28,10 @@ export default function MenuItems() {
         className="block md:hidden absolute top-4 left-4 cursor-pointer z-20"
         onClick={() => setMenuState(!menuState)}
       >
-        {/* می‌تونی اینجا آیکون هم بزاری */}
         {menuState ? (
-          // <FaTimes className="text-white text-2xl" />
-          // <h1 className="text-black">بستن</h1>
-          <i className="fa fa-times text-black pt-2" aria-hidden="true"></i>
+          <i className="fa fa-times text-black pt-2" aria-hidden="true" />
         ) : (
-          // <FaBars className="text-white text-2xl" />
-          // <h1 className="text-black">منو</h1>
-          <i className="fa fa-bars text-black pt-2" aria-hidden="true"></i>
+          <i className="fa fa-bars text-black pt-2" aria-hidden="true" />
         )}
       </div>
 
@@ -53,10 +49,7 @@ export default function MenuItems() {
             className={`list-none p-4 border-b-4 border-transparent transition-all duration-200 ease-out
               w-full text-center hover:font-bold
               md:hover:bg-transparent md:hover:text-current md:hover:border-b-black
-              ${isActive(item.path)
-                ? "text-black font-bold"
-                : ""
-              }`}
+              ${isActive(item.path) ? "text-black font-bold" : ""}`}
           >
             <Link href={item.path} onClick={() => setMenuState(false)}>
               {item.name}
@@ -64,13 +57,19 @@ export default function MenuItems() {
           </li>
         ))}
       </ul>
-      <ul>
-        <li><a href="basket.html"><i className="fa fa-shopping-cart text-black text-[16px] absolute right-[15px] top-1/3 hover:scale-125 transition-transform"></i></a></li>
-        <li><a href="#" onClick={() => checkUser()}><i className="fa fa-user text-black text-[16px] absolute right-[45px] top-1/3 hover:scale-125 transition-transform"></i></a></li>
-      </ul>
 
-      {/* اگر خواستی دکمه ثبت‌نام اضافه کنی */}
-      {/* <Button to="/signIn" buttonStyle="outline">ثبت‌نام</Button> */}
+      <ul>
+        <li>
+          <a href="basket.html">
+            <i className="fa fa-shopping-cart text-black text-[16px] absolute right-[15px] top-1/3 hover:scale-125 transition-transform" />
+          </a>
+        </li>
+        <li>
+          <a href="#" onClick={() => checkUser()}>
+            <i className="fa fa-user text-black text-[16px] absolute right-[45px] top-1/3 hover:scale-125 transition-transform" />
+          </a>
+        </li>
+      </ul>
     </>
   );
 }
