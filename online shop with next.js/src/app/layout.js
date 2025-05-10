@@ -1,6 +1,6 @@
 import "./globals.css";
-import MenuItems from "./components/menuItems";
-import FooterSection from "./components/footerSection";
+import MenuItems from "./components/MenuItems";
+import FooterSection from "./components/FooterSection";
 // import Link from "next/link";
 
 export const metadata = {

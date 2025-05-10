@@ -1,8 +1,9 @@
 import React from "react";
+import BlogSection from "@/app/components/BlogSection";
 export default function Blog() {
     return (
         <>
-            <h1>this page is blog</h1>
+            <BlogSection />
         </>
     )
 }

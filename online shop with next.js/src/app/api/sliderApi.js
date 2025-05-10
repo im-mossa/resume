@@ -1,5 +1,5 @@
 // src/api/SliderApi.js
-import { useBaseApi } from "../hooks/baseApi";
+import { useBaseApi } from "./baseApi";
 
 export default function useSliderApi() {
   const { getData } = useBaseApi();

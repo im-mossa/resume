@@ -1,6 +1,6 @@
 import React from "react";
-import CategorySection from "@/app/components/categorySection";
-import AllProducts from "@/app/components/allProducts";
+import CategorySection from "@/app/components/CategorySection";
+import AllProducts from "@/app/components/AllProducts";
 export default function Products() {
     return (
         <>

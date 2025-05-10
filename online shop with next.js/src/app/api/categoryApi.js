@@ -1,5 +1,5 @@
 // src/hooks/useCategoryApi.js
-import { useBaseApi } from "../hooks/baseApi";
+import { useBaseApi } from "./baseApi";
 
 export default function useCategoryApi() {
   const { getData } = useBaseApi();

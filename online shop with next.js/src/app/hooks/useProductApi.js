@@ -1,6 +1,6 @@
 // src/hooks/useProductApi.js
 import { useCallback } from "react";
-import { useBaseApi } from "../hooks/baseApi";
+import { useBaseApi } from "../api/baseApi";
 
 export function useProductApi() {
   const { getData } = useBaseApi();
