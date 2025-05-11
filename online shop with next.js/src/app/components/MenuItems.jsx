@@ -60,14 +60,14 @@ export default function MenuItems() {
 
       <ul>
         <li>
-          <a href="basket.html">
+          <Link href="#">
             <i className="fa fa-shopping-cart text-black text-[16px] absolute right-[15px] top-1/3 hover:scale-125 transition-transform" />
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="#" onClick={() => checkUser()}>
+          <Link href="#" onClick={() => checkUser()}>
             <i className="fa fa-user text-black text-[16px] absolute right-[45px] top-1/3 hover:scale-125 transition-transform" />
-          </a>
+          </Link>
         </li>
       </ul>
     </>
