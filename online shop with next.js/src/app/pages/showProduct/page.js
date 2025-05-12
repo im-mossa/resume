@@ -1,10 +1,9 @@
-// src/page/showProduct/page.js
 "use client";
 
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useProductApi } from "@/app/hooks/useProductApi";
-// import BasketDB from "@/db/BasketDB";
+import BasketDB from "@/app/db/BasketDB";
 import Swal from "sweetalert2";
 
 export default function ShowProduct() {
@@ -16,10 +15,10 @@ export default function ShowProduct() {
     const [selectedColor, setSelectedColor] = useState(null);
     const [selectedSize, setSelectedSize] = useState(null);
 
+    // بارگذاری محصول
     useEffect(() => {
         if (!productId) return;
         getById(productId, (dataList) => {
-            // assume dataList is an array with one element
             setProduct(dataList[0]);
         });
     }, [productId, getById]);
@@ -36,7 +35,10 @@ export default function ShowProduct() {
             Swal.fire({ icon: "error", title: "Oops...", text: "Please select a size!" });
             return;
         }
+
+        // ← اینجا متد کلاس دیتابیس را صدا می‌زنیم
         BasketDB.addToBasket(product, selectedSize, selectedColor);
+
         Swal.fire({ icon: "success", title: "Added!", text: "Product added to basket." });
     };
 
@@ -45,95 +47,94 @@ export default function ShowProduct() {
     }
 
     return (
-        <>
-            <main className="max-w-5xl mx-auto px-4 py-8 space-y-8">
-                <div className="flex flex-col md:flex-row gap-8">
-                    {/* تصویر محصول */}
-                    <div className="md:w-1/2">
-                        <img
-                            src={product.image}
-                            alt={product.title}
-                            className="w-full rounded-lg shadow"
-                        />
+        <main className="max-w-5xl mx-auto px-4 py-8 space-y-8">
+            <div className="flex flex-col md:flex-row gap-8">
+                {/* تصویر محصول */}
+                <div className="md:w-1/2">
+                    <img
+                        src={product.image}
+                        alt={product.title}
+                        className="w-full rounded-lg shadow"
+                    />
+                </div>
+
+                {/* جزئیات */}
+                <div className="md:w-1/2 space-y-6">
+                    <h1 className="text-2xl font-bold">
+                        {product.category.title} – {product.title}
+                    </h1>
+
+                    {/* انتخاب رنگ */}
+                    <div>
+                        <h3 className="font-semibold mb-2">Color</h3>
+                        <div className="flex gap-4">
+                            {product.colors.map((c) => (
+                                <button
+                                    key={c.id}
+                                    onClick={() => changeColor(c)}
+                                    title={c.title}
+                                    className={`w-8 h-8 rounded-full border-2 ${selectedColor?.id === c.id
+                                            ? "border-black"
+                                            : "border-gray-300"
+                                        }`}
+                                    style={{ backgroundColor: `#${c.hexValue}` }}
+                                />
+                            ))}
+                        </div>
                     </div>
 
-                    {/* جزئیات */}
-                    <div className="md:w-1/2 space-y-6">
-                        <h1 className="text-2xl font-bold">
-                            {product.category.title} – {product.title}
-                        </h1>
-
-                        {/* انتخاب رنگ */}
-                        <div>
-                            <h3 className="font-semibold mb-2">Color</h3>
-                            <div className="flex gap-4">
-                                {product.colors.map((c) => (
-                                    <button
-                                        key={c.id}
-                                        onClick={() => changeColor(c)}
-                                        title={c.title}
-                                        className={`w-8 h-8 rounded-full border-2 ${selectedColor?.id === c.id ? "border-black" : "border-gray-300"
-                                            }`}
-                                        style={{ backgroundColor: `#${c.hexValue}` }}
-                                    />
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* انتخاب سایز */}
-                        <div>
-                            <h3 className="font-semibold mb-2">Size</h3>
-                            <div className="flex gap-4">
-                                {product.sizes.map((s) => (
-                                    <button
-                                        key={s.id}
-                                        onClick={() => changeSize(s)}
-                                        className={`px-3 py-1 rounded border-2 transition ${selectedSize?.id === s.id
+                    {/* انتخاب سایز */}
+                    <div>
+                        <h3 className="font-semibold mb-2">Size</h3>
+                        <div className="flex gap-4">
+                            {product.sizes.map((s) => (
+                                <button
+                                    key={s.id}
+                                    onClick={() => changeSize(s)}
+                                    className={`px-3 py-1 rounded border-2 transition ${selectedSize?.id === s.id
                                             ? "border-black bg-gray-100"
                                             : "border-gray-300"
-                                            }`}
-                                    >
-                                        {s.title}
-                                    </button>
-                                ))}
-                            </div>
+                                        }`}
+                                >
+                                    {s.title}
+                                </button>
+                            ))}
                         </div>
-
-                        {/* قیمت */}
-                        <div>
-                            <h3 className="font-semibold mb-2">Price</h3>
-                            <div className="text-2xl font-bold text-black-600">
-                                TL{product.price}
-                            </div>
-                        </div>
-
-                        {/* توضیحات */}
-                        <div>
-                            <h3 className="font-semibold mb-2">Description</h3>
-                            <p className="text-gray-700">{product.description}</p>
-                        </div>
-
-                        <button
-                            id="btn-add-to-basket"
-                            onClick={addToBasket}
-                            className="
-    bg-[#333] text-white 
-    py-[15px] px-[30px] 
-    border-2 border-black 
-    rounded-[10px] 
-    shadow-[1px_1px_5px_0_#bbb] 
-    transition-all duration-300 ease-in-out 
-    cursor-pointer
-    hover:bg-black 
-    active:bg-white active:text-black
-  "
-                        >
-                            Add to Basket
-                        </button>
-
                     </div>
+
+                    {/* قیمت */}
+                    <div>
+                        <h3 className="font-semibold mb-2">Price</h3>
+                        <div className="text-2xl font-bold text-black">
+                            TL{product.price}
+                        </div>
+                    </div>
+
+                    {/* توضیحات */}
+                    <div>
+                        <h3 className="font-semibold mb-2">Description</h3>
+                        <p className="text-gray-700">{product.description}</p>
+                    </div>
+
+                    <button
+                        id="btn-add-to-basket"
+                        onClick={addToBasket}
+                        className="
+              bg-[#333] text-white 
+              py-[15px] px-[30px] 
+              border-2 border-black 
+              rounded-[10px] 
+              shadow-[1px_1px_5px_0_#bbb] 
+              transition-all duration-300 ease-in-out 
+              cursor-pointer
+              hover:bg-black 
+              active:bg-white active:text-black
+            "
+                    >
+                        Add to Basket
+                    </button>
                 </div>
-            </main>
-        </>
+            </div>
+        </main>
     );
 }

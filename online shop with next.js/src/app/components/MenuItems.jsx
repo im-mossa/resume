@@ -60,7 +60,7 @@ export default function MenuItems() {
 
       <ul>
         <li>
-          <Link href="#">
+          <Link href="/pages/basket">
             <i className="fa fa-shopping-cart text-black text-[16px] absolute right-[15px] top-1/3 hover:scale-125 transition-transform" />
           </Link>
         </li>
