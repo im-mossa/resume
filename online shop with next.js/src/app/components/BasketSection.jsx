@@ -101,7 +101,7 @@ export default function BasketSection() {
                   </div>
                 </td>
                 <td className="p-2 text-center">{itm.qty}</td>
-                <td className="p-2 flex items-center justify-center gap-2">
+                <td className="pt-8 flex items-center justify-center gap-2">
                   <button
                     onClick={() => increaseQTY(idx)}
                     className="px-2 py-1 border rounded"
@@ -110,7 +110,7 @@ export default function BasketSection() {
                   </button>
                   <button
                     onClick={() => decreaseQTY(idx)}
-                    className="px-2 py-1 border rounded"
+                    className="px-[0.6rem] py-1 border rounded"
                   >
                     -
                   </button>

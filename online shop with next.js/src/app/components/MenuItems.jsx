@@ -65,9 +65,9 @@ export default function MenuItems() {
           </Link>
         </li>
         <li>
-          <Link href="#" onClick={() => checkUser()}>
+          <div className="hover:cursor-pointer" onClick={() => checkUser()}>
             <i className="fa fa-user text-black text-[16px] absolute right-[45px] top-1/3 hover:scale-125 transition-transform" />
-          </Link>
+          </div>
         </li>
       </ul>
     </>
