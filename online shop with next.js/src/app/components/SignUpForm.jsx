@@ -1,4 +1,3 @@
-// src/components/SignUpForm.jsx
 "use client";
 
 import React, { useState } from "react";
@@ -6,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
 import useUserApi from "../hooks/useUserApi";
 import { setCookie } from "../utils/helpers";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"; // 👈 آیکون‌ها
 
 export default function SignUpForm() {
   const router = useRouter();
@@ -20,6 +20,8 @@ export default function SignUpForm() {
     postalCode: "",
     address: "",
   });
+
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
@@ -28,7 +30,6 @@ export default function SignUpForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // basic validation
     for (const key in formData) {
       if (!formData[key]) {
         Swal.fire({
@@ -75,15 +76,41 @@ export default function SignUpForm() {
             >
               {label}
             </label>
-            <input
-              id={name}
-              name={name}
-              type={type}
-              value={formData[name]}
-              onChange={handleChange}
-              className="mt-1 block w-full px-3 py-2 border rounded-md focus:outline-none focus:ring"
-              required
-            />
+            {name === "password" ? (
+              <div className="relative">
+                <input
+                  id={name}
+                  name={name}
+                  type={showPassword ? "text" : "password"}
+                  value={formData[name]}
+                  onChange={handleChange}
+                  className="mt-1 block w-full px-3 py-2 border rounded-md focus:outline-none focus:ring pr-10"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 right-2 flex items-center text-gray-600 hover:text-black"
+                  tabIndex={-1}
+                >
+                  {showPassword ? (
+                    <AiOutlineEyeInvisible size={20} />
+                  ) : (
+                    <AiOutlineEye size={20} />
+                  )}
+                </button>
+              </div>
+            ) : (
+              <input
+                id={name}
+                name={name}
+                type={type}
+                value={formData[name]}
+                onChange={handleChange}
+                className="mt-1 block w-full px-3 py-2 border rounded-md focus:outline-none focus:ring"
+                required
+              />
+            )}
           </div>
         ))}
         <div className="text-center">

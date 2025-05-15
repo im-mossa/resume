@@ -1,4 +1,3 @@
-// src/components/LoginForm.jsx
 "use client";
 
 import React, { useState } from "react";
@@ -7,6 +6,7 @@ import Swal from "sweetalert2";
 import useUserApi from "../hooks/useUserApi";
 import { setCookie } from "../utils/helpers";
 import Link from "next/link";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"; // 👈 آیکون‌ها
 
 export default function LoginForm() {
   const router = useRouter();
@@ -14,6 +14,7 @@ export default function LoginForm() {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -69,14 +70,28 @@ export default function LoginForm() {
           >
             Password
           </label>
-          <input
-            id="password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="mt-1 block w-full px-3 py-2 border rounded-md focus:outline-none focus:ring"
-            required
-          />
+          <div className="relative">
+            <input
+              id="password"
+              type={showPassword ? "text" : "password"}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="mt-1 block w-full px-3 py-2 border rounded-md focus:outline-none focus:ring pr-10"
+              required
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute inset-y-0 right-2 flex items-center text-gray-600 hover:text-black"
+              tabIndex={-1}
+            >
+              {showPassword ? (
+                <AiOutlineEyeInvisible size={20} />
+              ) : (
+                <AiOutlineEye size={20} />
+              )}
+            </button>
+          </div>
         </div>
         <div className="flex justify-between items-center">
           <button
@@ -86,7 +101,10 @@ export default function LoginForm() {
           >
             {loading ? "Please wait..." : "Login"}
           </button>
-          <Link href="../pages/signUp" className="text-sm text-blue-600 hover:underline cursor-pointer">
+          <Link
+            href="../pages/signUp"
+            className="text-sm text-blue-600 hover:underline cursor-pointer"
+          >
             Sign up
           </Link>
         </div>

@@ -1,10 +1,10 @@
+// src/components/MenuItems.jsx
 "use client";
 
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-// import { FaBars, FaTimes } from "react-icons/fa";
-// import Button from "./Ui/Button";
+import { FaBars, FaTimes, FaShoppingCart, FaUser } from "react-icons/fa";
 import { checkUser } from "../utils/helpers";
 
 export default function MenuItems() {
@@ -29,9 +29,9 @@ export default function MenuItems() {
         onClick={() => setMenuState(!menuState)}
       >
         {menuState ? (
-          <i className="fa fa-times text-black pt-2" aria-hidden="true" />
+          <FaTimes className="text-black text-2xl pt-2" />
         ) : (
-          <i className="fa fa-bars text-black pt-2" aria-hidden="true" />
+          <FaBars className="text-black text-2xl pt-2" />
         )}
       </div>
 
@@ -61,12 +61,12 @@ export default function MenuItems() {
       <ul>
         <li>
           <Link href="/pages/basket">
-            <i className="fa fa-shopping-cart text-black text-[16px] absolute right-[15px] top-1/3 hover:scale-125 transition-transform" />
+            <FaShoppingCart className="text-black text-[16px] absolute right-[15px] top-1/3 hover:scale-125 transition-transform" />
           </Link>
         </li>
         <li>
           <div className="hover:cursor-pointer" onClick={() => checkUser()}>
-            <i className="fa fa-user text-black text-[16px] absolute right-[45px] top-1/3 hover:scale-125 transition-transform" />
+            <FaUser className="text-black text-[16px] absolute right-[45px] top-1/3 hover:scale-125 transition-transform" />
           </div>
         </li>
       </ul>

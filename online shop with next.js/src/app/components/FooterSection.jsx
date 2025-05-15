@@ -3,6 +3,7 @@
 
 import React from "react";
 import Link from "next/link";
+import { FaInstagram, FaTwitter, FaLinkedin } from "react-icons/fa";
 
 export default function FooterSection() {
   const footerLinks = [
@@ -32,6 +33,12 @@ export default function FooterSection() {
     },
   ];
 
+  const socialIconMap = {
+    instagram: FaInstagram,
+    twitter: FaTwitter,
+    linkedin: FaLinkedin,
+  };
+
   return (
     <>
       {/* Map Section */}
@@ -58,38 +65,51 @@ export default function FooterSection() {
               <h4 className="mt-1 mb-4 text-black">{section.title}</h4>
               <nav>
                 <ul className="flex flex-col space-y-2">
-                  {section.links.map((link, index) => (
-                    <li key={index}>
-                      {section.title === "Social networks" ? (
-                        <a
-                          href={link.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-block hover:scale-110 transition-transform"
-                        >
-                          <i
-                            className={`fa-brands fa-${link.label.toLowerCase()} fa-2xl text-black`}
-                          />
-                        </a>
-                      ) : link.href.startsWith("http") ? (
-                        <a
-                          href={link.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-[13px] block text-black hover:font-bold"
-                        >
-                          {link.label}
-                        </a>
-                      ) : (
-                        <Link
-                          href={link.href}
-                          className="text-[13px] block text-black hover:font-bold"
-                        >
-                          {link.label}
-                        </Link>
-                      )}
-                    </li>
-                  ))}
+                  {section.links.map((link, index) => {
+                    const lower = link.label.toLowerCase();
+                    if (
+                      section.title === "Social networks" &&
+                      socialIconMap[lower]
+                    ) {
+                      const Icon = socialIconMap[lower];
+                      return (
+                        <li key={index}>
+                          <a
+                            href={link.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-block hover:scale-110 transition-transform"
+                          >
+                            <Icon className="text-2xl text-black" />
+                          </a>
+                        </li>
+                      );
+                    } else if (link.href.startsWith("http")) {
+                      return (
+                        <li key={index}>
+                          <a
+                            href={link.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[13px] block text-black hover:font-bold"
+                          >
+                            {link.label}
+                          </a>
+                        </li>
+                      );
+                    } else {
+                      return (
+                        <li key={index}>
+                          <Link
+                            href={link.href}
+                            className="text-[13px] block text-black hover:font-bold"
+                          >
+                            {link.label}
+                          </Link>
+                        </li>
+                      );
+                    }
+                  })}
                 </ul>
               </nav>
             </div>
