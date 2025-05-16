@@ -173,7 +173,7 @@ export default function BasketSection() {
 
       <div className="text-center">
         <Link
-          href="/checkout"
+          href="/pages/checkOut"
           className="inline-block px-6 py-3 bg-black text-white rounded-lg shadow hover:bg-gray-800"
         >
           Proceed To Payment

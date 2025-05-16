@@ -50,6 +50,12 @@ export default function PanelSection() {
       {/* دکمه‌های پایین */}
       <div className="flex flex-col sm:flex-row justify-center gap-4">
         <Link
+          href="/pages/editProfile"
+          className="px-6 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition text-center"
+        >
+          Edit Profile
+        </Link>
+        <Link
           href="/pages/invoices"
           className="px-6 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition text-center"
         >

@@ -1,0 +1,14 @@
+{
+    "id": 40777,
+    "username": "saeed4",
+    "oldPassword": "",
+    "password": "",
+    "repeatPassword": "",
+    "firstName": "Hossein",
+    "lastName": "Badrnezhad",
+    "address": "usa",
+    "phone": "09187654321",
+    "postalCode": "1111111111",
+    "customerId": 40774,
+    "token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzYWVlZDQiLCJleHAiOjE3NDc0MDI2NDQsImlhdCI6MTc0NzM4NDY0NH0.TRgtTrM_x0nbOGx8FtAwg6fbD1zx8da_g7vclsJWKjVSr3LQr1VOOumV80Z-d85mX9LYuma0_alZdx5TLkj5rg"
+}

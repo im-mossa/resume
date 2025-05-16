@@ -7,7 +7,6 @@ import Swal from "sweetalert2";
 import useUserApi from "@/app/hooks/useUserApi";
 import { getCookie, setCookie } from "@/app/utils/helpers";
 // ایمپورت آیکون‌ها از react-icons
-import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"; // 👈 آیکون‌ها
 
 

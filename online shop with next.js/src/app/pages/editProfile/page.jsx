@@ -1,11 +1,11 @@
-// src/app/pages/changePassword/page.jsx
+// src/app/pages/editProfile/page.jsx
 import React from "react";
-import ChangePasswordForm from "@/app/components/ChangePasswordForm";
+import EditProfileForm from "@/app/components/EditProfileForm";
 
 export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <ChangePasswordForm />
+      <EditProfileForm />
     </div>
   );
 }
