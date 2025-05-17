@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { useProductApi } from "@/app/hooks/useProductApi";
 import BasketDB from "@/app/db/BasketDB";
 import Swal from "sweetalert2";
+import Button from "@/app/components/ui/Button";
 
 export default function ShowProduct() {
     const params = useSearchParams();
@@ -74,8 +75,8 @@ export default function ShowProduct() {
                                     onClick={() => changeColor(c)}
                                     title={c.title}
                                     className={`w-8 h-8 rounded-full border-2 ${selectedColor?.id === c.id
-                                            ? "border-black"
-                                            : "border-gray-300"
+                                        ? "border-black"
+                                        : "border-gray-300"
                                         }`}
                                     style={{ backgroundColor: `#${c.hexValue}` }}
                                 />
@@ -92,8 +93,8 @@ export default function ShowProduct() {
                                     key={s.id}
                                     onClick={() => changeSize(s)}
                                     className={`px-3 py-1 rounded border-2 transition ${selectedSize?.id === s.id
-                                            ? "border-black bg-gray-100"
-                                            : "border-gray-300"
+                                        ? "border-black bg-gray-100"
+                                        : "border-gray-300"
                                         }`}
                                 >
                                     {s.title}
@@ -116,23 +117,9 @@ export default function ShowProduct() {
                         <p className="text-gray-700">{product.description}</p>
                     </div>
 
-                    <button
-                        id="btn-add-to-basket"
-                        onClick={addToBasket}
-                        className="
-              bg-[#333] text-white 
-              py-[15px] px-[30px] 
-              border-2 border-black 
-              rounded-[10px] 
-              shadow-[1px_1px_5px_0_#bbb] 
-              transition-all duration-300 ease-in-out 
-              cursor-pointer
-              hover:bg-black 
-              active:bg-white active:text-black
-            "
-                    >
+                    <Button onClick={addToBasket}>
                         Add to Basket
-                    </button>
+                    </Button>
                 </div>
             </div>
         </main>

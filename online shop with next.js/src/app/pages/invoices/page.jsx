@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useInvoiceApi } from "@/app/hooks/useInvoiceApi";
+import Button from "@/app/components/ui/Button";
 
 export default function InvoicesPage() {
   const { getInvoicesByUser } = useInvoiceApi();
@@ -31,7 +32,7 @@ export default function InvoicesPage() {
   };
 
   return (
-    <main className="max-w-5xl mx-auto p-4">
+    <main className="max-w-5xl mx-auto p-4 my-6">
       <h1 className="text-2xl font-bold mb-4">Invoices</h1>
 
       <div className="overflow-x-auto">
@@ -88,10 +89,8 @@ export default function InvoicesPage() {
       </div>
 
       {/* لینک بازگشت به داشبورد */}
-      <div className="mt-6 text-center">
-        <Link href="/pages/panel" className="inline-block px-6 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition cursor-pointer">
-            Back to Dashboard
-        </Link>
+      <div className="mt-6 pt-4 text-center">
+        <Button href="/pages/panel">Back to Dashboard</Button>
       </div>
     </main>
   );

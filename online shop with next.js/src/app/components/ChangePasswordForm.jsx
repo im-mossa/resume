@@ -8,7 +8,7 @@ import useUserApi from "@/app/hooks/useUserApi";
 import { getCookie, setCookie } from "@/app/utils/helpers";
 // ایمپورت آیکون‌ها از react-icons
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"; // 👈 آیکون‌ها
-
+import Button from "./ui/Button";
 
 export default function ChangePasswordForm() {
   const router = useRouter();
@@ -128,7 +128,11 @@ export default function ChangePasswordForm() {
             className="absolute inset-y-0 right-2 top-6 flex items-center text-gray-600 hover:text-black"
             tabIndex={-1}
           >
-            {showCurrent ? <AiOutlineEyeInvisible size={20} /> : <AiOutlineEye size={20} />}
+            {showCurrent ? (
+              <AiOutlineEyeInvisible size={20} />
+            ) : (
+              <AiOutlineEye size={20} />
+            )}
           </button>
         </div>
 
@@ -154,17 +158,17 @@ export default function ChangePasswordForm() {
             className="absolute inset-y-0 right-2 top-6 flex items-center text-gray-600 hover:text-black"
             tabIndex={-1}
           >
-            {showNew ? <AiOutlineEyeInvisible size={20} /> : <AiOutlineEye size={20} />}
+            {showNew ? (
+              <AiOutlineEyeInvisible size={20} />
+            ) : (
+              <AiOutlineEye size={20} />
+            )}
           </button>
         </div>
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full px-4 py-2 bg-black text-white rounded-md hover:bg-gray-800 disabled:opacity-50 cursor-pointer"
-        >
-          {loading ? "Please wait..." : "Submit"}
-        </button>
+        <Button type="submit" disabled={loading}>
+          {loading ? "Loading" : "Submit"}
+        </Button>
       </form>
     </div>
   );

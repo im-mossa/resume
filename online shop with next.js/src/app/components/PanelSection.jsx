@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePanelApi } from "../hooks/usePanelApi";
 import { getCookie, logOutSystem } from "../utils/helpers";
+import Button from "./ui/Button";
 
 export default function PanelSection() {
   const { getUserInfo } = usePanelApi();
@@ -49,30 +50,10 @@ export default function PanelSection() {
 
       {/* دکمه‌های پایین */}
       <div className="flex flex-col sm:flex-row justify-center gap-4">
-        <Link
-          href="/pages/editProfile"
-          className="px-6 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition text-center"
-        >
-          Edit Profile
-        </Link>
-        <Link
-          href="/pages/invoices"
-          className="px-6 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition text-center"
-        >
-          View My Invoices
-        </Link>
-        <Link
-          href="/pages/changePassword"
-          className="px-6 py-2 bg-yellow-500 text-white rounded-lg shadow hover:bg-yellow-600 transition text-center"
-        >
-          Change Password
-        </Link>
-        <button
-          onClick={logOutSystem}
-          className="px-6 py-2 bg-red-600 text-white rounded-lg shadow hover:bg-red-700 transition cursor-pointer"
-        >
-          Log Out
-        </button>
+        <Button href="/pages/editProfile">Edit Profile</Button>
+        <Button href="/pages/invoices">View My Invoices</Button>
+        <Button href="/pages/changePassword">Change Password</Button>
+        <Button onClick={logOutSystem}>Log Out</Button>
       </div>
     </div>
   );

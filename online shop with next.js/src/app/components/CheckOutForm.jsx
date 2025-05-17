@@ -6,6 +6,8 @@ import Swal from "sweetalert2";
 import BasketDB from "../db/BasketDB";
 import { getCookie } from "../utils/helpers";
 import useTransactionApi from "../hooks/useTransactionApi";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import Button from "./ui/Button";
 
 export default function CheckoutForm() {
   const [formData, setFormData] = useState({
@@ -17,6 +19,7 @@ export default function CheckoutForm() {
     postalCode: "",
     address: "",
   });
+  const [showPassword, setShowPassword] = useState(false);
   const { goToPayment } = useTransactionApi(); // ⚠️ هوک را اینجا صدا می‌زنیم
 
   // پر کردن فرم از کوکی
@@ -51,7 +54,7 @@ export default function CheckoutForm() {
       return Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "لطفاً همه‌ی فیلدها را پر کنید.",
+        text: "Please fill in all fields",
       });
     }
 
@@ -96,7 +99,7 @@ export default function CheckoutForm() {
       Swal.fire({
         icon: "error",
         title: "Error",
-        text: err.message || "پرداخت ناموفق بود.",
+        text: err.message || "The payment was unsuccessful.",
       });
     }
   };
@@ -118,25 +121,47 @@ export default function CheckoutForm() {
             <label htmlFor={name} className="mb-1">
               {label}
             </label>
-            <input
-              id={name}
-              name={name}
-              type={type}
-              value={formData[name]}
-              onChange={handleChange}
-              required
-              className="border border-gray-300 p-2 rounded"
-            />
+            {name === "password" ? (
+              <div className="relative">
+                <input
+                  id={name}
+                  name={name}
+                  type={showPassword ? "text" : "password"}
+                  value={formData[name]}
+                  onChange={handleChange}
+                  className="mt-1 block w-full px-3 py-2 border rounded-md focus:outline-none focus:ring pr-10"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 right-2 top-1 flex items-center text-gray-600 hover:text-black"
+                  tabIndex={-1}
+                >
+                  {showPassword ? (
+                    <AiOutlineEyeInvisible size={20} />
+                  ) : (
+                    <AiOutlineEye size={20} />
+                  )}
+                </button>
+              </div>
+            ) : (
+              <input
+                id={name}
+                name={name}
+                type={type}
+                value={formData[name]}
+                onChange={handleChange}
+                className="mt-1 block w-full px-3 py-2 border rounded-md focus:outline-none focus:ring"
+                required
+              />
+            )}
           </div>
         ))}
 
-        <button
-          type="button"
-          onClick={handleGoToPayment}
-          className="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
-        >
+        <Button type="button" onClick={handleGoToPayment}>
           Go To Payment
-        </button>
+        </Button>
       </form>
     </section>
   );

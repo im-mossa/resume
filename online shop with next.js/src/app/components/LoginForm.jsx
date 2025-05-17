@@ -7,6 +7,7 @@ import useUserApi from "../hooks/useUserApi";
 import { setCookie } from "../utils/helpers";
 import Link from "next/link";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"; // 👈 آیکون‌ها
+import Button from "./ui/Button";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -94,19 +95,10 @@ export default function LoginForm() {
           </div>
         </div>
         <div className="flex justify-between items-center">
-          <button
-            type="submit"
-            disabled={loading}
-            className="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-800 disabled:opacity-50 cursor-pointer"
-          >
-            {loading ? "Please wait..." : "Login"}
-          </button>
-          <Link
-            href="../pages/signUp"
-            className="text-sm text-blue-600 hover:underline cursor-pointer"
-          >
-            Sign up
-          </Link>
+          <Button type="submit" disabled={loading}>
+            {loading ? "Loading" : "Login"}
+          </Button>
+          <Button href="../pages/signUp">Sign up</Button>
         </div>
       </form>
     </div>

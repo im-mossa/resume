@@ -4,6 +4,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { getCookie, setCookie } from "../utils/helpers";
+import Button from "./ui/Button";
 
 export default function BasketSection() {
   const [items, setItems] = useState([]);
@@ -172,12 +173,7 @@ export default function BasketSection() {
       </div>
 
       <div className="text-center">
-        <Link
-          href="/pages/checkOut"
-          className="inline-block px-6 py-3 bg-black text-white rounded-lg shadow hover:bg-gray-800"
-        >
-          Proceed To Payment
-        </Link>
+        <Button href="/pages/checkOut">Proceed To Payment</Button>
       </div>
     </section>
   );

@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import useUserApi from "../hooks/useUserApi";
 import { setCookie } from "../utils/helpers";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"; // 👈 آیکون‌ها
+import Button from "./ui/Button";
 
 export default function SignUpForm() {
   const router = useRouter();
@@ -114,13 +115,9 @@ export default function SignUpForm() {
           </div>
         ))}
         <div className="text-center">
-          <button
-            type="submit"
-            disabled={loading}
-            className="px-6 py-2 bg-black text-white rounded-md hover:bg-gray-800 disabled:opacity-50"
-          >
+          <Button type="submit" disabled={loading}>
             {loading ? "Please wait..." : "Sign Up"}
-          </button>
+          </Button>
         </div>
       </form>
     </div>
