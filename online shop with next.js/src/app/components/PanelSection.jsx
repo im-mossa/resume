@@ -1,4 +1,3 @@
-// src/components/PanelSection.jsx
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -6,6 +5,7 @@ import Link from "next/link";
 import { usePanelApi } from "../hooks/usePanelApi";
 import { getCookie, logOutSystem } from "../utils/helpers";
 import Button from "./ui/Button";
+import Skeleton from "react-loading-skeleton";
 
 export default function PanelSection() {
   const { getUserInfo } = usePanelApi();
@@ -21,8 +21,23 @@ export default function PanelSection() {
     });
   }, [getUserInfo]);
 
+  // **حالت بارگذاری**: نمایش 5 اسکلتون کارت
   if (!user) {
-    return <div className="py-20 text-center">Loading dashboard…</div>;
+    return (
+      <div className="px-4 py-6">
+        <div className="grid gap-6 mb-8 sm:grid-cols-2 lg:grid-cols-4">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <div
+              key={i}
+              className="flex flex-col p-4 bg-white rounded-lg shadow animate-pulse"
+            >
+              <Skeleton height={16} width={100} className="mb-2" />
+              <Skeleton height={24} width={`80%`} />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
   }
 
   const cards = [

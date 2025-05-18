@@ -1,17 +1,25 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import Skeleton from "react-loading-skeleton";
 import useSliderApi from "../api/sliderApi";
 
 export default function Slideshow() {
   const { getAll } = useSliderApi();
   const [slides, setSlides] = useState([]);
   const [current, setCurrent] = useState(0);
+  const [loading, setLoading] = useState(true);
 
+  // بارگذاری اسلایدها
   useEffect(() => {
-    getAll((data) => setSlides(data));
+    setLoading(true);
+    getAll((data) => {
+      setSlides(Array.isArray(data) ? data : []);
+      setLoading(false);
+    });
   }, []);
 
+  // اتوپلی
   useEffect(() => {
     if (slides.length === 0) return;
     const timeoutId = setTimeout(() => {
@@ -20,40 +28,43 @@ export default function Slideshow() {
     return () => clearTimeout(timeoutId);
   }, [current, slides.length]);
 
-  if (!slides.length) {
-    return <div className="p-6 text-center">Loading...</div>;
+  if (loading) {
+    return (
+      <div className="relative w-[80vw] h-[300px] mx-auto overflow-hidden rounded-2xl">
+        <Skeleton className="w-full h-full" />
+        <div className="absolute top-0 left-0 bg-white/70 backdrop-blur-sm rounded-br-2xl p-4 z-20 w-[10em] h-[6em]">
+          <Skeleton width="35%" height={16} />
+          <Skeleton width="65%" height={14} className="mt-2" />
+        </div>
+      </div>
+    );
   }
+
+  if (slides.length === 0) {
+    return <div className="p-6 text-center">No slides available.</div>;
+  }
+
+  const SlideBox = ({ image, title, subTitle }) => (
+    <div className="relative flex-shrink-0 w-[80vw] h-[500px] max-[471px]:h-[300px]">
+      <img src={image} alt={title} title={title} className="w-full h-full object-cover" />
+      <div className="absolute top-0 left-0 bg-white/70 backdrop-blur-sm rounded-br-2xl p-4 flex flex-col justify-start items-start z-20 w-[10em] h-[6em]">
+        <h2 className="text-[1em] font-bold text-black">{title}</h2>
+        <p className="mt-2 text-[1em] text-black">{subTitle}</p>
+      </div>
+    </div>
+  );
 
   return (
     <section className="relative overflow-hidden w-[80vw] mx-auto rounded-2xl">
-      {/* رَپِر اسلایدها */}
       <div
         className="flex transition-transform duration-700 ease-in-out"
         style={{
           width: `${slides.length * 80}vw`,
-          transform: `translateX(+${current * 80}vw)`
+          transform: `translateX(+${current * 80}vw)`,
         }}
       >
         {slides.map(({ id, image, title, subTitle }) => (
-          <div
-            key={id}
-            className="relative flex-shrink-0 w-[80vw] h-[500px] max-[471px]:h-[300px]"
-          >
-            <img
-              src={image}
-              alt={title}
-              title={title}
-              className="w-full h-full object-cover"
-            />
-
-            {/* باکس عنوان در بالا چپ */}
-            <div className="absolute top-0 left-0 bg-white/70 backdrop-blur-sm
-                            rounded-br-2xl p-4 flex flex-col justify-start items-start z-20
-                            w-[10em] h-[6em]">
-              <h2 className="text-[1em] font-bold text-black">{title}</h2>
-              <p className="mt-2 text-[1em] text-black">{subTitle}</p>
-            </div>
-          </div>
+          <SlideBox key={id} image={image} title={title} subTitle={subTitle} />
         ))}
       </div>
 

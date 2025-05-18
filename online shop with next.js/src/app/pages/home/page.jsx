@@ -10,7 +10,7 @@ export default function Home() {
     const [activeTag, setActiveTag] = useState("Popular");
 
     return (
-        <div className="py-2">
+        <div className="py-8">
             {/* Slider */}
             <Slideshow />
 

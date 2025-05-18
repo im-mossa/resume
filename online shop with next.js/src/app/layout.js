@@ -1,3 +1,4 @@
+import "react-loading-skeleton/dist/skeleton.css";
 import "./globals.css";
 import MenuItems from "./components/MenuItems";
 import FooterSection from "./components/FooterSection";
