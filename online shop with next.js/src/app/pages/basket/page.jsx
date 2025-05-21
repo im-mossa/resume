@@ -5,5 +5,5 @@ import React from "react";
 import BasketSection from "@/app/components/BasketSection";
 
 export default function BasketPage() {
-    return <BasketSection />;
+  return <BasketSection />;
 }

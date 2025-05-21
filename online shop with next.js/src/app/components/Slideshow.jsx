@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import useSliderApi from "../api/sliderApi";
+import Link from "next/link";
 
 export default function Slideshow() {
   const { getAll } = useSliderApi();
@@ -44,12 +45,19 @@ export default function Slideshow() {
     return <div className="p-6 text-center">No slides available.</div>;
   }
 
-  const SlideBox = ({ image, title, subTitle }) => (
+  const SlideBox = ({ id, image, title, subTitle }) => (
     <div className="relative flex-shrink-0 w-[80vw] h-[500px] max-[471px]:h-[300px]">
-      <img src={image} alt={title} title={title} className="w-full h-full object-cover" />
+      <img
+        src={image}
+        alt={title}
+        title={title}
+        className="w-full h-full object-cover"
+      />
       <div className="absolute top-0 left-0 bg-white/70 backdrop-blur-sm rounded-br-2xl p-4 flex flex-col justify-start items-start z-20 w-[10em] h-[6em]">
-        <h2 className="text-[1em] font-bold text-black">{title}</h2>
-        <p className="mt-2 text-[1em] text-black">{subTitle}</p>
+        <Link href={`/pages/showSlider?id=${id}`}>
+          <h2 className="text-[1em] font-bold text-black">{title}</h2>
+          <p className="mt-2 text-[1em] text-black">{subTitle}</p>
+        </Link>
       </div>
     </div>
   );
@@ -64,13 +72,15 @@ export default function Slideshow() {
         }}
       >
         {slides.map(({ id, image, title, subTitle }) => (
-          <SlideBox key={id} image={image} title={title} subTitle={subTitle} />
+          <SlideBox key={id} id={id} image={image} title={title} subTitle={subTitle} />
         ))}
       </div>
 
       {/* دکمه قبلی */}
       <button
-        onClick={() => setCurrent((i) => (i - 1 + slides.length) % slides.length)}
+        onClick={() =>
+          setCurrent((i) => (i - 1 + slides.length) % slides.length)
+        }
         className="cursor-pointer absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 p-3 rounded-full hover:bg-black/70 text-white text-2xl z-10"
       >
         ‹
