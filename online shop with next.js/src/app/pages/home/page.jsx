@@ -10,7 +10,7 @@ export default function Home() {
   const [activeTag, setActiveTag] = useState("Popular");
 
   return (
-    <div className="py-8">
+    <div className="py-8 home">
       {/* Slider */}
       <Slideshow />
 
@@ -23,8 +23,8 @@ export default function Home() {
           <button
             key={type}
             onClick={() => setActiveTag(type)}
-            className={`px-4 py-2 rounded-xl transition duration-200
-              ${activeTag === type ? "bg-gray-300" : "hover:bg-gray-100"}`}
+            className={`px-4 py-2 rounded-xl transition duration-200 text-white dark:bg-gray-500  hover:cursor-pointer
+              ${activeTag === type ? "bg-gray-500" : "hover:bg-gray-100 hover:text-black"}`}
           >
             {type}
           </button>

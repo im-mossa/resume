@@ -2,7 +2,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
 import { getCookie, setCookie } from "../utils/helpers";
 import Button from "./ui/Button";
 
@@ -52,9 +51,9 @@ export default function BasketSection() {
     return (
       <section className="p-6 text-center">
         <h2 className="text-2xl font-bold mb-4">Your basket is empty!</h2>
-        <Link href="/products" className="text-blue-600 hover:underline">
+        <Button href="/pages/products">
           Browse Products
-        </Link>
+        </Button>
       </section>
     );
   }
@@ -67,7 +66,7 @@ export default function BasketSection() {
 
       {/* Desktop Table */}
       <div className="hidden md:block">
-        <table className="w-full table-auto border-collapse mb-6">
+        <table className="w-full table-auto border-collapse mb-6 text-black">
           <thead>
             <tr className="bg-gray-200">
               <th className="p-2">Image</th>

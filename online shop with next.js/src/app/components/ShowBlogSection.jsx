@@ -56,11 +56,11 @@ export default function ShowBlogSection() {
 
         <h1 className="text-2xl sm:text-3xl font-bold my-4">{blog.title}</h1>
 
-        <h3 className="text-xl sm:text-2xl font-semibold text-gray-700 mb-6">
+        <h3 className="text-xl sm:text-2xl font-semibold mb-6">
           {blog.subTitle}
         </h3>
 
-        <p className="text-base sm:text-lg text-gray-800 leading-relaxed mb-6">
+        <p className="text-base sm:text-lg leading-relaxed mb-6">
           {blog.description}
         </p>
 

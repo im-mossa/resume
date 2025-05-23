@@ -133,7 +133,7 @@ export default function ShowProductSection() {
                   key={c.id}
                   onClick={() => changeColor(c)}
                   title={c.title}
-                  className={`w-8 h-8 rounded-full border-2 transition-colors ${
+                  className={`w-8 h-8 rounded-full border-6 transition-colors ${
                     selectedColor?.id === c.id
                       ? "border-black"
                       : "border-gray-300"
@@ -152,9 +152,9 @@ export default function ShowProductSection() {
                 <button
                   key={s.id}
                   onClick={() => changeSize(s)}
-                  className={`px-3 py-1 rounded border-2 transition-colors ${
+                  className={`px-3 py-1 rounded border-6 transition-colors ${
                     selectedSize?.id === s.id
-                      ? "border-black bg-gray-100"
+                      ? "border-black"
                       : "border-gray-300"
                   }`}
                 >
@@ -167,7 +167,7 @@ export default function ShowProductSection() {
           {/* قیمت */}
           <div>
             <h3 className="font-semibold mb-2">Price</h3>
-            <div className="text-2xl font-bold text-black">
+            <div className="text-2xl font-bold">
               TL{product.price}
             </div>
           </div>
@@ -175,7 +175,7 @@ export default function ShowProductSection() {
           {/* توضیحات */}
           <div>
             <h3 className="font-semibold mb-2">Description</h3>
-            <p className="text-gray-700">{product.description}</p>
+            <p>{product.description}</p>
           </div>
 
           <Button onClick={addToBasket}>Add to Basket</Button>

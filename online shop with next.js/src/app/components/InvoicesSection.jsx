@@ -38,7 +38,7 @@ export default function InvoicesSection() {
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white">
           <thead>
-            <tr className="bg-gray-100 text-left">
+            <tr className="bg-white text-left  text-black">
               <th className="px-4 py-2">Status</th>
               <th className="px-4 py-2">Add Date</th>
               <th className="px-4 py-2">Pay Date</th>

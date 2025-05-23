@@ -40,10 +40,10 @@ export default function FooterSection() {
   };
 
   return (
-    <>
+    <div className="footer-section">
       {/* Map Section */}
-      <section className="bg-[#eee] pt-5 text-center">
-        <h4 className="text-black">Our Address</h4>
+      <section className="pt-5 text-center">
+        <h4>Our Address</h4>
         <br />
         <iframe
           title="Company Location"
@@ -58,11 +58,11 @@ export default function FooterSection() {
       </section>
 
       {/* Footer Links */}
-      <footer className="bg-[#eee] py-5">
+      <footer className="py-5">
         <div className="container mx-auto grid grid-cols-1 justify-items-center sm:grid-cols-2 sm:justify-items-start md:grid-cols-3 md:justify-items-start gap-6">
           {footerLinks.map((section, idx) => (
             <div key={idx} className="text-justify">
-              <h4 className="mt-1 mb-4 text-black">{section.title}</h4>
+              <h4 className="mt-1 mb-4">{section.title}</h4>
               <nav>
                 <ul className="flex flex-col space-y-2">
                   {section.links.map((link, index) => {
@@ -80,7 +80,7 @@ export default function FooterSection() {
                             rel="noopener noreferrer"
                             className="inline-block hover:scale-110 transition-transform"
                           >
-                            <Icon className="text-2xl text-black" />
+                            <Icon className="text-2xl" />
                           </a>
                         </li>
                       );
@@ -91,7 +91,7 @@ export default function FooterSection() {
                             href={link.href}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-[13px] block text-black hover:font-bold"
+                            className="text-[13px] block hover:font-bold"
                           >
                             {link.label}
                           </a>
@@ -102,7 +102,7 @@ export default function FooterSection() {
                         <li key={index}>
                           <Link
                             href={link.href}
-                            className="text-[13px] block text-black hover:font-bold"
+                            className="text-[13px] block hover:font-bold"
                           >
                             {link.label}
                           </Link>
@@ -116,6 +116,6 @@ export default function FooterSection() {
           ))}
         </div>
       </footer>
-    </>
+    </div>
   );
 }

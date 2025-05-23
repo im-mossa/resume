@@ -29,17 +29,17 @@ export default function MenuItems() {
         onClick={() => setMenuState(!menuState)}
       >
         {menuState ? (
-          <FaTimes className="text-black text-2xl pt-2" />
+          <FaTimes className="text-2xl pt-2" />
         ) : (
-          <FaBars className="text-black text-2xl pt-2" />
+          <FaBars className="text-2xl pt-2" />
         )}
       </div>
 
       {/* لیست آیتم‌های منو */}
       <ul
         data-testid="menu"
-        className={`bg-white fixed top-20 left-0 text-[16px] w-full h-[90vh] flex flex-col justify-center items-center
-         text-black z-[1] transition-all duration-500 ease-in-out
+        className={` fixed top-20 left-0 text-[16px] w-full h-[90vh] flex flex-col justify-center items-center
+        z-[1] transition-all duration-500 ease-in-out
           ${menuState ? "translate-x-0" : "translate-x-[-100%]"}
           md:static md:translate-x-0 md:w-[60vw] md:flex-row md:h-auto md:bg-transparent md:justify-end`}
       >
@@ -48,8 +48,8 @@ export default function MenuItems() {
             key={item.path}
             className={`list-none p-4 border-b-4 border-transparent transition-all duration-200 ease-out
               w-full text-center hover:font-bold
-              md:hover:bg-transparent md:hover:text-current md:hover:border-b-black
-              ${isActive(item.path) ? "text-black font-bold" : ""}`}
+              md:hover:bg-transparent md:hover:text-current md:hover:border-b-current
+              ${isActive(item.path) ? "font-bold" : ""}`}
           >
             <Link href={item.path} onClick={() => setMenuState(false)}>
               {item.name}
@@ -61,12 +61,12 @@ export default function MenuItems() {
       <ul>
         <li>
           <Link href="/pages/basket">
-            <FaShoppingCart className="text-black text-[16px] absolute right-[15px] top-1/3 hover:scale-125 transition-transform" />
+            <FaShoppingCart className="text-[18px] absolute right-[30px] top-1/3 hover:scale-125 transition-transform" />
           </Link>
         </li>
         <li>
           <div className="hover:cursor-pointer" onClick={() => checkUser()}>
-            <FaUser className="text-black text-[16px] absolute right-[45px] top-1/3 hover:scale-125 transition-transform" />
+            <FaUser className="text-[18px] absolute right-[60px] top-1/3 hover:scale-125 transition-transform" />
           </div>
         </li>
       </ul>
