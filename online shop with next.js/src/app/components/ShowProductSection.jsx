@@ -135,7 +135,7 @@ export default function ShowProductSection() {
                   title={c.title}
                   className={`w-8 h-8 rounded-full border-6 transition-colors ${
                     selectedColor?.id === c.id
-                      ? "border-black"
+                      ? "border-blue-400"
                       : "border-gray-300"
                   }`}
                   style={{ backgroundColor: `#${c.hexValue}` }}
@@ -154,7 +154,7 @@ export default function ShowProductSection() {
                   onClick={() => changeSize(s)}
                   className={`px-3 py-1 rounded border-6 transition-colors ${
                     selectedSize?.id === s.id
-                      ? "border-black"
+                      ? "border-blue-400"
                       : "border-gray-300"
                   }`}
                 >

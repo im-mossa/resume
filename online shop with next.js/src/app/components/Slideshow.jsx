@@ -32,8 +32,8 @@ export default function Slideshow() {
   if (loading) {
     return (
       <div className="relative w-[80vw] h-[300px] mx-auto overflow-hidden rounded-2xl">
-        <Skeleton className="w-full h-full" />
-        <div className="absolute top-0 left-0 bg-white/70 backdrop-blur-sm rounded-br-2xl p-4 z-20 w-[10em] h-[6em]">
+        <Skeleton className="w-full h-full" containerClassName="leading-none align-top" />
+        <div className="absolute align-top top-0 left-0 backdrop-blur-sm rounded-br-2xl p-4 z-10 w-[10em] h-[6em] footer-section">
           <Skeleton width="35%" height={16} />
           <Skeleton width="65%" height={14} className="mt-2" />
         </div>

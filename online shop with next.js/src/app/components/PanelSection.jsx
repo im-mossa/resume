@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
 import { usePanelApi } from "../hooks/usePanelApi";
 import { getCookie, logOutSystem } from "../utils/helpers";
 import Button from "./ui/Button";
@@ -29,12 +28,20 @@ export default function PanelSection() {
           {Array.from({ length: 5 }).map((_, i) => (
             <div
               key={i}
-              className="flex flex-col p-4 bg-white rounded-lg shadow animate-pulse"
+              className="flex flex-col p-4 bg-white rounded-lg shadow"
             >
               <Skeleton height={16} width={100} className="mb-2" />
               <Skeleton height={24} width={`80%`} />
             </div>
           ))}
+        </div>
+
+        {/* دکمه‌های پایین */}
+        <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <Skeleton height={50} width={150} />
+          <Skeleton height={50} width={150} />
+          <Skeleton height={50} width={150} />
+          <Skeleton height={50} width={150} />
         </div>
       </div>
     );

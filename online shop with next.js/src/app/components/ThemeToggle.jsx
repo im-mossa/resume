@@ -32,9 +32,9 @@ export default function ThemeToggle() {
       aria-label="Toggle theme"
     >
       {theme === "light" ? (
-        <FaMoon className="text-xl" />
+        <FaMoon className="text-l" />
       ) : (
-        <FaSun className="text-xl" />
+        <FaSun className="text-l" />
       )}
     </button>
   );

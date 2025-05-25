@@ -38,7 +38,7 @@ export default function MenuItems() {
       {/* لیست آیتم‌های منو */}
       <ul
         data-testid="menu"
-        className={` fixed top-20 left-0 text-[16px] w-full h-[90vh] flex flex-col justify-center items-center
+        className={`footer-section fixed top-20 left-0 text-[16px] w-full h-[90vh] flex flex-col justify-center items-center
         z-[1] transition-all duration-500 ease-in-out
           ${menuState ? "translate-x-0" : "translate-x-[-100%]"}
           md:static md:translate-x-0 md:w-[60vw] md:flex-row md:h-auto md:bg-transparent md:justify-end`}

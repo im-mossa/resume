@@ -1,4 +1,4 @@
-// import "react-loading-skeleton/dist/skeleton.css";
+import "react-loading-skeleton/dist/skeleton.css";
 import "./globals.css";
 import MenuItems from "./components/MenuItems";
 import FooterSection from "./components/FooterSection";
@@ -19,13 +19,18 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" dir="rtl">
       <head>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        <script
+          src="https://www.google.com/recaptcha/api.js?render=explicit"
+          async
+          defer
+        />
+        {/* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
           integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
           crossOrigin="anonymous" referrerPolicy="no-referrer" />
         <link
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/react-loading-skeleton@3.5.0/dist/skeleton.css"
-        />
+        /> */}
       </head>
       <body className="transition-colors duration-300">
         {/* نوار ناوبری به صورت fixed */}
