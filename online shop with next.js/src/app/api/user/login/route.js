@@ -30,21 +30,21 @@ export async function POST(request) {
   //    فرض می‌کنیم API اصل شما یک endpoint POST روی https://api.example.com/login دارد
 
   try {
-      await login({ username, password }, (data) => {
-        const user = data[0];
-        setCookie("currentUser", JSON.stringify(user), 5);
-        setCookie("token", user.token, 5);
-        Swal.fire({ icon: "success", title: "Welcome!" });
-        router.push("/pages/panel");
-      });
-    } catch {
-      // errors handled by useBaseApi
-    }
-//   const apiRes = await fetch("https://api.example.com/login", {
-//     method: "POST",
-//     headers: { "Content-Type": "application/json" },
-//     body: JSON.stringify({ username, password }),
-//   });
+    await login({ username, password }, (data) => {
+      const user = data[0];
+      setCookie("currentUser", JSON.stringify(user), 5);
+      setCookie("token", user.token, 5);
+      Swal.fire({ icon: "success", title: "Welcome!" });
+      router.push("/pages/panel");
+    });
+  } catch {
+    // errors handled by useBaseApi
+  }
+  //   const apiRes = await fetch("https://api.example.com/login", {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({ username, password }),
+  //   });
 
   // پاسخی که از API اصلی می‌آید را عینا برگردانید
   const apiJson = await apiRes.json();

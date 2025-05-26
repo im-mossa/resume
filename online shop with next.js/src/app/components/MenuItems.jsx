@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FaBars, FaTimes, FaShoppingCart, FaUser } from "react-icons/fa";
 import { checkUser } from "../utils/helpers";
+import useLogoSrc from "../hooks/useLogoSrc";
 
 export default function MenuItems() {
   const [menuState, setMenuState] = useState(false);
@@ -19,6 +20,8 @@ export default function MenuItems() {
     { name: "Blog", path: "/pages/blog" },
     { name: "About us", path: "/pages/aboutUs" },
   ];
+
+  const logoSrc = useLogoSrc();
 
   return (
     <>
@@ -43,6 +46,12 @@ export default function MenuItems() {
           ${menuState ? "translate-x-0" : "translate-x-[-100%]"}
           md:static md:translate-x-0 md:w-[60vw] md:flex-row md:h-auto md:bg-transparent md:justify-end`}
       >
+        <li>
+          <img
+            src={logoSrc}
+            className="absolute left-[30%] top-1/6 md:hidden w-[130px] h-[30px]"
+          />
+        </li>
         {navItems.map((item) => (
           <li
             key={item.path}
