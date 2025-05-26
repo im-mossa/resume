@@ -1,4 +1,4 @@
-// src/components/ShowProduct.jsx
+//app/components/ShowProduct.jsx
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -61,44 +61,44 @@ export default function ShowProductSection() {
   // اسکلتون هنگام لودینگ
   if (loading) {
     return (
-      <main className="max-w-5xl mx-auto px-4 py-8 space-y-8">
-        <div className="flex flex-col md:flex-row gap-8">
-          {/* Skeleton تصویر */}
-          <div className="md:w-1/2">
-            <Skeleton className="w-full h-[300px] md:h-[500px] rounded-lg" />
-          </div>
-          {/* Skeleton جزئیات */}
-          <div className="md:w-1/2 space-y-6">
-            <Skeleton width="55%" height={32} />
-            <Skeleton width="10%" height={24} />
-            <div>
-              {/* <Skeleton width="30%" height={20} /> */}
-              <div className="flex gap-4 mt-2">
-                <Skeleton circle width={32} height={32} />
-                <Skeleton circle width={32} height={32} />
-                <Skeleton circle width={32} height={32} />
-              </div>
+        <main className="max-w-5xl mx-auto px-4 py-8 space-y-8">
+          <div className="flex flex-col md:flex-row gap-8">
+            {/* Skeleton تصویر */}
+            <div className="md:w-1/2">
+              <Skeleton className="w-full h-[300px] md:h-[500px] rounded-lg" />
             </div>
-            <div>
-              <Skeleton width="30%" height={20} />
-              <div className="flex gap-4 mt-2">
-                <Skeleton width={48} height={32} />
-                <Skeleton width={48} height={32} />
-                <Skeleton width={48} height={32} />
-              </div>
-            </div>
-            <div>
+            {/* Skeleton جزئیات */}
+            <div className="md:w-1/2 space-y-6">
+              <Skeleton width="55%" height={32} />
               <Skeleton width="10%" height={24} />
-              <Skeleton width="30%" height={24} />
+              <div>
+                {/* <Skeleton width="30%" height={20} /> */}
+                <div className="flex gap-4 mt-2">
+                  <Skeleton circle width={32} height={32} />
+                  <Skeleton circle width={32} height={32} />
+                  <Skeleton circle width={32} height={32} />
+                </div>
+              </div>
+              <div>
+                <Skeleton width="30%" height={20} />
+                <div className="flex gap-4 mt-2">
+                  <Skeleton width={48} height={32} />
+                  <Skeleton width={48} height={32} />
+                  <Skeleton width={48} height={32} />
+                </div>
+              </div>
+              <div>
+                <Skeleton width="10%" height={24} />
+                <Skeleton width="30%" height={24} />
+              </div>
+              <div>
+                <Skeleton width="20%" height={24} />
+                <Skeleton count={4} />
+              </div>
+              <Skeleton width="50%" height={40} />
             </div>
-            <div>
-              <Skeleton width="20%" height={24} />
-              <Skeleton count={4} />
-            </div>
-            <Skeleton width="50%" height={40} />
           </div>
-        </div>
-      </main>
+        </main>
     );
   }
 
@@ -167,9 +167,7 @@ export default function ShowProductSection() {
           {/* قیمت */}
           <div>
             <h3 className="font-semibold mb-2">Price</h3>
-            <div className="text-2xl font-bold">
-              TL{product.price}
-            </div>
+            <div className="text-2xl font-bold">TL{product.price}</div>
           </div>
 
           {/* توضیحات */}

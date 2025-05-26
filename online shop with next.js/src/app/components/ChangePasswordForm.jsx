@@ -28,14 +28,14 @@ export default function ChangePasswordForm() {
         icon: "error",
         title: "Not Logged In",
         text: "Please log in first.",
-      }).then(() => router.push("/pages/login"));
+      }).then(() => router.push("/login"));
       return;
     }
     try {
       const user = JSON.parse(json);
       setUsername(user.username);
     } catch {
-      router.push("/pages/login");
+      router.push("/login");
     }
   }, [router]);
 
@@ -72,7 +72,7 @@ export default function ChangePasswordForm() {
           icon: "success",
           title: "Success",
           text: "Your password has been changed.",
-        }).then(() => router.push("/pages/login"));
+        }).then(() => router.push("/login"));
       });
     } catch (error) {
       console.error("Change password error:", error);

@@ -1,4 +1,4 @@
-// src/app/pages/editProfile/page.jsx
+// src/app/editProfile/page.jsx
 import React from "react";
 import EditProfileForm from "@/app/components/EditProfileForm";
 

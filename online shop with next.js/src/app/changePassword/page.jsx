@@ -1,12 +1,11 @@
-// src/app/pages/checkOut/page.jsx
-
+// src/app/changePassword/page.jsx
 import React from "react";
-import CheckoutForm from "@/app/components/CheckOutForm";
+import ChangePasswordForm from "@/app/components/ChangePasswordForm";
 
 export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center text-black">
-      <CheckoutForm />
+      <ChangePasswordForm />
     </div>
   );
 }

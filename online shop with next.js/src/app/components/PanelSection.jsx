@@ -72,9 +72,9 @@ export default function PanelSection() {
 
       {/* دکمه‌های پایین */}
       <div className="flex flex-col sm:flex-row justify-center gap-4">
-        <Button href="/pages/editProfile">Edit Profile</Button>
-        <Button href="/pages/invoices">View My Invoices</Button>
-        <Button href="/pages/changePassword">Change Password</Button>
+        <Button href="/editProfile">Edit Profile</Button>
+        <Button href="/invoices">View My Invoices</Button>
+        <Button href="/changePassword">Change Password</Button>
         <Button onClick={logOutSystem}>Log Out</Button>
       </div>
     </div>

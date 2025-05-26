@@ -1,4 +1,4 @@
-// src/pages/InvoicesPage.jsx
+// src/InvoicesPage.jsx
 
 import React from "react";
 import InvoicesSection from "@/app/components/InvoicesSection";

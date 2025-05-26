@@ -34,7 +34,7 @@ export default function LoginForm() {
         setCookie("currentUser", JSON.stringify(user), 5);
         setCookie("token", user.token, 5);
         Swal.fire({ icon: "success", title: "Welcome!" });
-        router.push("/pages/panel");
+        router.push("/panel");
       });
     } catch {
       // errors handled by useBaseApi
@@ -97,7 +97,7 @@ export default function LoginForm() {
           <Button type="submit" disabled={loading}>
             {loading ? "Loading" : "Login"}
           </Button>
-          <Button href="../pages/signUp">Sign up</Button>
+          <Button href="../signUp">Sign up</Button>
         </div>
       </form>
     </div>

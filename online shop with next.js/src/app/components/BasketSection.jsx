@@ -51,7 +51,7 @@ export default function BasketSection() {
     return (
       <section className="p-6 text-center">
         <h2 className="text-2xl font-bold mb-4">Your basket is empty!</h2>
-        <Button href="/pages/products">
+        <Button href="/products">
           Browse Products
         </Button>
       </section>
@@ -172,7 +172,7 @@ export default function BasketSection() {
       </div>
 
       <div className="text-center">
-        <Button href="/pages/checkOut">Proceed To Payment</Button>
+        <Button href="/checkOut">Proceed To Payment</Button>
       </div>
     </section>
   );

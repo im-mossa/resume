@@ -36,7 +36,7 @@ export default function EditProfileForm() {
         icon: "error",
         title: "Not logged in",
         text: "Please login first.",
-      }).then(() => router.push("/pages/login"));
+      }).then(() => router.push("/login"));
       return;
     }
     try {
@@ -50,7 +50,7 @@ export default function EditProfileForm() {
         address: u.address,
       });
     } catch {
-      router.push("/pages/login");
+      router.push("/login");
     }
   }, [router]);
 
@@ -96,7 +96,7 @@ export default function EditProfileForm() {
         setCookie("currentUser", JSON.stringify(updated), 5);
         setCookie("token", updated.token, 5);
         Swal.fire({ icon: "success", title: "Profile Updated!" }).then(() =>
-          router.push("/pages/login")
+          router.push("/login")
         );
       });
     } catch (err) {

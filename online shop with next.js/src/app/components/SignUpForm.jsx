@@ -48,7 +48,7 @@ export default function SignUpForm() {
         setCookie("currentUser", JSON.stringify(user), 5);
         setCookie("token", user.token, 5);
         Swal.fire({ icon: "success", title: "Welcome!" });
-        router.push("/pages/login");
+        router.push("/login");
       });
     } catch {
       // errors handled by useBaseApi

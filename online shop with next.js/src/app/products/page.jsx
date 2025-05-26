@@ -1,6 +1,5 @@
 "use client";
-
-import React from "react";
+import React, { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import CategorySection from "@/app/components/CategorySection";
 import ProductSection from "@/app/components/ProductSection";
@@ -17,16 +16,16 @@ export default function ProductsPage() {
   const catName = searchParams.get("catName") || "";
 
   return (
-    <div className="py-2">
-      {/* دسته‌بندی‌ها */}
-      <CategorySection />
+    <Suspense
+      fallback={<div className="py-20 text-center">Loading product...</div>}
+    >
+      <div className="py-2">
+        {/* دسته‌بندی‌ها */}
+        <CategorySection />
 
-      {/* محصولات بر اساس نوع یا دسته */}
-      <ProductSection
-        type={type}
-        catId={catId}
-        catName={catName}
-      />
-    </div>
+        {/* محصولات بر اساس نوع یا دسته */}
+        <ProductSection type={type} catId={catId} catName={catName} />
+      </div>
+    </Suspense>
   );
 }

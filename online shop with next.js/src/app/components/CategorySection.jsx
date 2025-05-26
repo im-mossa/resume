@@ -58,7 +58,7 @@ export default function CategorySection() {
               id={cat.id}
               title={cat.title}
               image={cat.image}
-              href={`/pages/products?type=Category&catId=${
+              href={`/products?type=Category&catId=${
                 cat.id
               }&catName=${encodeURIComponent(cat.title)}`}
             />

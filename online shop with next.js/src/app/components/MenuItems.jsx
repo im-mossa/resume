@@ -16,9 +16,9 @@ export default function MenuItems() {
 
   const navItems = [
     { name: "Home", path: "/" },
-    { name: "Products", path: "/pages/products" },
-    { name: "Blog", path: "/pages/blog" },
-    { name: "About us", path: "/pages/aboutUs" },
+    { name: "Products", path: "/products" },
+    { name: "Blog", path: "/blog" },
+    { name: "About us", path: "/aboutUs" },
   ];
 
   const logoSrc = useLogoSrc();
@@ -69,7 +69,7 @@ export default function MenuItems() {
 
       <ul>
         <li>
-          <Link href="/pages/basket">
+          <Link href="/basket">
             <FaShoppingCart className="text-[18px] absolute right-[30px] top-1/3 hover:scale-125 transition-transform" />
           </Link>
         </li>

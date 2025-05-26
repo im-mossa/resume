@@ -62,11 +62,11 @@ export function showButton() {
  */
 export function checkUser() {
   const user = getCookie('currentUser');
-  window.location.href = user ? '/pages/panel' : '/pages/login';
+  window.location.href = user ? '/panel' : '/login';
 }
 
 export function logOutSystem() {
   deleteCookie('currentUser');
   deleteCookie('token');
-  window.location.href = '/pages/login';
+  window.location.href = '/login';
 }
