@@ -23,13 +23,22 @@ export function setCookie(cname, cvalue, exdays) {
 }
 
 export function getCookie(cname) {
+  if (typeof document === "undefined") {
+    // در زمان SSR (سرور) document وجود ندارد
+    return "";
+  }
+
   const name = `${cname}=`;
-  const ca = decodeURIComponent(document.cookie).split(';');
+  const decodedCookie = decodeURIComponent(document.cookie);
+  const ca = decodedCookie.split(";");
+
   for (let c of ca) {
     c = c.trim();
-    if (c.indexOf(name) === 0) return c.substring(name.length);
+    if (c.indexOf(name) === 0) {
+      return c.substring(name.length);
+    }
   }
-  return '';
+  return "";
 }
 
 export function deleteCookie(cname) {
@@ -45,7 +54,7 @@ export function showLoading() {
     timer: 2000,
     timerProgressBar: true,
     didOpen: () => Swal.showLoading(),
-  }).then(() => {});
+  }).then(() => { });
   document.querySelectorAll('.action-btn, .action-btn2').forEach(btn => btn && (btn.style.display = 'none'));
   const wait = document.querySelector('.please-wait');
   if (wait) wait.style.display = 'block';

@@ -54,7 +54,7 @@ export default function Slideshow() {
         className="w-full h-full object-cover"
       />
       <div className="absolute top-0 left-0 bg-white/70 backdrop-blur-sm rounded-br-2xl p-4 flex flex-col justify-start items-start z-20 w-[10em] h-[6em]">
-        <Link href={`/showSlider?id=${id}`}>
+        <Link href={`/showSlider/${id}`}>
           <h2 className="text-[1em] font-bold text-black">{title}</h2>
           <p className="mt-2 text-[1em] text-black">{subTitle}</p>
         </Link>

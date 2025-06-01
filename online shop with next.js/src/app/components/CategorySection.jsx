@@ -1,10 +1,11 @@
-// src/components/CategorySection.jsx
+// src/app/components/CategorySection.jsx
 "use client";
 
 import React, { useEffect, useState } from "react";
 import useCategoryApi from "../api/categoryApi";
 import ItemSection from "./ItemSection";
 import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 export default function CategorySection() {
   const { getAllCategories } = useCategoryApi();
@@ -14,8 +15,8 @@ export default function CategorySection() {
     getAllCategories((data) => setCategories(Array.isArray(data) ? data : []));
   }, [getAllCategories]);
 
+  // loading skeleton: اگر هنوز categories خالی است
   if (!categories.length) {
-    // نشان دادن 5 کارت اسکلتون
     return (
       <section>
         <h2 className="pt-4 text-center text-2xl font-semibold">
@@ -28,12 +29,22 @@ export default function CategorySection() {
               .map((_, idx) => (
                 <div
                   key={idx}
-                  className="flex-shrink-0 w-[160px] sm:w-[180px] md:w-[205px] h-[250px] relative overflow-hidden
-        rounded-[15px] shadow-[1px_1px_5px_0_#bbb]
-        transition-all duration-300 ease-in-out
-        hover:shadow-[1px_1px_5px_0_#000] hover:scale-[1.03]"
+                  className="
+                    flex-shrink-0 w-[160px] sm:w-[180px] md:w-[205px] h-[250px]
+                    relative overflow-hidden rounded-[15px]
+                    shadow-[1px_1px_5px_0_#bbb]
+                    transition-all duration-300 ease-in-out
+                    hover:shadow-[1px_1px_5px_0_#000] hover:scale-[1.03]
+                  "
                 >
-                  <Skeleton className="w-full h-[200px] object-cover" containerClassName="block leading-none align-top" style={{ borderBottomLeftRadius: 0, borderBottomRightRadius: 0 }} />
+                  <Skeleton
+                    className="w-full h-[200px] object-cover"
+                    containerClassName="block leading-none align-top"
+                    style={{
+                      borderBottomLeftRadius: 0,
+                      borderBottomRightRadius: 0,
+                    }}
+                  />
                   <div className="px-2 py-2 text-center h-full footer-section">
                     <Skeleton width="80%" height={20} />
                   </div>
@@ -58,9 +69,11 @@ export default function CategorySection() {
               id={cat.id}
               title={cat.title}
               image={cat.image}
-              href={`/products?type=Category&catId=${
-                cat.id
-              }&catName=${encodeURIComponent(cat.title)}`}
+              // لینک جدید داینامیک:
+              //  /products/Category/[cat.id]/[cat.title]
+              href={`/products/Category/${cat.id}/${encodeURIComponent(
+                cat.title
+              )}`}
             />
           ))}
         </div>

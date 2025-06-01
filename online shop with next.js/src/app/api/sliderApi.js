@@ -6,7 +6,6 @@ export default function useSliderApi() {
 
   const getAll = (onSuccess) => {
     getData("slider", onSuccess);
-    console.log(onSuccess);
   };
 
   const getById = (id, onSuccess) => {

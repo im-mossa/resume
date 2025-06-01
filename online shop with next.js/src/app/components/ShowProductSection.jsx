@@ -2,16 +2,14 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
 import { useProductApi } from "@/app/hooks/useProductApi";
 import BasketDB from "@/app/db/BasketDB";
 import Swal from "sweetalert2";
 import Button from "@/app/components/ui/Button";
 import Skeleton from "react-loading-skeleton";
 
-export default function ShowProductSection() {
-  const params = useSearchParams();
-  const productId = params.get("id");
+export default function ShowProductSection({ slideId }) {
+  const productId = slideId;
   const { getById } = useProductApi();
 
   const [product, setProduct] = useState(null);

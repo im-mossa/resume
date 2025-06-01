@@ -1,14 +1,12 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
 import { useBlogApi } from "@/app/hooks/useBlogApi";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-export default function ShowBlogSection() {
-  const searchParams = useSearchParams();
-  const blogId = searchParams.get("id");
+export default function ShowBlogSection({ slideId }) {
+  const blogId = slideId;
 
   const { getPostById } = useBlogApi();
   const [blog, setBlog] = useState(null);

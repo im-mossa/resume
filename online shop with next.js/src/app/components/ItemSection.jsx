@@ -12,7 +12,7 @@ import Link from "next/link";
  */
 export default function ItemSection({ id, title, image, href }) {
   // اگر prop.href پاس نشده، پیش‌فرض به ShowProduct با کوئری id برو
-  const link = href ?? `/showProduct?id=${id}`;
+  const link = href ?? `/showProduct/${id}`;
 
   return (
     <div

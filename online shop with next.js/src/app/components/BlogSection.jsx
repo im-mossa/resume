@@ -52,7 +52,7 @@ export default function BlogSection() {
                 id={id}
                 title={title}
                 image={image}
-                href={`/showBlog?id=${id}`} // مسیر داخلی به صفحه بلاگ
+                href={`/showBlog/${id}`} // مسیر داخلی به صفحه بلاگ
               />
             ))}
           </div>
