@@ -1,86 +1,127 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
-// ——— ۱. بارگذاری تصاویر با TextureLoader ———
-const loader = new THREE.TextureLoader();
-Promise.all([0,1,2].map(i =>
-  new Promise(resolve => {
-    loader.load(`./src/asset/Texture${i}.png`, tex => resolve(tex.image));
-  })
-)).then(images => {
-  // ——— ۲. ساخت یک کانواس به عرض مجموع تصاویر و ارتفاع اولینشان ———
+// ——— ۱. بارگذاری تصاویر RAW ———
+function loadImage(path) {
+  return new Promise((res, rej) => {
+    const img = new Image();
+    img.src = path;
+    img.onload = () => res(img);
+    img.onerror = err => rej(err);
+  });
+}
+
+// ——— ۲. کمک برای ساخت یک Texture Atlas از یک آرایه Image ———
+function makeAtlas(images) {
   const w = images[0].width;
   const h = images[0].height;
   const canvas = document.createElement('canvas');
-  canvas.width  = w * images.length;
+  canvas.width = w * images.length;
   canvas.height = h;
   const ctx = canvas.getContext('2d');
-  
-  // هر تصویر را کنار هم می‌کشیم
-  images.forEach((img, i) => {
-    ctx.drawImage(img, i * w, 0, w, h);
-  });
-  
-  // ——— ۳. ساخت CanvasTexture و تنظیم فیلترها ———
-  const atlasTexture = new THREE.CanvasTexture(canvas);
-  atlasTexture.magFilter = THREE.NearestFilter;
-  atlasTexture.minFilter = THREE.NearestFilter;
-  atlasTexture.wrapS = THREE.ClampToEdgeWrapping;
-  atlasTexture.wrapT = THREE.ClampToEdgeWrapping;
-  
-  initScene(atlasTexture, images.length);
-});
+  images.forEach((img, i) => ctx.drawImage(img, i * w, 0, w, h));
+  const tex = new THREE.CanvasTexture(canvas);
+  tex.magFilter = THREE.NearestFilter;
+  tex.minFilter = THREE.NearestFilter;
+  tex.wrapS = THREE.ClampToEdgeWrapping;
+  tex.wrapT = THREE.ClampToEdgeWrapping;
+  return tex;
+}
 
-function initScene(atlas, tiles) {
-    // ——— Renderer ———
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
-
-    // ——— Scene & Camera ———
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x202020);
-    const camera = new THREE.PerspectiveCamera(
-        50, innerWidth / innerHeight, 0.1, 1000
+// ——— ۳. بارگذاری و آماده‌سازی اطلس‌ها ———
+async function prepareAtlases() {
+  const channels = ['Color', 'NormalGL', 'AmbientOcclusion', 'Roughness'];
+  const count = 3; // تعداد مجموعه‌ها: 0،1،2
+  // بارگذاری همه‌ی تصاویر
+  const images = {};
+  for (let ch of channels) {
+    images[ch] = await Promise.all(
+      Array.from({ length: count }, (_, i) =>
+        loadImage(`./src/asset/Texture${i}_${ch}.png`)
+      )
     );
-    camera.position.set(0, 2, 5);
+  }
+  // ساخت اطلس برای هر کانال
+  const atlases = {};
+  for (let ch of channels) {
+    atlases[ch] = makeAtlas(images[ch]);
+  }
+  return { atlases, count };
+}
 
-    // ——— Controls ———
-    new OrbitControls(camera, renderer.domElement);
+// ——— ۴. اجرا وقتی اطلس‌ها آماده شدند ———
+prepareAtlases().then(({ atlases, count }) => {
+  initScene(atlases, count);
+}).catch(err => console.error(err));
 
-    // ——— Light ———
-    scene.add(new THREE.AmbientLight(0xffffff, 0.5));
-    const dl = new THREE.DirectionalLight(0xffffff, 1);
-    dl.position.set(5, 5, 5);
-    scene.add(dl);
+// ——— ۵. ساخت صحنه با اطلس‌ها و meshهای مختلف ———
+function initScene(atlases, count) {
+  // Renderer + DOM
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(innerWidth, innerHeight);
+  document.body.appendChild(renderer.domElement);
 
-    // ——— محاسبه UV هر سلول ———
-    const cols = tiles, rows = 1;
-    const cellU = 1 / cols, cellV = 1 / rows;
+  // Scene & Camera
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x202020);
+  const camera = new THREE.PerspectiveCamera(50, innerWidth / innerHeight, 0.1, 1000);
+  camera.position.set(0, 2, 6);
+  const controls = new OrbitControls(camera, renderer.domElement);
 
-    // ——— ایجاد چند Sprite با UV متفاوت ———
-    for (let i = 0; i < tiles; i++) {
-        const mat = new THREE.SpriteMaterial({
-            map: atlas,
-            uvOffset: new THREE.Vector2(i * cellU, 1 - cellV),
-            uvRepeat: new THREE.Vector2(cellU, cellV)
-        });
-        const sprite = new THREE.Sprite(mat);
-        sprite.position.set((i - (tiles - 1) / 2) * 1.5, 0, 0);
-        scene.add(sprite);
-    }
+  // Light
+  scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+  const dl = new THREE.DirectionalLight(0xffffff, 1);
+  dl.position.set(5, 5, 5);
+  scene.add(dl);
 
-    // ——— حلقهٔ رندر ———
-    (function animate() {
-        requestAnimationFrame(animate);
-        renderer.render(scene, camera);
-    })();
+  // هندسه پایه
+  const geom = new THREE.BoxGeometry(1, 1, 1);
+  geom.setAttribute('uv2', geom.attributes.uv); // برای aoMap
 
-    // ——— واکنش به ریسایز ———
-    window.addEventListener('resize', () => {
-        const w = innerWidth, h = innerHeight;
-        camera.aspect = w / h;
-        camera.updateProjectionMatrix();
-        renderer.setSize(w, h);
+  // اندازه هر سلول در UV atlas
+  const uStep = 1 / count;
+
+  // برای هر index یک mesh جدا با material جدا می‌سازیم
+  for (let i = 0; i < count; i++) {
+    // کلون کردن هر تکسچر تا offset/repeat منحصر به آن mesh باشد
+    const mapClone = atlases.Color.clone();
+    const normalClone = atlases.NormalGL.clone();
+    const aoClone = atlases.AmbientOcclusion.clone();
+    const roughnessClone = atlases.Roughness.clone();
+
+    // تنظیم UV
+    [mapClone, normalClone, aoClone, roughnessClone].forEach(tex => {
+      tex.repeat.set(uStep, 1);
+      tex.offset.set(uStep * i, 0);
     });
+
+    // material جدید برای هر mesh
+    const mat = new THREE.MeshStandardMaterial({
+      map: mapClone,
+      normalMap: normalClone,
+      aoMap: aoClone,
+      roughnessMap: roughnessClone,
+      aoMapIntensity: 1
+    });
+
+    const mesh = new THREE.Mesh(geom, mat);
+    mesh.position.x = (i - (count - 1) / 2) * 1.8;
+    scene.add(mesh);
+  }
+
+  // انیمیشن و رندر
+  function animate() {
+    requestAnimationFrame(animate);
+    controls.update();
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  // resize handling
+  window.addEventListener('resize', () => {
+    const w = innerWidth, h = innerHeight;
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+    renderer.setSize(w, h);
+  });
 }
