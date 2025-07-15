@@ -6,99 +6,86 @@ const renderer = new THREE.WebGLRenderer({ antialias: true, canvas });
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setScissorTest(true);
 
-// ایجاد صحنه ها
-const scene1 = new THREE.Scene();
-scene1.background = new THREE.Color(0xff0000);
-const scene2 = new THREE.Scene();
-scene2.background = new THREE.Color(0x00aa00);
-const scene3 = new THREE.Scene();
-scene3.background = new THREE.Color(0x0000ff);
-// ایجاد دوربین ها
-const camera1 = new THREE.PerspectiveCamera(75, canvas.width /
-    canvas.height, 0.1, 1000);
-const camera2 = new THREE.PerspectiveCamera(75, canvas.width /
-    canvas.height, 0.1, 1000);
-const camera3 = new THREE.PerspectiveCamera(75, canvas.width /
-    canvas.height, 0.1, 1000);
-// تنظیم موقعیت دوربین ها
-camera1.position.z = 5;
-camera2.position.x = 5;
-camera2.lookAt(0, 0, 0);
-camera3.position.y = 5;
-camera3.lookAt(0, 0, 0);
+// یک صحنه واحد
+const scene = new THREE.Scene();
 
-// ——— Light1 ———
-const al1 = new THREE.AmbientLight(0xffffff, 0.5);
-const dl1 = new THREE.DirectionalLight(0xffffff, 1);
-dl1.position.set(5, 5, 5);
-scene1.add(dl1, al1);
-// ——— Light2 ———
-const al2 = new THREE.AmbientLight(0xffffff, 0.5);
-const dl2 = new THREE.DirectionalLight(0xffffff, 1);
-dl2.position.set(5, 5, 5);
-scene2.add(dl2, al2);
-// ——— Light3 ———
-const al3 = new THREE.AmbientLight(0xffffff, 0.5);
-const dl3 = new THREE.DirectionalLight(0xffffff, 1);
-dl3.position.set(5, 5, 5);
-scene3.add(dl3, al3);
+// سه دوربین
+const camera1 = new THREE.PerspectiveCamera(75, 1 / 1, 0.1, 1000);
+const camera2 = new THREE.PerspectiveCamera(75, 1 / 1, 0.1, 1000);
+const camera3 = new THREE.PerspectiveCamera(75, 1 / 1, 0.1, 1000);
+camera1.position.set(0, 0, 5);
+camera2.position.set(5, 0, 0); camera2.lookAt(0, 0, 0);
+camera3.position.set(0, 5, 0); camera3.lookAt(0, 0, 0);
 
+// هندسه‌ها و یک متریال مشترک
+const geoA = new THREE.ConeGeometry(1, 2, 32);
+const geoB = new THREE.IcosahedronGeometry(1.5, 0);
+const geoC = new THREE.TorusKnotGeometry(1, 0.4);
+const mat = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
 
-// ۱) هندسه‌ها و متریال
-const geoA = new THREE.ConeGeometry(1,2,32);
-const geoB = new THREE.IcosahedronGeometry(1.5,0);
-const geoC = new THREE.TorusKnotGeometry(1,0.4);
-const material = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
+// سه Mesh
+const meshA = new THREE.Mesh(geoA, mat);
+const meshB = new THREE.Mesh(geoB, mat);
+const meshC = new THREE.Mesh(geoC, mat);
 
-// ۲) سه Mesh جدا
-const meshA = new THREE.Mesh(geoA, material);
-const meshB = new THREE.Mesh(geoB, material);
-const meshC = new THREE.Mesh(geoC, material);
+// قرار دادن هر Mesh در یک لایه‌ی منحصربه‌فرد
+meshA.layers.set(0);
+meshB.layers.set(1);
+meshC.layers.set(2);
 
-// ۳) افزودن به صحنه‌ها
-scene1.add(meshA);
-scene2.add(meshB);
-scene3.add(meshC);
+// اضافه کردن به یک صحنه
+scene.add(meshA, meshB, meshC);
+
+// بعد از ساخت AmbientLight و DirectionalLight
+const al = new THREE.AmbientLight(0xffffff, 0.5);
+const dl = new THREE.DirectionalLight(0xffffff, 1);
+
+// می‌خواهیم این نورها روی لایه‌های 0,1,2 تأثیرگذار باشند:
+for (let layer = 0; layer < 3; layer++) {
+  al.layers.enable(layer);
+  dl.layers.enable(layer);
+}
+
+scene.add(al, dl);
+
+const bgColors = [0xff0000, 0xd6d61e, 0x0000ff];
+const cameras = [camera1, camera2, camera3];
 
 function animate() {
     requestAnimationFrame(animate);
-    // چرخاندن مکعب ها
-    meshA.rotation.x += 0.01;
-    meshA.rotation.y += 0.01;
-    meshB.rotation.x += 0.01;
-    meshB.rotation.y += 0.01;
-    meshC.rotation.x += 0.01;
-    meshC.rotation.y += 0.01;
-    // رندر کردن صحنه ها با دوربین های مختلف
+
+    // بچرخون همه
+    meshA.rotation.x += 0.01; meshA.rotation.y += 0.01;
+    meshB.rotation.x += 0.01; meshB.rotation.y += 0.01;
+    meshC.rotation.x += 0.01; meshC.rotation.y += 0.01;
+
     const w = window.innerWidth;
     const h = window.innerHeight;
     const thirdW = Math.floor(w / 3);
 
-    // صحنه اول در سوم سمت چپ
-    renderer.setViewport(0, 0, thirdW, h);
-    renderer.setScissor(0, 0, thirdW, h);
-    renderer.render(scene1, camera1);
+    for (let i = 0; i < 3; i++) {
+        // انتخاب دوربین و لایه
+        const cam = cameras[i];
+        cam.layers.set(i);
 
-    // صحنه دوم در وسط
-    renderer.setViewport(thirdW, 0, thirdW, h);
-    renderer.setScissor(thirdW, 0, thirdW, h);
-    renderer.render(scene2, camera2);
+        // تنظیم viewport و scissor برای هر بخش
+        const x = thirdW * i;
+        renderer.setViewport(x, 0, thirdW, h);
+        renderer.setScissor(x, 0, thirdW, h);
 
-    // صحنه سوم در سمت راست
-    renderer.setViewport(2 * thirdW, 0, thirdW, h);
-    renderer.setScissor(2 * thirdW, 0, thirdW, h);
-    renderer.render(scene3, camera3);
+        // پاک کردن همان بخش با رنگ بک‌گراند خودش
+        renderer.setClearColor(bgColors[i]);
+        renderer.clear( /* color */ true, /* depth */ false);
+
+        // رندر صحنه‌ی واحد ولی با دوربین فعلی
+        renderer.render(scene, cam);
+    }
 }
-// شروع انیمیشن
+
 animate();
 
-// ——— Resize Handler ———
+
+// Resize handler
 window.addEventListener('resize', () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
-    camera1.aspect = window.innerWidth / window.innerHeight;
-    camera1.updateProjectionMatrix();
-    camera2.aspect = window.innerWidth / window.innerHeight;
-    camera2.updateProjectionMatrix();
-    camera3.aspect = window.innerWidth / window.innerHeight;
-    camera3.updateProjectionMatrix();
 });

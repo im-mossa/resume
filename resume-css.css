@@ -153,6 +153,10 @@ i.fa {
     margin: 18px 0;
 }
 
+#ul>li {
+    margin-left: 20px;
+}
+
 .label {
     background-color: #bb86fc;
     border-radius: 5px;
