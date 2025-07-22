@@ -27,9 +27,9 @@ export type Shape =
 
 // اینترفیس هم مانند تایپ است ولی فقط برای تعریف تایپ آبجکت کاربرد دارد
 export interface Car {
-    brand: string,
-    model: string
-    year: number
+    brand: string;
+    model: string;
+    year: number;
 };
 
 export interface CompleteCar extends Car {type: string};

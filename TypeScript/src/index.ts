@@ -97,7 +97,7 @@ let z: null = null;
 // مودیفایر readonly برای آرایه هایی است که فقط خوانده می شوند و نمی توان آن ها را تغییر داد
 // وقتی تایپ آرایه را استرینگ تعیین می کنیم یعنی همه ی آیتم ها باید استرینگ باشند
 const listOfName: readonly string[] = ['dylan'];
-// تعیین تایپ آرایه در بالا به صورت ریح یا اکسپلیست می باشد
+// تعیین تایپ آرایه در بالا به صورت صریح یا اکسپلیست می باشد
 // در پایین تعیین نوع آرایه به صورت ضمنی یا ایمپلیست انجام می شود
 const listOfNum = [1, 2];
 // تعریف آرایه به صورت تاپل یا چند تایی tuple array
@@ -239,7 +239,7 @@ class RectangleArea implements Rectangle {
 const rect = new RectangleArea(5, 4);
 console.log(rect.getArea());
 class SquareArea extends RectangleArea {
-    public constructor(width: number){
+    public constructor(width: number) {
         super(width, width);
     }
     public override toString(): string {
@@ -265,3 +265,224 @@ class Triangle extends Polygon {
 }
 const trl = new Triangle(10, 5);
 console.log(`Triangle Area is ${trl.getArea()}`);
+// TypeScript Basic Generics
+function createPair<T, S>(v1: T, v2: S): [T, S] {
+    return [v1, v2];
+}
+console.log(createPair<number, number>(10, 12));
+class NamedValue<T> {
+    private _value: T | undefined;
+    constructor(private name: string) { }
+    /**
+     * setValue
+     */
+    public setValue(value: T) {
+        this._value = value;
+    }
+    public toString(): string {
+        return `${this.name}: ${this._value}.`;
+    }
+}
+let signValue = new NamedValue<number>("salar");
+signValue.setValue(20);
+console.log(signValue.toString());
+// Default Value
+type wrapper<T, S = string> = { value: T, name: S };
+let wrapp: wrapper<number, string> = { value: 12, name: 'samira' };
+console.log(wrapp);
+let wrapp1: wrapper<string> = { value: 'one', name: 'samira' };
+console.log(wrapp1);
+// extends
+let fullNameAndSurname = <T extends string | number, S extends string | number>(f: T, l: S) => {
+    return `hi this is ${f} ${l}`;
+}
+console.log(fullNameAndSurname('saeed', 'saeedyan'));
+// TypeScript Utility Types
+interface Point0 {
+    a: number;
+    b: number;
+}
+//Partial تمام پراپرتی ها را به حالت اختیاری تغییر می دهد
+let point0: Partial<Point0> = {}
+point0.b = 12;
+console.log(point0);
+interface Point1 {
+    a?: number;
+    b?: number;
+}
+// Required تمام پراپرتی ها را به حالت ضروری تغییر می دهد
+let point1: Required<Point1> = { a: 10, b: 12 }
+console.log(point1);
+// Record یک شرت کات برای تعریف تایپ یک آبجکت با مشخص کردن تایپ کلید و تایپ مقدار
+// Record<string, number> is equivalent to { [key: string]: number }
+let point2: Record<string, number> = {
+    'saeed': 29,
+    'mana': 14
+}
+console.log(point2);
+interface Person01 {
+    name: string;
+    age: number;
+    location?: string;
+}
+// Omit حذف  کلید هایی از تایپ آبجکت
+const omid: Omit<Person01, 'age' | 'location'> = { name: 'omid' };
+console.log(omid);
+interface Person02 {
+    name: string;
+    age: number;
+    location?: string;
+}
+// Pick یک کلید از تایپ آبجکت را انتخاب می کند و مابقی را حذف می کند
+const sina: Pick<Person02, 'name'> = { name: 'sina' };
+console.log(sina);
+type Primitive = string | number | boolean;
+// Exclude تایپ مشخص شده از یونیون های متغیر حذف می شود
+const primitivePrint: Exclude<Primitive, 'string'> = true;
+console.log(primitivePrint);
+interface OnlyR {
+    name01: string;
+    age: number;
+}
+// Readonly بعد از مقداردهی قابل تغییر نیست و فقط خوانده می شود
+const onlyR: Readonly<OnlyR> = {
+    name01: 'sasan',
+    age: 55,
+}
+console.log(onlyR);
+type PointPrinter = (p: { a: number, b: number }) => void;
+// Parameters تایپ ورودی های یک تابع را به صورت یک آرایه ی تاپل ذخیره می کند
+const printer: Parameters<PointPrinter>[0] = {
+    a: 5,
+    b: 10
+}
+console.log(printer);
+function great01(name: string, age: number): void {
+    console.log(`your name is ${name} and you'r ${age} years old.`);
+}
+type greatType = Parameters<typeof great01>;
+function great02(...arg: greatType) {
+    return `your name is ${arg[0]} and you'r ${arg[1]} years old.`;
+}
+console.log(great02('shahin', 12));
+function sumAll(a: number, b: number): number {
+    return a * b;
+}
+// ReturnType تایپ خروجی یک تابع را می گیرد
+type sumPlus = ReturnType<typeof sumAll>;
+function sumPrint(a: sumPlus): void {
+    console.log(a);
+}
+sumPrint(45);
+// TypeScript Keyof
+interface FamilyScale {
+    father: string;
+    mother: string;
+    brother: string;
+    mySelf: string;
+}
+let family = {
+    father: 'javad',
+    mother: 'mahvash',
+    brother: 'mohammad',
+    mySelf: 'saeed'
+}
+function printFamilyProperty(item: FamilyScale, itemKey: keyof FamilyScale) {
+    console.log(`Printing person property ${itemKey}: "${item[itemKey]}"`);
+}
+printFamilyProperty(family, 'mother');
+interface Family01 {
+    [key: string]: unknown
+}
+function setFamily(key: keyof Family01, value: string): Family01 {
+    return { [key]: value }
+}
+console.log(setFamily("brother", "mardin"));
+// Optional Chaining
+interface Family02 {
+    father: string;
+    doughter?: {
+        name: string;
+        son?: string;
+    }
+}
+function setFamily01(family: Family02) {
+    let { father, doughter } = family
+    let grandSon: string | undefined = doughter?.son
+    if (grandSon !== undefined) {
+        console.log(`${father} have a grand son, his name is ${grandSon}.`);
+    } else {
+        console.log(`you don't have grand son.`);
+    }
+}
+let family1: Family02 = {
+    father: 'mohammad',
+    doughter: {
+        name: 'mahvash',
+        son: undefined
+    }
+}
+setFamily01(family1);
+// Nullish Coalescence
+function printMileage(value: number | null | undefined): void {
+    console.log(`Mileage your car is ${value ?? 'not available'}`);
+}
+printMileage(null);
+// Null Assertion
+function getLength(item: string | undefined) {
+    return item!.length;
+}
+console.log(getLength('hello'));
+// Array bounds handling
+// برخلاف زبان های دیگر در تی اس و جی اس دسترسی به ایندکس خارج از محدوده آرایه خطا نمی دهد و مقدار آندیفایند می دهد
+// برای رفع این مشکل از کاندیشن یا آپشنال چینینگ استفاده می کنیم
+let arr2: string[] = ['saeed', 'mohammad'];
+// در خط پایین باید خطا بدهد ولی بدلیل استفاده از اوپراتور آندیفایند را برمی گرداند
+console.log(arr2[3]?.toUpperCase());
+
+function checkArr(item: string | undefined): void {
+    if (item !== undefined) {
+        console.log(item);
+    } else {
+        console.log('your index is out of bounds!');
+    }
+}
+checkArr(arr2[3]);
+// Template Literal Types 
+type ColorHexMap = {
+    blue: '0000ff';
+    white: 'ffffff';
+    black: '000000';
+}
+type ColorHex<T extends keyof ColorHexMap> = `#${ColorHexMap[T]}`;
+type ColorLabel<T extends keyof ColorHexMap> = `main - ${T} - ${ColorHex<T>}`;
+let blue: ColorLabel<'black'> = "main - black - #000000";
+console.log(blue);
+// use infer
+type ExtractHex<T> = T extends `main - ${string} - #${infer S}` ? S : never;
+let extractBlue: ExtractHex<"main - black - #000000"> = "000000";
+console.log(extractBlue);
+//Index Signature Labels
+type listOfUser = {
+    name: string;  //کلید مشخص
+    [key: string]: string;  //Index Signature Labels
+} & {
+    [K in `dynamic_${string}`]: string;  //Mapped Types
+};
+let classA: listOfUser = {
+    name: "morad",
+    age: '20',
+    dynamic_grade: "14"
+}
+console.log(classA);
+//Mapped Types
+type EventNames = 'click' | 'hover' | 'scroll';
+type EventHandlers = {
+    readonly [k in EventNames as `on${Capitalize<k>}`]: string;
+}
+let event: EventHandlers = {
+    onClick: 'clicked',
+    onHover: 'hovered',
+    onScroll: 'scrolled'
+}
+console.log(event);

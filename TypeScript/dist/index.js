@@ -94,7 +94,7 @@ let z = null;
 // مودیفایر readonly برای آرایه هایی است که فقط خوانده می شوند و نمی توان آن ها را تغییر داد
 // وقتی تایپ آرایه را استرینگ تعیین می کنیم یعنی همه ی آیتم ها باید استرینگ باشند
 const listOfName = ['dylan'];
-// تعیین تایپ آرایه در بالا به صورت ریح یا اکسپلیست می باشد
+// تعیین تایپ آرایه در بالا به صورت صریح یا اکسپلیست می باشد
 // در پایین تعیین نوع آرایه به صورت ضمنی یا ایمپلیست انجام می شود
 const listOfNum = [1, 2];
 // تعریف آرایه به صورت تاپل یا چند تایی tuple array
@@ -273,3 +273,156 @@ class Triangle extends Polygon {
 }
 const trl = new Triangle(10, 5);
 console.log(`Triangle Area is ${trl.getArea()}`);
+// TypeScript Basic Generics
+function createPair(v1, v2) {
+    return [v1, v2];
+}
+console.log(createPair(10, 12));
+class NamedValue {
+    constructor(name) {
+        this.name = name;
+    }
+    /**
+     * setValue
+     */
+    setValue(value) {
+        this._value = value;
+    }
+    toString() {
+        return `${this.name}: ${this._value}.`;
+    }
+}
+let signValue = new NamedValue("salar");
+signValue.setValue(20);
+console.log(signValue.toString());
+let wrapp = { value: 12, name: 'samira' };
+console.log(wrapp);
+let wrapp1 = { value: 'one', name: 'samira' };
+console.log(wrapp1);
+// extends
+let fullNameAndSurname = (f, l) => {
+    return `hi this is ${f} ${l}`;
+};
+console.log(fullNameAndSurname('saeed', 'saeedyan'));
+//Partial تمام پراپرتی ها را به حالت اختیاری تغییر می دهد
+let point0 = {};
+point0.b = 12;
+console.log(point0);
+// Required تمام پراپرتی ها را به حالت ضروری تغییر می دهد
+let point1 = { a: 10, b: 12 };
+console.log(point1);
+// Record یک شرت کات برای تعریف تایپ یک آبجکت با مشخص کردن تایپ کلید و تایپ مقدار
+// Record<string, number> is equivalent to { [key: string]: number }
+let point2 = {
+    'saeed': 29,
+    'mana': 14
+};
+console.log(point2);
+// Omit حذف  کلید هایی از تایپ آبجکت
+const omid = { name: 'omid' };
+console.log(omid);
+// Pick یک کلید از تایپ آبجکت را انتخاب می کند و مابقی را حذف می کند
+const sina = { name: 'sina' };
+console.log(sina);
+// Exclude تایپ مشخص شده از یونیون های متغیر حذف می شود
+const primitivePrint = true;
+console.log(primitivePrint);
+// Readonly بعد از مقداردهی قابل تغییر نیست و فقط خوانده می شود
+const onlyR = {
+    name01: 'sasan',
+    age: 55,
+};
+console.log(onlyR);
+// Parameters تایپ ورودی های یک تابع را به صورت یک آرایه ی تاپل ذخیره می کند
+const printer = {
+    a: 5,
+    b: 10
+};
+console.log(printer);
+function great01(name, age) {
+    console.log(`your name is ${name} and you'r ${age} years old.`);
+}
+function great02(...arg) {
+    return `your name is ${arg[0]} and you'r ${arg[1]} years old.`;
+}
+console.log(great02('shahin', 12));
+function sumAll(a, b) {
+    return a * b;
+}
+function sumPrint(a) {
+    console.log(a);
+}
+sumPrint(45);
+let family = {
+    father: 'javad',
+    mother: 'mahvash',
+    brother: 'mohammad',
+    mySelf: 'saeed'
+};
+function printFamilyProperty(item, itemKey) {
+    console.log(`Printing person property ${itemKey}: "${item[itemKey]}"`);
+}
+printFamilyProperty(family, 'mother');
+function setFamily(key, value) {
+    return { [key]: value };
+}
+console.log(setFamily("brother", "mardin"));
+function setFamily01(family) {
+    let { father, doughter } = family;
+    let grandSon = doughter?.son;
+    if (grandSon !== undefined) {
+        console.log(`${father} have a grand son, his name is ${grandSon}.`);
+    }
+    else {
+        console.log(`you don't have grand son.`);
+    }
+}
+let family1 = {
+    father: 'mohammad',
+    doughter: {
+        name: 'mahvash',
+        son: undefined
+    }
+};
+setFamily01(family1);
+// Nullish Coalescence
+function printMileage(value) {
+    console.log(`Mileage your car is ${value ?? 'not available'}`);
+}
+printMileage(null);
+// Null Assertion
+function getLength(item) {
+    return item.length;
+}
+console.log(getLength('hello'));
+// Array bounds handling
+// برخلاف زبان های دیگر در تی اس و جی اس دسترسی به ایندکس خارج از محدوده آرایه خطا نمی دهد و مقدار آندیفایند می دهد
+// برای رفع این مشکل از کاندیشن یا آپشنال چینینگ استفاده می کنیم
+let arr2 = ['saeed', 'mohammad'];
+// در خط پایین باید خطا بدهد ولی بدلیل استفاده از اوپراتور آندیفایند را برمی گرداند
+console.log(arr2[3]?.toUpperCase());
+function checkArr(item) {
+    if (item !== undefined) {
+        console.log(item);
+    }
+    else {
+        console.log('your index is out of bounds!');
+    }
+}
+checkArr(arr2[3]);
+let blue = "main - black - #000000";
+console.log(blue);
+let extractBlue = "000000";
+console.log(extractBlue);
+let classA = {
+    name: "morad",
+    age: '20',
+    dynamic_grade: "14"
+};
+console.log(classA);
+let event = {
+    onClick: 'clicked',
+    onHover: 'hovered',
+    onScroll: 'scrolled'
+};
+console.log(event);
