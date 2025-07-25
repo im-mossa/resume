@@ -126,6 +126,10 @@ i.fa {
     width: 60%;
 }
 
+.pb40 {
+    width: 40%;
+}
+
 #right-side {
     display: inline-block;
     vertical-align: top;
