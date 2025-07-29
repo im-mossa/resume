@@ -1,4 +1,3 @@
-
 import { MeshWobbleMaterial } from "@react-three/drei";
 import { TorusKnotProps } from "../types";
 import { useControls } from "leva";

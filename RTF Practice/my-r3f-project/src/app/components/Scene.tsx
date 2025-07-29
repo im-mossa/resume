@@ -1,5 +1,3 @@
-"use client"
-
 import { useRef } from "react"
 import { OrbitControls, useHelper } from "@react-three/drei"
 import { DirectionalLightHelper, DirectionalLight } from "three"
