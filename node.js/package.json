@@ -1,0 +1,12 @@
+{
+  "name": "node-practice",
+  "version": "1.0.0",
+  "description": "this project create for practice node.js",
+  "main": "myseconde.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npm start"
+  },
+  "author": "Mohammad Saeed Saeedian",
+  "license": "ISC"
+}
