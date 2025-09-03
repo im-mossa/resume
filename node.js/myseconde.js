@@ -1,43 +1,41 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
-const { url } = require('inspector');
-const { error } = require('console');
+const mime = require('mime-types');
 
 const PORT = process.env.PORT || 3000;
 const PUBLIC_DIR = path.join(__dirname, 'public');
-const ALLOWED_ORIGINS = [
+const ALLOWED_ORIGINS = new Set([
     'http://localhost:3000',
     'http://localhost:9090'
-];
-
-const MIME_TYPES = {
-    '.html': 'text/html',
-    '.js': 'text/javascript',
-    '.css': 'text/css',
-    '.json': 'application/json',
-    '.png': 'image/png',
-    '.jpg': 'image/jpeg',
-    '.jpeg': 'image/jpeg'
-};
-
+]);
 let todos = [];
 
 // تابع تنظیم هدرهای CORS
-function applyCORS(res, origin) {
-    if (!ALLOWED_ORIGINS.includes(origin)) return;
-    // 'access-control-allow-origin': '*' //به همه ی دامنه ها اجازه می دهد که پاسخ را دریافت کنند. توصیه می شود این کار را نکنید
-    res.setHeader('Access-Control-Allow-Origin', origin);
+function setCommonHeaders(res, origin) {
+    if (ALLOWED_ORIGINS.has(origin)) {
+        // 'access-control-allow-origin': '*' //به همه ی دامنه ها اجازه می دهد که پاسخ را دریافت کنند. توصیه می شود این کار را نکنید
+        res.setHeader('Access-Control-Allow-Origin', origin);
+        res.setHeader('Access-Control-Allow-Credentials', 'true');
+    }
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
 }
 
-const server = http.createServer((req, res) => {
-    const { method, url, headers } = req;
-    const origin = headers.origin;
-    const parsedUrl = new URL(req.url, `http://${req.headers.host}`);
-    applyCORS(res, origin);
+// ارسال پاسخ خطای جیسون
+function sendJson(res, statusCode, payload) {
+    const str = JSON.stringify(payload);
+    res.writeHead(statusCode, {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(str)
+    });
+    res.end(str);
+}
+
+// کوچکترین روتر برای ای پی آی
+function handleApi(req, res, parsedUrl) {
+    const { method } = req;
+    const pathname = parsedUrl.pathname;
 
     // 1. پاسخ به درخواست preflight (OPTIONS)
     if (method === 'OPTIONS') {
@@ -45,43 +43,32 @@ const server = http.createServer((req, res) => {
         return res.end();
     }
 
-    // 2. ریدایرکت مسیر خاص
-    if (method === 'GET' && url === '/aboutUs.html') {
-        res.writeHead(301, { Location: '/about.html' });
-        return res.end();
-    }
-
     // API: GET /todos
-    if (method === 'GET' && url === '/todos') {
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        return res.end(JSON.stringify(todos));
+    if (method === 'GET' && pathname === '/todos') {
+        return sendJson(res, 200, todos);
     }
 
     // API: POST /todos
-    if (method === 'POST' && url === '/todos') {
+    if (method === 'POST' && pathname === '/todos') {
         let body = '';
-        req.on('data', chunk => {
-            body += chunk;
-        });
+        req.on('data', chunk => body += chunk);
         req.on('end', () => {
             try {
                 const newTodo = JSON.parse(body);
                 newTodo.id = todos.length ? Math.max(...todos.map(t => t.id)) + 1 : 1;
                 todos.push(newTodo);
-                res.writeHead(201, { 'content-type': 'application/json' });
-                return res.end(JSON.stringify(todos));
+                return sendJson(res, 201, todos);
             } catch {
-                res.writeHead(400, { 'content-type': 'application/json' });
-                return res.end(JSON.stringify({ error: 'Invalid JSON' }));
+                return sendJson(res, 400, { error: 'Invalid JSON' });
             }
         });
         return;
     }
 
-
     // API: PUT /todos
-    if (method === 'PUT' && parsedUrl.pathname.startsWith('/todos/')) {
-        const id = Number(parsedUrl.pathname.split('/')[2]);
+    const match = pathname.match(/^\/todos\/(\d+)$/);
+    if (method === 'PUT' && match) {
+        const id = Number(match[1]);
         if (isNaN(id)) {
             console.log('id not a number!');
             return;
@@ -92,63 +79,87 @@ const server = http.createServer((req, res) => {
         });
         req.on('end', () => {
             try {
-                const updatedTodo = JSON.parse(body);
-                const index = todos.findIndex(t => t.id === id);
-                if (index === -1) {
-                    res.writeHead(400, { 'content-type': 'application/json' });
-                    res.end(JSON.stringify({ error: 'Todo not found!' }));
-                } else {
-                    todos[index] = { ...todos[index], ...updatedTodo };
-                    res.writeHead(200, { 'content-type': 'application/json' });
-                    res.end(JSON.stringify(todos));
+                const updates = JSON.parse(body);
+                const idx = todos.findIndex(t => t.id === id);
+                if (idx < 0) {
+                    return sendJson(res, 404, { error: 'Todo not found!' });
                 }
+                todos[idx] = { ...todos[idx], ...updates };
+                return sendJson(res, 200, todos);
             } catch (error) {
-                res.writeHead(400, { 'content-type': 'application/json' });
-                res.end(JSON.stringify({ error: 'Invalid JSON' }));
+                return sendJson(res, 400, { error: 'Invalid JSON' });
             }
         });
+        return;
     }
+    return false;
+}
 
-    // 3. تعیین مسیر فایل استاتیک
-    let requestedPath = url === '/' ? '/index.html' : url;
-    let filePath = path.join(PUBLIC_DIR, requestedPath);
-    let ext = path.extname(filePath) || '.html';
-    let contentType = MIME_TYPES[ext] || 'application/octet-stream';
+// ارسال فایل استاتیک
+function serveStatic(req, res, requestedPath) {
+    const filePath = path.normalize(path.join(PUBLIC_DIR, requestedPath));
     if (!filePath.startsWith(PUBLIC_DIR)) {
         res.writeHead(403);
         return res.end('Forbidden');
     }
 
-    // 4. خواندن و ارسال فایل
-    fs.readFile(filePath, (err, data) => {
-        // 4.1 خطای فایل پیدا نشد
-        if (err && err.code === 'ENOENT') {
-            const notFoundPage = path.join(PUBLIC_DIR, '404.html');
-            return fs.readFile(notFoundPage, (nfErr, nfData) => {
-                res.writeHead(404, { 'Content-Type': 'text/html' });
-                res.end(nfData || '<h1>404 Not Found</h1>');
-            });
-        }
-
-        // 4.2 خطای داخلی سرور
+    fs.stat(filePath, (err, stats) => {
+        // 1. خطاهای I/O
         if (err) {
+            if (err.code === 'ENOENT') {
+                // 404 صفحه
+                const notFoundPage = path.join(PUBLIC_DIR, '404.html');
+                return fs.readFile(notFoundPage, (nfErr, nfData) => {
+                    res.writeHead(404, { 'Content-Type': 'text/html' });
+                    res.end(nfData || '<h1>404 Not Found</h1>');
+                });
+            }
+            // 500 خطای داخلی
             res.writeHead(500, { 'Content-Type': 'text/plain' });
             return res.end(`Server Error: ${err.message}`);
         }
 
-        if (method === 'GET') {
-            // 4.3 ارسال موفق پاسخ
-            res.writeHead(200, {
-                'Content-Type': contentType,
-                'Content-Length': Buffer.byteLength(data),
-                // 'transfer-encoding': 'chunked',  //اگر نوع ارتباط به صورت استریم باشد یا مقدار دیتا به صورت لحظه ای تغییر کند به جای کانتنت لنز از این استیتمنت استفاده می کنیم
-                'Cache-Control': 'public, max-age=86400',
-                'X-Powered-By': 'node.js',  //توصیه می شود که این بخش در بخش پروداکشن نباشد چون اطلاعاتی مفیدی به هکر می دهد که حمله ی هدفمند انجام دهد
-                'Set-Cookie': 'sessionid=abc123; HttpOnly; Secure; SameSite=Strict; Max-Age=3600'
-            });
-            res.end(data);
+        // 2. بررسی اینکه مسیر فایل است
+        if (!stats.isFile()) {
+            res.writeHead(404, { 'Content-Type': 'text/html' });
+            return res.end('<h1>404 Not Found</h1>');
         }
+
+        // 3. تعیین MIME و هدرها
+        const contentType = mime.lookup(filePath) || 'application/octet-stream';
+        res.writeHead(200, {
+            'Content-Type': contentType,
+            'Cache-Control': 'public, max-age=86400',
+            'Content-Length': stats.size
+            // حذف Set-Cookie از فایل‌های استاتیک در موارد production توصیه می‌شود
+        });
+
+        // 4. استریم فایل
+        fs.createReadStream(filePath).pipe(res);
     });
+}
+
+const server = http.createServer((req, res) => {
+    const origin = req.headers.origin || '';
+    setCommonHeaders(res, origin);
+    // parse URL
+    const parsedUrl = new URL(req.url, `http://${req.headers.host}`);
+    const pathname = parsedUrl.pathname;
+
+    // 2. ریدایرکت مسیر خاص
+    if (req.method === 'GET' && pathname === '/aboutUs.html') {
+        res.writeHead(301, { Location: '/about.html' });
+        return res.end();
+    }
+
+    // API handle
+    if (handleApi(req, res, parsedUrl) !== false) {
+        return;
+    }
+
+    // 3. تعیین مسیر فایل استاتیک
+    const reqPath = (pathname === '/' ? '/index.html' : pathname);
+    serveStatic(req, res, reqPath);
 });
 
 server.listen(PORT, () => {

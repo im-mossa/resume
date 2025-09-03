@@ -245,3 +245,44 @@ http.createServer((req, res) => {
 
 // const url = new URL (input, [base]);
 // const searchParams = new URLSearchParams(str)
+
+// const ext = path.extname(filePath).toLowerCase();
+// const contentType = {
+//     '.html': 'text/html',
+//     '.js': 'application/javascript',
+//     '.css': 'text/css',
+//     '.json': 'application/json',
+//     '.png': 'image/png',
+//     '.jpg': 'image/jpeg',
+//     '.jpeg': 'image/jpeg'
+// }[ext] || 'application/octet-stream';
+
+// fs.readFile(filePath, (err, data) => {
+//     // 4.1 خطای فایل پیدا نشد
+//     if (err && err.code === 'ENOENT') {
+//         const notFoundPage = path.join(PUBLIC_DIR, '404.html');
+//         return fs.readFile(notFoundPage, (nfErr, nfData) => {
+//             res.writeHead(404, { 'Content-Type': 'text/html' });
+//             res.end(nfData || '<h1>404 Not Found</h1>');
+//         });
+//     }
+
+//     // 4.2 خطای داخلی سرور
+//     if (err) {
+//         res.writeHead(500, { 'Content-Type': 'text/plain' });
+//         return res.end(`Server Error: ${err.message}`);
+//     }
+
+//     if (method === 'GET') {
+//         // 4.3 ارسال موفق پاسخ
+//         res.writeHead(200, {
+//             'Content-Type': contentType,
+//             'Content-Length': Buffer.byteLength(data),
+//             // 'transfer-encoding': 'chunked',  //اگر نوع ارتباط به صورت استریم باشد یا مقدار دیتا به صورت لحظه ای تغییر کند به جای کانتنت لنز از این استیتمنت استفاده می کنیم
+//             'Cache-Control': 'public, max-age=86400',
+//             'X-Powered-By': 'node.js',  //توصیه می شود که این بخش در بخش پروداکشن نباشد چون اطلاعاتی مفیدی به هکر می دهد که حمله ی هدفمند انجام دهد
+//             'Set-Cookie': 'sessionid=abc123; HttpOnly; Secure; SameSite=Strict; Max-Age=3600'
+//         });
+//         res.end(data);
+//     }
+// });

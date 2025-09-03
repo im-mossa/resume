@@ -8,5 +8,8 @@
     "dev": "npm start"
   },
   "author": "Mohammad Saeed Saeedian",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "mime-types": "^3.0.1"
+  }
 }
