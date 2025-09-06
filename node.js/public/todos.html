@@ -17,8 +17,13 @@
     <input type="number" name="update" id="uId">
     <br>
     <label for="uName">name:</label>
-    <input type="text" name="update" id="uName">
+    <input type="text" name="uName" id="uName">
     <button onclick="fUpdate()">update</button>
+    <hr>
+    <h1>delete</h1>
+    <label for="delete">id:</label>
+    <input type="number" name="delete" id="uIdD">
+    <button onclick="fDelete()">delete</button>
     <p id="output"></p>
 </body>
 <script>
@@ -55,6 +60,23 @@
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ text: name })
+            });
+            const jsonData = await postData.json();
+            output.innerText = JSON.stringify(jsonData, null, 2);
+        } catch (error) {
+            console.error('خطا در ارتباط با سرور:', error);
+        }
+    }
+
+    async function fDelete() {
+        const id = document.getElementById('uIdD').value;
+        const output = document.getElementById('output');
+        try {
+            const postData = await fetch(`http://localhost:3000/todos/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
             });
             const jsonData = await postData.json();
             output.innerText = JSON.stringify(jsonData, null, 2);

@@ -286,3 +286,20 @@ http.createServer((req, res) => {
 //         res.end(data);
 //     }
 // });
+
+// استفاده از خط فرمان برای تست api
+// curl -X HEAD http://localhost:3000/todos
+
+// curl -I http://localhost:3000/todos
+
+// curl -X POST http://localhost:3000/todos 
+//  -H "Content-Type: application/json" 
+//  -d '{"task":"New Task","completed":false}'
+
+// curl -X DELETE http://localhost:3000/todos/2
+
+// curl -X PUT http://localhost:3000/todos/4
+//   -H "Content-Type: application/json"
+//   -d "{\"text\":\"sama\", \"id\":2}"
+
+// curl -X GET http://localhost:3000/todos

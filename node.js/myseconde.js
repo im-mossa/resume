@@ -18,7 +18,7 @@ function setCommonHeaders(res, origin) {
         res.setHeader('Access-Control-Allow-Origin', origin);
         res.setHeader('Access-Control-Allow-Credentials', 'true');
     }
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, HEAD');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 }
 
@@ -40,6 +40,11 @@ function handleApi(req, res, parsedUrl) {
     // 1. پاسخ به درخواست preflight (OPTIONS)
     if (method === 'OPTIONS') {
         res.writeHead(204);
+        return res.end();
+    }
+
+    if (method === 'HEAD') {
+        res.writeHead(200);
         return res.end();
     }
 
@@ -70,8 +75,7 @@ function handleApi(req, res, parsedUrl) {
     if (method === 'PUT' && match) {
         const id = Number(match[1]);
         if (isNaN(id)) {
-            console.log('id not a number!');
-            return;
+            return sendJson(res, 400, { error: 'Invalid ID' });
         }
         let body = '';
         req.on('data', chunk => {
@@ -92,6 +96,24 @@ function handleApi(req, res, parsedUrl) {
         });
         return;
     }
+
+    // API: DELETE /todos
+    if (method === 'DELETE' && match) {
+        const id = Number(match[1]);
+        if (isNaN(id)) {
+            return sendJson(res, 400, { error: 'Invalid ID' });
+        }
+        try {
+            const idx = todos.findIndex(t => t.id === id);
+            if (idx < 0) {
+                return sendJson(res, 404, { error: 'Todo not found!' });
+            }
+            todos.splice(idx, 1);
+            return sendJson(res, 200, todos);
+        } catch (error) {
+            return sendJson(res, 400, { error: 'Invalid JSON' });
+        }
+    }
     return false;
 }
 
@@ -103,39 +125,46 @@ function serveStatic(req, res, requestedPath) {
         return res.end('Forbidden');
     }
 
-    fs.stat(filePath, (err, stats) => {
-        // 1. خطاهای I/O
+    fs.access(filePath, fs.constants.F_OK, (err) => {
         if (err) {
-            if (err.code === 'ENOENT') {
-                // 404 صفحه
-                const notFoundPage = path.join(PUBLIC_DIR, '404.html');
-                return fs.readFile(notFoundPage, (nfErr, nfData) => {
-                    res.writeHead(404, { 'Content-Type': 'text/html' });
-                    res.end(nfData || '<h1>404 Not Found</h1>');
-                });
+            // 404 صفحه
+            const notFoundPage = path.normalize(path.join(PUBLIC_DIR, '404.html'));
+            return fs.readFile(notFoundPage, (nfErr = '<h1>404 Not Found</h1>', nfData) => {
+                res.writeHead(404, { 'Content-Type': 'text/html' });
+                res.end(nfData || nfErr);
+            });
+        }
+
+        fs.stat(filePath, (err, stats) => {
+            // 1. خطاهای I/O
+            if (err) {
+                // 500 خطای داخلی
+                res.writeHead(500, { 'Content-Type': 'text/plain' });
+                return res.end(`Server Error: ${err.message}`);
             }
-            // 500 خطای داخلی
-            res.writeHead(500, { 'Content-Type': 'text/plain' });
-            return res.end(`Server Error: ${err.message}`);
-        }
 
-        // 2. بررسی اینکه مسیر فایل است
-        if (!stats.isFile()) {
-            res.writeHead(404, { 'Content-Type': 'text/html' });
-            return res.end('<h1>404 Not Found</h1>');
-        }
+            // 3. تعیین MIME و هدرها
+            const contentType = mime.lookup(filePath) || 'application/octet-stream';
+            res.writeHead(200, {
+                'Content-Type': contentType,
+                'Cache-Control': 'public, max-age=86400',
+                'Content-Length': stats.size
+                // حذف Set-Cookie از فایل‌های استاتیک در موارد production توصیه می‌شود
+            });
 
-        // 3. تعیین MIME و هدرها
-        const contentType = mime.lookup(filePath) || 'application/octet-stream';
-        res.writeHead(200, {
-            'Content-Type': contentType,
-            'Cache-Control': 'public, max-age=86400',
-            'Content-Length': stats.size
-            // حذف Set-Cookie از فایل‌های استاتیک در موارد production توصیه می‌شود
+            // 4. استریم فایل
+            const stream = fs.createReadStream(filePath);
+
+            stream.on('error', (err) => {
+                console.error('Error reading file:', err);
+                if (!res.headersSent) {
+                    res.statusCode = 500;
+                    res.end('Error reading file');
+                }
+            });
+
+            stream.pipe(res);
         });
-
-        // 4. استریم فایل
-        fs.createReadStream(filePath).pipe(res);
     });
 }
 
