@@ -1,129 +1,72 @@
-const express = require('express');
-const https = require('https');
-const fs = require('fs');
-const path = require('path');
-const helmet = require('helmet'); // Security middleware
-const logger = require('./logger');
+// server.js
 require('dotenv').config();
+const express = require('express');
+const http = require('http');
+const helmet = require('helmet');
+const cors = require('cors');
+const logger = require('./logger');
 
-// Create Express app
 const app = express();
+const PORT = process.env.PORT || 3000;
+const HOST = process.env.HOST || '127.0.0.1';
 
-// Security middleware
+app.set('trust proxy', true);
+
 app.use(helmet());
-
-// Parse JSON and URL-encoded bodies
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use((req, res, next) => {
-  logger.info({ method: req.method, url: req.url }, 'Incoming request');
-  next();
+    logger.info({ method: req.method, url: req.originalUrl, ip: req.ip }, 'Incoming request');
+    next();
 });
 
-// Serve static files from 'public' directory
-app.use(express.static(path.join(__dirname, 'public'), {
-    dotfiles: 'ignore',
-    etag: true,
-    extensions: ['html', 'htm'],
-    index: 'index.html',
-    maxAge: '1d',
-    redirect: true
-}));
-
-// Routes
-app.get('/', (req, res) => {
-    res.send('<h1>Welcome to Secure Express Server</h1>');
-});
-
+// فقط مسیرهای API را تعریف کن
 app.get('/api/status', (req, res) => {
     res.json({
         status: 'operational',
         timestamp: new Date().toISOString(),
         environment: process.env.NODE_ENV || 'development',
-        nodeVersion: process.version
+        nodeVersion: process.version,
+        protocol: req.protocol,
+        secure: req.secure,
+        clientIp: req.ip
     });
 });
 
-// Error handling middleware
-app.use((err, req, res, next) => {
-    // console.error(err.stack);
-    logger.error({ err }, 'Unhandled error');
-    res.status(500).json({ error: 'Something went wrong!' });
-});
-
-// 404 handler
+// 404 برای مسیرهای غیر API
 app.use((req, res) => {
     res.status(404).json({ error: 'Not Found' });
 });
 
-// SSL/TLS options
-const sslOptions = {
-    key: fs.readFileSync(process.env.SSL_KEY_PATH),
-    cert: fs.readFileSync(process.env.SSL_CERT_PATH),
-    // Enable HTTP/2 if available
-    allowHTTP1: true,
-    // Recommended security options
-    minVersion: 'TLSv1.2',
-    ciphers: [
-        'TLS_AES_256_GCM_SHA384',
-        'TLS_CHACHA20_POLY1305_SHA256',
-        'TLS_AES_128_GCM_SHA256',
-        'ECDHE-RSA-AES128-GCM-SHA256',
-        '!DSS',
-        '!aNULL',
-        '!eNULL',
-        '!EXPORT',
-        '!DES',
-        '!RC4',
-        '!3DES',
-        '!MD5',
-        '!PSK'
-    ].join(':'),
-    honorCipherOrder: true
-};
-
-// Create HTTPS server
-const PORT = process.env.PORT || 3000;
-const server = https.createServer(sslOptions, app);
-
-// Handle unhandled promise rejections
-process.on('unhandledRejection', (reason, promise) => {
-    logger.error('Unhandled Rejection at:', promise, 'reason:', reason);
+// error handler
+app.use((err, req, res, next) => {
+    logger.error({ err, method: req.method, url: req.originalUrl }, 'Unhandled error');
+    if (res.headersSent) return next(err);
+    res.status(500).json({ error: 'Something went wrong' });
 });
 
-// Handle uncaught exceptions
+const server = http.createServer(app);
+
+process.on('unhandledRejection', (reason) => logger.error({ reason }, 'Unhandled Rejection'));
 process.on('uncaughtException', (error) => {
-    logger.error('Uncaught Exception:', error);
-    // Perform cleanup and exit if needed
+    logger.error({ error }, 'Uncaught Exception');
     process.exit(1);
 });
 
-// Graceful shutdown
 const gracefulShutdown = (signal) => {
-    logger.info(`\nReceived ${signal}. Shutting down gracefully...`);
-
-    server.close(() => {
-        logger.info('HTTP server closed.');
-        // Close database connections, etc.
-        process.exit(0);
-    });
-
-    // Force close server after 10 seconds
-    setTimeout(() => {
-        logger.warn('Forcing shutdown...');
-        process.exit(1);
-    }, 10000);
+    logger.info(`Received ${signal}. Shutting down...`);
+    server.close(() => process.exit(0));
+    setTimeout(() => process.exit(1), 10000);
 };
+process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));
+process.on('SIGINT', () => gracefulShutdown('SIGINT'));
 
-// Listen for shutdown signals
-process.on('SIGTERM', gracefulShutdown);
-process.on('SIGINT', gracefulShutdown);
-
-// Start the server
-const HOST = process.env.HOST || '0.0.0.0';
-server.listen(PORT, HOST, () => {
-    logger.info(`Express server running at https://${HOST}:${PORT}`);
-    logger.info('Environment:'+ (process.env.NODE_ENV || 'development'));
-    logger.info('Press Ctrl+C to stop the server');
+server.listen(PORT, HOST, (err) => {
+    if (err) { logger.error({ err }, 'Server failed to start'); process.exit(1); }
+    logger.info(`API server listening on http://${HOST}:${PORT}`);
 });
+
+// استفاده از خط فرمان برای تست api
+// curl -k https://localhost:3000/
