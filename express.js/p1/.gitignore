@@ -18,3 +18,5 @@ Thumbs.db
 # Ignore build artifacts (optional)
 dist/
 build/
+
+/src/generated/prisma
