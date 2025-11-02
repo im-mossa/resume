@@ -1,7 +1,7 @@
 // src/routes/orders.ts
 import { Router } from 'express';
 import { z } from 'zod';
-import { validateBody } from '../middlewares/validate.js';
+import { validateQuery } from '../middlewares/validateQuery.js';
 import { createReservation } from '../services/utilsService.js';
 
 const router = Router();
@@ -17,7 +17,7 @@ const reserveSchema = z.object({
 
 type ReserveBody = z.infer<typeof reserveSchema>;
 
-router.post('/reserve', validateBody(reserveSchema), async (req, res) => {
+router.post('/reserve', validateQuery(reserveSchema), async (req, res) => {
     const body = req.body as ReserveBody;
     const { product_id, variant_id, quantity, reserved_by = null, order_id = null, ttl_minutes } = body;
 

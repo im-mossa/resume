@@ -1,7 +1,6 @@
 // src/lib/brandFilter.ts
 import { PrismaClient } from '@prisma/client';
-
-const uuidRegex = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
+import { isUuid } from '../utils/validateUUID.js';
 
 /**
  * Resolve brandParam (comma separated slugs or uuids) into array of brand UUIDs.
@@ -15,8 +14,8 @@ export async function resolveBrandIds(prisma: PrismaClient, brandParam?: string)
     const parts = brandParam.split(',').map(s => s.trim()).filter(Boolean);
     if (parts.length === 0) return [];
 
-    const uuids = parts.filter(p => uuidRegex.test(p));
-    const slugs = parts.filter(p => !uuidRegex.test(p));
+    const uuids = parts.filter(p => isUuid(p));
+    const slugs = parts.filter(p => !isUuid(p));
 
     const ids: string[] = [...uuids];
 

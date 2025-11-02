@@ -11,6 +11,7 @@ import productRouter from './routes/product.js';
 import categoriesProducts from './routes/categoriesProducts.js';
 import categories from './routes/categories.js';
 import brandsRouter from './routes/brands.js';
+import slidesRouter from './routes/slides.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 
 const app = express();
@@ -25,17 +26,27 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/api/v1/orders', ordersRouter);
 app.use('/api/v1/products', productsRouter);
-//https://localhost/api/v1/products?brand=men_pama,another_brand&page=1&limit=12
+//https://localhost/api/v1/products?brand=pama,another_brand&page=1&limit=12
+//https://localhost/api/v1/products?brand=bc9dd1af-17ce-4926-b2b0-ee2aa8124ec8&page=1&limit=12
+//https://localhost/api/v1/products?search=model SM03
+//https://localhost/api/v1/products?search=This product is from the reputable brand Pama
+//https://localhost/api/v1/products?sort_by=price&order=asc
+//https://localhost/api/v1/products?category_id=d67a4daf-03f0-4cae-8f80-139bb660e683
 //https://localhost/api/v1/products
 app.use('/api/v1/product', productRouter);
 //https://localhost/api/v1/product/00000000-0000-0000-0000-000000000010
+//https://localhost/api/v1/product/Pama_Darvin_2-G1326
 // https://localhost/api/v1/product/00000000-0000-0000-0000-000000000010?category=d67a4daf-03f0-4cae-8f80-139bb660e683
+//https://localhost/api/v1/product/Pama_Darvin_2-G1326?category=c22e3026-dc60-4e79-8584-395cdf98f37a
 app.use('/api/v1/categories', categoriesProducts);
 //https://localhost/api/v1/categories/d67a4daf-03f0-4cae-8f80-139bb660e683/products?page=1&limit=20
 app.use('/api/v1/categories', categories);
 // https://localhost/api/v1/categories/tree
 app.use('/api/v1/brands', brandsRouter);
 // https://localhost/api/v1/brands/pama/products?page=1&limit=24&sort=manual
+// https://localhost/api/v1/products?brand=pama,nazari&page=1&limit=12
+app.use('/api/v1/slides', slidesRouter);
+// https://localhost/api/v1/slides?position=home_hero&device=mobile&country=IR
 
 // request logger middleware
 app.use((req: Request, _res: Response, next: NextFunction) => {

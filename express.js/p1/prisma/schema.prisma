@@ -78,6 +78,7 @@ model brands {
   description String?
   logo_url    String?
   created_at  DateTime   @default(now()) @db.Timestamptz(6)
+  slug        String?
   products    products[]
 
   @@schema("catalog")
@@ -198,6 +199,7 @@ model products {
   is_active              Boolean                  @default(true)
   created_at             DateTime                 @default(now()) @db.Timestamptz(6)
   updated_at             DateTime                 @default(now()) @db.Timestamptz(6)
+  sort                   Int?
   inventory_reservations inventory_reservations[]
   product_categories     product_categories[]
   product_images         product_images[]
