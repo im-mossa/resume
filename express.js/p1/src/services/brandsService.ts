@@ -1,21 +1,15 @@
 // src/services/brandsService.ts
-import * as repo from '../repositories/brandsRepo.js';
+import { fetchBrandProductsSingleQuery } from '../repositories/brandsRepo.js';
 import { buildPublicImageUrl } from '../utils/image.js';
-import type { ProductRow } from '../types/brands.js';
 
 export async function listProductsByBrand(slug: string, page = 1, limit = 24, sort: 'manual' | 'price_asc' | 'price_desc' | 'newest' = 'newest') {
-    const offset = (page - 1) * limit;
+    const res = await fetchBrandProductsSingleQuery(slug, page, limit, sort);
 
-    const brand = await repo.findBrandBySlug(slug);
-    if (!brand) return { notFound: true };
+    // if brand not found, preserve that signal
+    if (!res.brand) return { notFound: true };
 
-    const ids = await repo.selectProductIdsForBrand(brand.id, sort, limit, offset);
-    const itemsRaw: ProductRow[] = await repo.fetchProductsByIdsOrdered(ids);
-    const total = await repo.countProductsForBrand(brand.id);
-
-    // normalize image urls
-    const items = itemsRaw.map(it => ({
-        id: it.id,
+    const items = (res.items ?? []).map(it => ({
+        id: String(it.id),
         name: it.name,
         slug: it.slug,
         description: it.description ?? null,
@@ -26,8 +20,8 @@ export async function listProductsByBrand(slug: string, page = 1, limit = 24, so
 
     return {
         notFound: false,
-        brand: { id: brand.id, name: brand.name, slug: brand.slug },
+        brand: res.brand,
         items,
-        meta: { page, limit, total, totalPages: Math.max(1, Math.ceil(total / limit)) }
+        meta: { page, limit, total: Number(res.total ?? 0), totalPages: Math.max(1, Math.ceil(Number(res.total ?? 0) / limit)) },
     };
 }

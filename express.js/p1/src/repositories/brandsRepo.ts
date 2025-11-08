@@ -1,128 +1,215 @@
 // src/repositories/brandsRepo.ts
 import { prisma } from '../prisma.js';
-import type { BrandRow, ProductAggRow, ProductRow } from '../types/brands.js';
+
+type Row = {
+  brand_id: string | null;
+  brand_name: string | null;
+  brand_slug: string | null;
+  id: string | null;
+  name: string | null;
+  product_slug: string | null;
+  description: string | null;
+  price: string | null;
+  created_at: string | null;
+  image: string | null;
+  total: number | null;
+};
+
+type BrandRow = { id: string; name: string; slug: string };
 
 /**
- * find brand by slug using Prisma model (typed)
+ * Fetch brand + paginated products + total in a single, parameterized query.
+ * Safe: uses prisma.$queryRaw with template literals (Prisma parameterizes values).
  */
-export async function findBrandBySlug(slug: string): Promise<BrandRow | null> {
-  // use Prisma model if available
-  const p: any = prisma as any;
-  if (p.brands && typeof p.brands.findFirst === 'function') {
-    const b = await p.brands.findFirst({ where: { slug }, select: { id: true, name: true, slug: true } });
-    return b ? { id: String(b.id), name: b.name, slug: b.slug } : null;
-  }
+export async function fetchBrandProductsSingleQuery(
+  slug: string,
+  page = 1,
+  limit = 24,
+  sort: 'manual' | 'price_asc' | 'price_desc' | 'newest' = 'newest'
+): Promise<{
+  brand: { id: string; name: string; slug: string } | null;
+  items: Array<{ id: string; name: string; slug: string; description: string | null; price: string | null; created_at: string | null; image: string | null }>;
+  total: number;
+}> {
+  const offset = (page - 1) * limit;
 
-  // fallback raw (shouldn't be needed if Prisma schema is correct)
-  const rows = await prisma.$queryRaw`SELECT id::text AS id, name, slug FROM catalog.brands WHERE slug = ${slug}` as Array<{ id: string }>;
-  return Array.isArray(rows) && rows.length ? rows[0] as BrandRow : null;
-}
+  // Build different query bodies depending on 'sort'. Each uses parameter placeholders via template literal.
+  let rows: Row[] = [];
 
-/**
- * select product ids (and aggregation fields) for this brand according to sort option
- * Returns array of { id, ... }
- */
-export async function selectProductIdsForBrand(brandId: string, sort: 'manual' | 'price_asc' | 'price_desc' | 'newest', limit: number, offset: number): Promise<string[]> {
-  // We use different parameterized raw queries per sort option to avoid injecting SQL fragments.
-  if (sort === 'manual') {
-    const rows = await prisma.$queryRaw`
-      SELECT id::text AS id FROM (
-        SELECT p.id, MIN(p.sort) AS min_sort, MAX(p.created_at) AS latest_created
-        FROM catalog.products p
-        WHERE p.brand_id = ${brandId}::uuid AND p.is_active = true
-        GROUP BY p.id
-        ORDER BY MIN(p.sort) ASC NULLS LAST, MAX(p.created_at) DESC
-        LIMIT ${limit} OFFSET ${offset}
-      ) t;
-    ` as Array<{ id: string }>;
-    return (rows ?? []).map((r: any) => String(r.id));
-  } else if (sort === 'price_asc') {
-    const rows = await prisma.$queryRaw`
-      SELECT id::text AS id FROM (
-        SELECT p.id, MIN(p.price) AS min_price
-        FROM catalog.products p
-        WHERE p.brand_id = ${brandId}::uuid AND p.is_active = true
-        GROUP BY p.id
-        ORDER BY MIN(p.price) ASC NULLS LAST
-        LIMIT ${limit} OFFSET ${offset}
-      ) t;
-    ` as Array<{ id: string }>;
-    return (rows ?? []).map((r: any) => String(r.id));
-  } else if (sort === 'price_desc') {
-    const rows = await prisma.$queryRaw`
-      SELECT id::text AS id FROM (
-        SELECT p.id, MIN(p.price) AS min_price
-        FROM catalog.products p
-        WHERE p.brand_id = ${brandId}::uuid AND p.is_active = true
-        GROUP BY p.id
-        ORDER BY MIN(p.price) DESC NULLS LAST
-        LIMIT ${limit} OFFSET ${offset}
-      ) t;
-    ` as Array<{ id: string }>;
-    return (rows ?? []).map((r: any) => String(r.id));
-  } else {
-    // newest
-    const rows = await prisma.$queryRaw`
-      SELECT id::text AS id FROM (
-        SELECT p.id, MAX(p.created_at) AS latest_created
-        FROM catalog.products p
-        WHERE p.brand_id = ${brandId}::uuid AND p.is_active = true
-        GROUP BY p.id
-        ORDER BY MAX(p.created_at) DESC
-        LIMIT ${limit} OFFSET ${offset}
-      ) t;
-    ` as Array<{ id: string }>;
-    return (rows ?? []).map((r: any) => String(r.id));
-  }
-}
-
-/**
- * fetch full product rows (details + first image) for a list of ids.
- * We'll use Prisma model-based findMany and then reorder to match ids order.
- */
-export async function fetchProductsByIdsOrdered(ids: string[]): Promise<ProductRow[]> {
-  if (!ids || ids.length === 0) return [];
-
-  const p: any = prisma as any;
-  if (!p.products) throw new Error('Prisma products model not found.');
-
-  const rows = await p.products.findMany({
-    where: { id: { in: ids } },
-    select: {
-      id: true, name: true, slug: true, description: true, price: true, created_at: true,
-      product_images: { orderBy: [{ sort_order: 'asc' }], take: 1, select: { image_url: true } }
+  try {
+    if (sort === 'manual') {
+      rows = await prisma.$queryRaw`
+        WITH brand_row AS (
+          SELECT id, name, slug FROM catalog.brands WHERE slug = ${slug}
+        ),
+        prod_agg AS (
+          SELECT p.id,
+                 ROW_NUMBER() OVER (ORDER BY MIN(p.sort) ASC NULLS LAST, MAX(p.created_at) DESC) AS rn
+          FROM catalog.products p
+          WHERE p.brand_id = (SELECT id FROM brand_row)::uuid AND p.is_active = true
+          GROUP BY p.id
+          ORDER BY MIN(p.sort) ASC NULLS LAST, MAX(p.created_at) DESC
+          LIMIT ${limit} OFFSET ${offset}
+        ),
+        total_cte AS (
+          SELECT COUNT(*)::int AS total_count
+          FROM catalog.products p
+          WHERE p.brand_id = (SELECT id FROM brand_row)::uuid AND p.is_active = true
+        )
+        SELECT (SELECT id::text FROM brand_row) AS brand_id,
+               (SELECT name FROM brand_row) AS brand_name,
+               (SELECT slug FROM brand_row) AS brand_slug,
+               p.id::text AS id,
+               p.name,
+               p.slug AS product_slug,
+               p.description,
+               p.price::text AS price,
+               p.created_at,
+               (SELECT image_url FROM catalog.product_images WHERE product_id = p.id ORDER BY sort_order ASC LIMIT 1) AS image,
+               (SELECT total_count FROM total_cte) AS total
+        FROM prod_agg pa
+        JOIN catalog.products p ON p.id = pa.id
+        ORDER BY pa.rn;
+      ` as Row[];
+    } else if (sort === 'price_asc') {
+      rows = await prisma.$queryRaw`
+        WITH brand_row AS (
+          SELECT id, name, slug FROM catalog.brands WHERE slug = ${slug}
+        ),
+        prod_agg AS (
+          SELECT p.id,
+                 ROW_NUMBER() OVER (ORDER BY MIN(p.price) ASC NULLS LAST) AS rn
+          FROM catalog.products p
+          WHERE p.brand_id = (SELECT id FROM brand_row)::uuid AND p.is_active = true
+          GROUP BY p.id
+          ORDER BY MIN(p.price) ASC NULLS LAST
+          LIMIT ${limit} OFFSET ${offset}
+        ),
+        total_cte AS (
+          SELECT COUNT(*)::int AS total_count
+          FROM catalog.products p
+          WHERE p.brand_id = (SELECT id FROM brand_row)::uuid AND p.is_active = true
+        )
+        SELECT (SELECT id::text FROM brand_row) AS brand_id,
+               (SELECT name FROM brand_row) AS brand_name,
+               (SELECT slug FROM brand_row) AS brand_slug,
+               p.id::text AS id,
+               p.name,
+               p.slug AS product_slug,
+               p.description,
+               p.price::text AS price,
+               p.created_at,
+               (SELECT image_url FROM catalog.product_images WHERE product_id = p.id ORDER BY sort_order ASC LIMIT 1) AS image,
+               (SELECT total_count FROM total_cte) AS total
+        FROM prod_agg pa
+        JOIN catalog.products p ON p.id = pa.id
+        ORDER BY pa.rn;
+      ` as Row[];
+    } else if (sort === 'price_desc') {
+      rows = await prisma.$queryRaw`
+        WITH brand_row AS (
+          SELECT id, name, slug FROM catalog.brands WHERE slug = ${slug}
+        ),
+        prod_agg AS (
+          SELECT p.id,
+                 ROW_NUMBER() OVER (ORDER BY MIN(p.price) DESC NULLS LAST) AS rn
+          FROM catalog.products p
+          WHERE p.brand_id = (SELECT id FROM brand_row)::uuid AND p.is_active = true
+          GROUP BY p.id
+          ORDER BY MIN(p.price) DESC NULLS LAST
+          LIMIT ${limit} OFFSET ${offset}
+        ),
+        total_cte AS (
+          SELECT COUNT(*)::int AS total_count
+          FROM catalog.products p
+          WHERE p.brand_id = (SELECT id FROM brand_row)::uuid AND p.is_active = true
+        )
+        SELECT (SELECT id::text FROM brand_row) AS brand_id,
+               (SELECT name FROM brand_row) AS brand_name,
+               (SELECT slug FROM brand_row) AS brand_slug,
+               p.id::text AS id,
+               p.name,
+               p.slug AS product_slug,
+               p.description,
+               p.price::text AS price,
+               p.created_at,
+               (SELECT image_url FROM catalog.product_images WHERE product_id = p.id ORDER BY sort_order ASC LIMIT 1) AS image,
+               (SELECT total_count FROM total_cte) AS total
+        FROM prod_agg pa
+        JOIN catalog.products p ON p.id = pa.id
+        ORDER BY pa.rn;
+      ` as Row[];
+    } else {
+      // newest
+      rows = await prisma.$queryRaw`
+        WITH brand_row AS (
+          SELECT id, name, slug FROM catalog.brands WHERE slug = ${slug}
+        ),
+        prod_agg AS (
+          SELECT p.id,
+                 ROW_NUMBER() OVER (ORDER BY MAX(p.created_at) DESC) AS rn
+          FROM catalog.products p
+          WHERE p.brand_id = (SELECT id FROM brand_row)::uuid AND p.is_active = true
+          GROUP BY p.id
+          ORDER BY MAX(p.created_at) DESC
+          LIMIT ${limit} OFFSET ${offset}
+        ),
+        total_cte AS (
+          SELECT COUNT(*)::int AS total_count
+          FROM catalog.products p
+          WHERE p.brand_id = (SELECT id FROM brand_row)::uuid AND p.is_active = true
+        )
+        SELECT (SELECT id::text FROM brand_row) AS brand_id,
+               (SELECT name FROM brand_row) AS brand_name,
+               (SELECT slug FROM brand_row) AS brand_slug,
+               p.id::text AS id,
+               p.name,
+               p.slug AS product_slug,
+               p.description,
+               p.price::text AS price,
+               p.created_at,
+               (SELECT image_url FROM catalog.product_images WHERE product_id = p.id ORDER BY sort_order ASC LIMIT 1) AS image,
+               (SELECT total_count FROM total_cte) AS total
+        FROM prod_agg pa
+        JOIN catalog.products p ON p.id = pa.id
+        ORDER BY pa.rn;
+      ` as Row[];
     }
-  });
+  } catch (err) {
+    // If the SQL fails, rethrow to let higher layer log/handle
+    throw err;
+  }
 
-  const byId = new Map<string, any>();
-  rows.forEach((r: any) => {
-    byId.set(String(r.id), r);
-  });
+  // If no rows returned, check whether brand exists at all
+  if (!rows || rows.length === 0) {
+    const brandCheck = await prisma.$queryRaw`
+      SELECT id::text AS id, name, slug FROM catalog.brands WHERE slug = ${slug}
+    ` as BrandRow[];
 
-  // preserve original ids order
-  return ids.map(id => {
-    const r = byId.get(id);
-    return {
-      id,
-      name: r?.name ?? null,
-      slug: r?.slug ?? null,
-      description: r?.description ?? null,
-      price: r?.price !== undefined && r?.price !== null ? String(r.price) : null,
-      created_at: r?.created_at ?? null,
-      image: (r?.product_images && r.product_images[0]) ? r.product_images[0].image_url ?? null : null,
-    } as ProductRow;
-  });
-}
+    if (!brandCheck || brandCheck.length === 0) {
+      return { brand: null, items: [], total: 0 };
+    }
 
-/**
- * count total products for brand
- */
-export async function countProductsForBrand(brandId: string): Promise<number> {
-  const row = await prisma.$queryRaw`
-    SELECT COUNT(*)::text AS total
-    FROM catalog.products p
-    WHERE p.brand_id = ${brandId}::uuid AND p.is_active = true
-  ` as Array<{ total: string }>;
-  const total = parseInt(row?.[0]?.total ?? '0', 10);
-  return Number.isFinite(total) ? total : 0;
+    return { brand: { id: brandCheck[0].id, name: brandCheck[0].name, slug: brandCheck[0].slug }, items: [], total: 0 };
+  }
+
+  // Extract brand info and total from first row
+  const first = rows[0];
+  const brand = first.brand_id ? { id: first.brand_id, name: first.brand_name ?? '', slug: first.brand_slug ?? '' } : null;
+  const total = Number(first.total ?? 0);
+
+  // Build items (filter null ids)
+  const items = rows
+    .filter(r => r.id != null)
+    .map(r => ({
+      id: String(r.id),
+      name: r.name ?? '',
+      slug: r.product_slug ?? '',
+      description: r.description ?? null,
+      price: r.price ?? null,
+      created_at: r.created_at ?? null,
+      image: r.image ?? null,
+    }));
+
+  return { brand, items, total };
 }
