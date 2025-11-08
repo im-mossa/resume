@@ -30,8 +30,6 @@ app.use('/api/v1/product', productRouter);
 app.use('/api/v1/categories', categoriesProducts);
 app.use('/api/v1/categories', categories);
 app.use('/api/v1/brands', brandsRouter);
-// https://localhost/api/v1/brands/nazari/products?page=1&limit=24&sort=manual
-// https://localhost/api/v1/products?brand=pama,nazari&page=1&limit=12
 app.use('/api/v1/slides', slidesRouter);
 // https://localhost/api/v1/slides?position=home_hero&device=mobile&country=IR
 
