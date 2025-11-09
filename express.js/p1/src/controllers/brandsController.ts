@@ -1,16 +1,12 @@
 // src/controllers/brandsController.ts
 import type { Request, Response } from 'express';
-import { paramsSchema, querySchema } from '../schemas/brands.js';
 import { listProductsByBrand } from '../services/brandsService.js';
 import logger from '../logger.js';
 
 export async function getBrandProductsHandler(req: Request, res: Response) {
-    // if middleware provided validated params/query they are *already parsed values*
-    // otherwise we use zod.parse (which returns parsed value or throws)
-    const params = (req as any).validatedParams ?? paramsSchema.parse(req.params);
-    const query = (req as any).validatedQuery ?? querySchema.parse(req.query);
+    const params = (req as any).validatedParams ?? {};
+    const query = (req as any).validatedQuery ?? {};
 
-    // params and query are the parsed objects (not { data })
     const { slug } = params;
     const { page, limit, sort } = query;
 

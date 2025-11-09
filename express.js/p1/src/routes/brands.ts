@@ -1,5 +1,7 @@
 // src/routes/brands.ts
 import { Router } from 'express';
+import { paramsSchema, querySchema } from '../schemas/brands.js';
+import { validateParams, validateQuery } from '../middlewares/validateQuery.js';
 import { getBrandProductsHandler } from '../controllers/brandsController.js';
 
 const router = Router();
@@ -69,6 +71,6 @@ const router = Router();
  *   - Return image URLs via a utility that converts stored paths to `APP_URL/static/...`.
  */
 
-router.get('/:slug/products', getBrandProductsHandler);
+router.get('/:slug/products', validateParams(paramsSchema),validateQuery(querySchema), getBrandProductsHandler);
 
 export default router;

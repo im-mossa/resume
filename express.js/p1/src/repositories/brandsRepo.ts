@@ -1,21 +1,6 @@
 // src/repositories/brandsRepo.ts
 import { prisma } from '../prisma.js';
-
-type Row = {
-  brand_id: string | null;
-  brand_name: string | null;
-  brand_slug: string | null;
-  id: string | null;
-  name: string | null;
-  product_slug: string | null;
-  description: string | null;
-  price: string | null;
-  created_at: string | null;
-  image: string | null;
-  total: number | null;
-};
-
-type BrandRow = { id: string; name: string; slug: string };
+import {Row, BrandRow} from '../types/brands.js';
 
 /**
  * Fetch brand + paginated products + total in a single, parameterized query.
