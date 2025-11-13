@@ -7,13 +7,13 @@ import type { SlideRow } from '../types/slides.js';
  * Returns array of raw rows from DB.
  */
 export async function fetchSlides(
-    position: string,
-    device: string | undefined,
-    country: string | undefined,
-    limit = 10
+  position: string,
+  device: string | undefined,
+  country: string | undefined,
+  limit = 10
 ): Promise<SlideRow[]> {
-    // Note: using prisma.$queryRaw tagged template for parameterization (safe)
-    const rows = await prisma.$queryRaw`
+  // Note: using prisma.$queryRaw tagged template for parameterization (safe)
+  const rows = await prisma.$queryRaw`
     SELECT
       id::text AS id,
       title,
@@ -52,5 +52,5 @@ export async function fetchSlides(
     LIMIT ${limit}
   `;
 
-    return rows as SlideRow[];
+  return rows as SlideRow[];
 }

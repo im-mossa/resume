@@ -7,7 +7,7 @@ import type { ProductItemRow } from '../types/categoriesProducts.js';
  * We'll re-run the same selection inside a CTE and then join to get image.
  */
 export async function fetchProductsForCategorySubtree(categoryId: string, limit: number, offset: number): Promise<ProductItemRow[]> {
-    const rows = await prisma.$queryRaw`
+  const rows = await prisma.$queryRaw`
     WITH RECURSIVE cats AS (
       SELECT id FROM catalog.categories WHERE id = ${categoryId}::uuid
       UNION ALL
@@ -37,23 +37,23 @@ export async function fetchProductsForCategorySubtree(categoryId: string, limit:
     ORDER BY sa.min_pos ASC NULLS LAST, sa.latest_created DESC;
   ` as Array<ProductItemRow & { min_pos?: number | null; latest_created?: string | Date | null }>;
 
-    // map to ProductItemRow shape (strip min_pos/latest_created)
-    return (rows ?? []).map(r => ({
-        id: String(r.id),
-        name: r.name,
-        slug: r.slug,
-        description: r.description ?? null,
-        price: r.price ?? null,
-        created_at: r.created_at ?? null,
-        image: r.image ?? null,
-    }));
+  // map to ProductItemRow shape (strip min_pos/latest_created)
+  return (rows ?? []).map(r => ({
+    id: String(r.id),
+    name: r.name,
+    slug: r.slug,
+    description: r.description ?? null,
+    price: r.price ?? null,
+    created_at: r.created_at ?? null,
+    image: r.image ?? null,
+  }));
 }
 
 /**
  * Count distinct products in subtree
  */
 export async function countProductsInCategorySubtree(categoryId: string): Promise<number> {
-    const res = await prisma.$queryRaw`
+  const res = await prisma.$queryRaw`
     WITH RECURSIVE cats AS (
       SELECT id FROM catalog.categories WHERE id = ${categoryId}::uuid
       UNION ALL
@@ -66,6 +66,6 @@ export async function countProductsInCategorySubtree(categoryId: string): Promis
     WHERE p.is_active = true
   ` as Array<{ total: string }>;
 
-    const total = parseInt(res?.[0]?.total ?? '0', 10);
-    return Number.isFinite(total) ? total : 0;
+  const total = parseInt(res?.[0]?.total ?? '0', 10);
+  return Number.isFinite(total) ? total : 0;
 }
