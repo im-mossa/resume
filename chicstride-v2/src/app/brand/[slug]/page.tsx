@@ -2,7 +2,7 @@
 import React from 'react';
 import { apiClient } from "../../../lib/api/client";
 import { Brand } from "../../../entities/brand";
-import { Product } from '../../../entities/product';
+import { Product } from "../../../entities/product";
 import { buildPublicImageUrl } from '../../../lib/utils/images';
 import BrandHeader from '../../../ui/components/brand/BrandHeader';
 import BrandProductGrid from '../../../ui/components/brand/BrandProductGrid';
