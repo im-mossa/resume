@@ -22,7 +22,8 @@ export type OrderFormData = {
 
 export default function CheckoutPage() {
   const handleSubmit = (data: OrderFormData) => {
-    console.log('اطلاعات سفارش:', data);
+    void data; // می‌گوید عمداً از data استفاده نشده
+    // console.log('اطلاعات سفارش:', data);
     // اینجا می‌تونی فراخوانی API برای ایجاد سفارش، اعتبارسنجی بیشتر یا ناوبری بعد از پرداخت را انجام بدی
     alert('سفارش شما ثبت شد! آماده اتصال به درگاه پرداخت...');
   };
