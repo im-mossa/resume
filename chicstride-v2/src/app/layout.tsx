@@ -1,5 +1,4 @@
 // src/app/layout.tsx
-// @ts-expect-error: allow side-effect css import without type declarations
 import '../ui/styles/globals.css';
 import React from 'react';
 import Providers from './providers';
