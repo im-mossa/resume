@@ -5,13 +5,13 @@
  * @param value عدد قیمت (ممکن است null باشد)
  * @param currency واحد پولی (پیش‌فرض IRR)
  */
-export function formatPrice(value: number | null, currency = "IRR"): string {
-    if (value == null) return "";
-    return new Intl.NumberFormat("fa-IR", {
-        style: "currency",
-        currency,
-        maximumFractionDigits: 0,
-    }).format(value);
+export function formatPrice(value: number | null, currency = 'IRR'): string {
+  if (value == null) return '';
+  return new Intl.NumberFormat('fa-IR', {
+    style: 'currency',
+    currency,
+    maximumFractionDigits: 0,
+  }).format(value);
 }
 
 /**
@@ -20,8 +20,8 @@ export function formatPrice(value: number | null, currency = "IRR"): string {
  * @param maxLength حداکثر طول مجاز
  */
 export function truncateText(text: string, maxLength = 100): string {
-    if (text.length <= maxLength) return text;
-    return text.slice(0, maxLength) + "…";
+  if (text.length <= maxLength) return text;
+  return text.slice(0, maxLength) + '…';
 }
 
 /**
@@ -29,10 +29,10 @@ export function truncateText(text: string, maxLength = 100): string {
  * @param isoDate تاریخ به صورت ISO string
  */
 export function formatDate(isoDate: string): string {
-    const date = new Date(isoDate);
-    return new Intl.DateTimeFormat("fa-IR", {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-    }).format(date);
+  const date = new Date(isoDate);
+  return new Intl.DateTimeFormat('fa-IR', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  }).format(date);
 }

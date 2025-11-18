@@ -1,11 +1,11 @@
 // src/store/index.ts
-import { configureStore } from "@reduxjs/toolkit";
-import cartReducer from "./cartSlice";
+import { configureStore } from '@reduxjs/toolkit';
+import cartReducer from './cartSlice';
 
 export const store = configureStore({
-    reducer: {
-        cart: cartReducer,
-    },
+  reducer: {
+    cart: cartReducer,
+  },
 });
 
 // نوع‌های کمکی برای استفاده در useSelector و useDispatch

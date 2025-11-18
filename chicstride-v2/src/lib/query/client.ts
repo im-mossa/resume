@@ -1,18 +1,25 @@
 // src/lib/query/client.ts
-"use client";
-import { QueryClient } from "@tanstack/react-query";
+'use client';
+
+import { QueryClient } from '@tanstack/react-query';
+import type { AxiosError } from 'axios';
 
 export function createQueryClient() {
-    return new QueryClient({
-        defaultOptions: {
-            queries: {
-                staleTime: 60_000,
-                retry: (failureCount, error: any) => {
-                    const status = error?.response?.status;
-                    if (status && status >= 400 && status < 500) return false;
-                    return failureCount < 2;
-                },
-            },
+  return new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 60_000,
+        retry: (failureCount: number, error: unknown) => {
+          // اگر خطا از Axios باشد، status را بررسی می‌کنیم
+          const axiosError = error as AxiosError | undefined;
+          const status = axiosError?.response?.status;
+
+          if (status && status >= 400 && status < 500) {
+            return false;
+          }
+          return failureCount < 2;
         },
-    });
+      },
+    },
+  });
 }

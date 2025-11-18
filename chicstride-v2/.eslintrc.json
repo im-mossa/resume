@@ -1,15 +1,16 @@
 {
-    "extends": [
-        "next/core-web-vitals",
-        "plugin:@typescript-eslint/recommended",
-        "plugin:react/recommended",
-        "plugin:jsx-a11y/recommended"
-    ],
-    "plugins": [
-        "@typescript-eslint"
-    ],
-    "rules": {
-        "react/react-in-jsx-scope": "off",
-        "react/no-unknown-property": "off"
-    }
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:jsx-a11y/recommended",
+    "prettier"
+  ],
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "react/no-unknown-property": "off",
+    "no-console": "warn",
+    "no-debugger": "error"
+  }
 }

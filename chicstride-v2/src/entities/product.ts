@@ -1,84 +1,72 @@
 // src/entities/product.ts
-export interface Product {
-    id: string;
-    name: string;
-    slug: string;
-    description?: string | null;
-    price: number | null;
-    createdAt: string;
-    image?: string | null;
-}
+import { Category } from './category';
 
-export interface ProductDetail {
-    id: string;
-    name: string;
-    slug: string;
-    description?: string | null;
-    price: number | null;
-    stock: number;
-    isActive: boolean;
-    createdAt: string;
-    updatedAt: string;
-    images: ProductImage[];
-    variants: ProductVariant[];
-    categories: Category[];
-    breadcrumb: Breadcrumb[] | null;
-}
+/**
+ * تصویر محصول (مختصر)
+ */
+export type ProductImage = {
+  id: string;
+  url: string;
+  altText?: string | null;
+  sortOrder?: number | null;
+};
 
-export interface ProductImage {
-    id: string;
-    url: string;
-    altText?: string | null;
-    sortOrder?: number | null;
-}
+/**
+ * واریانت محصول
+ */
+export type ProductVariant = {
+  id: string;
+  sku: string;
+  name?: string | null;
+  color?: string | null;
+  size?: string | null;
+  stock: number;
+  price?: number | null;
+  createdAt?: string;
+};
 
-export interface ProductVariant {
-    id: string;
-    sku: string;
-    color?: string | null;
-    size?: string | null;
-    stock: number;
-    createdAt: string;
-}
+/**
+ * مسیر breadcrumb برای نمایش مسیر دسته‌بندی/ناوبری
+ */
+export type Breadcrumb = {
+  id: string;
+  name: string;
+  slug?: string;
+};
 
-export interface Breadcrumb {
-    id: string;
-    name: string;
-    slug: string;
-}
+/**
+ * نمای کلی از محصول برای صفحات لیست (Catalog)
+ */
+export type Product = {
+  id: string;
+  name: string;
+  slug: string;
+  description?: string | null;
+  /** قیمت پایه محصول؛ ممکن است null باشد اگر قیمت مشخص نشده باشد */
+  price?: number | null;
+  createdAt?: string;
+  /** آدرس تصویر اصلی / thumbnail */
+  image?: string | null;
+  brandId?: string | null;
+  categoryId?: string | null;
+};
 
-// src/entities/category.ts
-export interface Category {
-    id: string;
-    name: string;
-    slug: string;
-    parentId?: string | null;
-    imageUrl?: string | null;
-    path?: string | null;
-    sortOrder?: number | null;
-    productCount?: number | null;
-    isActive: boolean;
-    children?: Category[];
-}
-
-// src/entities/brand.ts
-export interface Brand {
-    id: string;
-    name: string;
-    slug: string;
-}
-
-// src/entities/slide.ts
-export interface Slide {
-    id: string;
-    title?: string;
-    subtitle?: string;
-    image?: string | null;
-    targetType?: "product" | "category" | "url" | null;
-    targetValue?: string | null;
-    productId?: string | null;
-    position: string;
-    sortOrder?: number | null;
-    weight?: number | null;
-    metadata?: Record<string, unknown>;
-}
+/**
+ * جزییات کامل محصول برای صفحه محصول
+ */
+export type ProductDetail = {
+  id: string;
+  name: string;
+  slug: string;
+  description?: string | null;
+  price?: number | null;
+  stock?: number;
+  isActive?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+  images: ProductImage[];
+  variants: ProductVariant[];
+  categories?: Category[];
+  breadcrumb?: Breadcrumb[] | null;
+  metadata?: Record<string, unknown>;
+};
