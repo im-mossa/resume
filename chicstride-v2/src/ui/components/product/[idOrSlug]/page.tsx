@@ -19,12 +19,12 @@ export default async function ProductDetailPage({
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div>
-        <Breadcrumb trail={pd.breadcrumb} />
+        <Breadcrumb trail={pd.breadcrumb ?? null} />
         <ProductGallery images={pd.images} />
       </div>
       <div className="space-y-4">
         <h1 className="text-2xl font-bold">{pd.name}</h1>
-        <div className="text-lg">{formatPrice(pd.price)}</div>
+        <div className="text-lg">{pd.price != null ? formatPrice(pd.price) : '-'}</div>
         <div className="text-sm text-gray-600">موجودی: {pd.stock}</div>
         {/* VariantSelector client-side could be mounted via a Client Component wrapper */}
         <p className="text-gray-700 whitespace-pre-line">{pd.description ?? ''}</p>

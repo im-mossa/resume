@@ -5,19 +5,19 @@ import { removeItem, updateQuantity } from '../../../store/cartSlice';
 import Image from 'next/image';
 
 type CartItemVariant = {
-  id?: string;
-  size?: string;
-  color?: string;
-  sku?: string;
+  id?: string | null;
+  size?: string | null;
+  color?: string | null;
+  sku?: string | null;
 };
 
 export type CartItemType = {
   id: string;
   name: string;
-  image?: string;
-  price?: number;
+  price: number | null;
   quantity: number;
-  variant?: CartItemVariant;
+  image?: string | null;
+  variant?: CartItemVariant | null;
 };
 
 export default function CartItem({ item }: { item: CartItemType }) {
@@ -55,7 +55,7 @@ export default function CartItem({ item }: { item: CartItemType }) {
               dispatch(
                 updateQuantity({
                   id: item.id,
-                  variantId: item.variant?.id,
+                  variantId: item.variant?.id || undefined,
                   quantity: Number(e.target.value),
                 })
               )
@@ -63,7 +63,9 @@ export default function CartItem({ item }: { item: CartItemType }) {
             className="w-16 border rounded px-2 py-1"
           />
           <button
-            onClick={() => dispatch(removeItem({ id: item.id, variantId: item.variant?.id }))}
+            onClick={() =>
+              dispatch(removeItem({ id: item.id, variantId: item.variant?.id || undefined }))
+            }
             className="text-red-600 text-sm"
           >
             حذف

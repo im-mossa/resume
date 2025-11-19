@@ -26,9 +26,11 @@ function mapToCategory(raw: unknown): Category {
  * دریافت درخت دسته‌ها
  * برمی‌گرداند: یک آرایه از Category (ممکن است خالی باشد)
  */
-export async function getCategoriesTree(): Promise<Category[]> {
+export async function getCategoriesTree(includeHidden: boolean): Promise<Category[]> {
   try {
-    const res: AxiosResponse = await apiClient.get('/categories/tree');
+    const res: AxiosResponse = await apiClient.get(
+      `/categories/tree?include_inactive=${includeHidden ?? false}`
+    );
     const raw = res.data;
     if (!Array.isArray(raw)) return [];
     return raw.map(mapToCategory);

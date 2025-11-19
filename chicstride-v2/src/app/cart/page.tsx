@@ -1,3 +1,4 @@
+// src/app/cart/page.tsx
 'use client';
 
 import { useSelector } from 'react-redux';

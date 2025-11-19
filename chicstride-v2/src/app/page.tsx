@@ -10,7 +10,7 @@ export default async function HomePage() {
   const [slides, latest, categories] = await Promise.all([
     getSlides({ position: 'home_hero', device: 'desktop', country: 'IR', limit: 6 }),
     getProducts({ page: 1, limit: 8, sort_by: 'created_at', order: 'desc' }),
-    getCategoriesTree(),
+    getCategoriesTree(false),
   ]);
 
   return (
