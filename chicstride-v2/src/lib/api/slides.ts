@@ -32,21 +32,22 @@ function ensureNumberOrNull(v: unknown): number | null {
 
 function mapToSlide(raw: RawSlide): Slide {
   const r = raw ?? {};
-  const imageRaw = r.image ?? r.image_url ?? null;
+  const imageRaw = r.image_url ?? null;
   const imageUrl = imageRaw == null ? null : buildPublicImageUrl(String(imageRaw));
+  // console.log(buildPublicImageUrl(String(imageRaw)));
 
-  const targetType = (r.target_type ?? r.targetType) as SlideTargetType | undefined;
+  const targetType = r.target_type as SlideTargetType | undefined;
 
   return {
     id: ensureString(r.id),
-    title: ensureNullableString(r.title ?? r.title_text ?? null),
-    subtitle: ensureNullableString(r.subtitle ?? r.subtitle_text ?? null),
+    title: ensureNullableString(r.title ?? null),
+    subtitle: ensureNullableString(r.subtitle ?? null),
     image: imageUrl ?? null,
     targetType: targetType ?? null,
-    targetValue: ensureNullableString(r.target_value ?? r.targetValue ?? null),
-    productId: ensureNullableString(r.product_id ?? r.productId ?? null),
-    position: ensureString(r.position ?? r.pos ?? ''),
-    sortOrder: ensureNumberOrNull(r.sort_order ?? r.sortOrder ?? null),
+    targetValue: ensureNullableString(r.target_value ?? null),
+    productId: ensureNullableString(r.product_id ?? null),
+    position: ensureString(r.position ?? ''),
+    sortOrder: ensureNumberOrNull(r.sort_order ?? null),
     weight: ensureNumberOrNull(r.weight ?? null),
     metadata: (r.metadata as Record<string, unknown>) ?? undefined,
   };

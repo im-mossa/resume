@@ -2,8 +2,8 @@
 import axios, { AxiosInstance } from 'axios';
 import https from 'https';
 
-const DEFAULT_BASE = 'http://localhost:3000';
-const BASE_URL = process.env.NEXT_PUBLIC_API_BASE ?? DEFAULT_BASE;
+// const DEFAULT_BASE = 'http://localhost';
+const BASE_URL: string = String(process.env.NEXT_PUBLIC_API_BASE);
 
 /**
  * مشخص می‌کند که آیا در محیط فعلی اجازه نادیده‌گرفتن خطای TLS داده شود.
@@ -33,7 +33,7 @@ export function createApiClient(baseURL: string = BASE_URL): AxiosInstance {
       'Content-Type': 'application/json',
       Accept: 'application/json',
     },
-    httpsAgent: insecure ? new https.Agent({ rejectUnauthorized: false }) : undefined,
+    httpsAgent: insecure ? undefined : new https.Agent({ rejectUnauthorized: false }),
   });
 
   // request interceptor (مثال: افزودن توکن Authorization)
