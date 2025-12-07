@@ -32,9 +32,26 @@ function ensureNumberOrNull(v: unknown): number | null {
 
 function mapToSlide(raw: RawSlide): Slide {
   const r = raw ?? {};
-  const imageRaw = r.image_url ?? null;
-  const imageUrl = imageRaw == null ? null : buildPublicImageUrl(String(imageRaw));
-  // console.log(buildPublicImageUrl(String(imageRaw)));
+  const imageRaw = r.image_url ?? r.image ?? null;
+  let imageUrl = imageRaw == null ? null : buildPublicImageUrl(String(imageRaw));
+  
+  // اگر buildPublicImageUrl null برگرداند، سعی کن مستقیماً از imageRaw استفاده کنی
+  if (!imageUrl && imageRaw) {
+    const rawStr = String(imageRaw);
+    // اگر absolute URL است، مستقیماً استفاده کن
+    if (/^https?:\/\//i.test(rawStr)) {
+      imageUrl = rawStr;
+    } else {
+      // در غیر این صورت با base URL ترکیب کن
+      const base = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://dev.local';
+      imageUrl = `${base}/static/${rawStr.replace(/^\/+/, '')}`;
+    }
+  }
+
+  // لاگ برای دیباگ
+  if (imageRaw && !imageUrl) {
+    console.warn('Slide image URL could not be built:', { imageRaw, imageUrl });
+  }
 
   const targetType = r.target_type as SlideTargetType | undefined;
 
@@ -42,7 +59,7 @@ function mapToSlide(raw: RawSlide): Slide {
     id: ensureString(r.id),
     title: ensureNullableString(r.title ?? null),
     subtitle: ensureNullableString(r.subtitle ?? null),
-    image: imageUrl ?? null,
+    image: imageUrl,
     targetType: targetType ?? null,
     targetValue: ensureNullableString(r.target_value ?? null),
     productId: ensureNullableString(r.product_id ?? null),
