@@ -10,18 +10,21 @@ export const revalidate = 60;
 export default async function ProductsPage({
   searchParams,
 }: {
-  searchParams: Record<string, string | string[] | undefined>;
+  searchParams: Promise<Record<string, string | string[] | undefined>> | Record<string, string | string[] | undefined>;
 }) {
-  const page = Number(searchParams.page ?? 1);
-  const limit = Number(searchParams.limit ?? 24);
-  const search = typeof searchParams.search === 'string' ? searchParams.search : undefined;
-  const brand = typeof searchParams.brand === 'string' ? searchParams.brand : undefined;
+  // Handle searchParams as Promise (Next.js 15+) or direct object
+  const resolvedSearchParams = await Promise.resolve(searchParams);
+  
+  const page = Number(resolvedSearchParams.page ?? 1);
+  const limit = Number(resolvedSearchParams.limit ?? 24);
+  const search = typeof resolvedSearchParams.search === 'string' ? resolvedSearchParams.search : undefined;
+  const brand = typeof resolvedSearchParams.brand === 'string' ? resolvedSearchParams.brand : undefined;
   const category_id =
-    typeof searchParams.category_id === 'string' ? searchParams.category_id : undefined;
+    typeof resolvedSearchParams.category_id === 'string' ? resolvedSearchParams.category_id : undefined;
   const sort_by = (
-    typeof searchParams.sort_by === 'string' ? searchParams.sort_by : 'created_at'
+    typeof resolvedSearchParams.sort_by === 'string' ? resolvedSearchParams.sort_by : 'created_at'
   ) as 'created_at' | 'price' | 'name';
-  const order = (typeof searchParams.order === 'string' ? searchParams.order : 'desc') as
+  const order = (typeof resolvedSearchParams.order === 'string' ? resolvedSearchParams.order : 'desc') as
     | 'asc'
     | 'desc';
 

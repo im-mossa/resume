@@ -34,7 +34,7 @@ function mapToSlide(raw: RawSlide): Slide {
   const r = raw ?? {};
   const imageRaw = r.image_url ?? r.image ?? null;
   let imageUrl = imageRaw == null ? null : buildPublicImageUrl(String(imageRaw));
-  
+
   // اگر buildPublicImageUrl null برگرداند، سعی کن مستقیماً از imageRaw استفاده کنی
   if (!imageUrl && imageRaw) {
     const rawStr = String(imageRaw);
@@ -42,9 +42,8 @@ function mapToSlide(raw: RawSlide): Slide {
     if (/^https?:\/\//i.test(rawStr)) {
       imageUrl = rawStr;
     } else {
-      // در غیر این صورت با base URL ترکیب کن
-      const base = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://dev.local';
-      imageUrl = `${base}/static/${rawStr.replace(/^\/+/, '')}`;
+      // در غیر این صورت از buildPublicImageUrl استفاده کن که relative URL برمی‌گرداند
+      imageUrl = buildPublicImageUrl(rawStr);
     }
   }
 

@@ -150,10 +150,26 @@ export async function getProducts(params: GetProductsParams = {}): Promise<{
 /** دریافت جزئیات یک محصول بر اساس id یا slug */
 export async function getProduct(idOrSlug: string, category?: string): Promise<ProductDetail> {
   const encoded = encodeURIComponent(idOrSlug);
-  const res: AxiosResponse = await apiClient.get(`/product/${encoded}`, {
-    params: { category },
-  });
-  const pd = (res.data?.data ?? {}) as Record<string, unknown>;
+  
+  try {
+    // Try /product/{id} first
+    let res: AxiosResponse;
+    try {
+      res = await apiClient.get(`/product/${encoded}`, {
+        params: { category },
+      });
+    } catch (err: any) {
+      // If 404, try /products/{id} (plural)
+      if (err?.response?.status === 404) {
+        res = await apiClient.get(`/products/${encoded}`, {
+          params: { category },
+        });
+      } else {
+        throw err;
+      }
+    }
+    
+    const pd = (res.data?.data ?? res.data ?? {}) as Record<string, unknown>;
 
   const productRaw = (pd['product'] ?? {}) as Record<string, unknown>;
   const imagesRaw = Array.isArray(pd['images']) ? (pd['images'] as unknown[]) : [];
@@ -190,5 +206,15 @@ export async function getProduct(idOrSlug: string, category?: string): Promise<P
     metadata: pd['metadata'] == null ? undefined : (pd['metadata'] as Record<string, unknown>),
   };
 
-  return productDetail;
+    return productDetail;
+  } catch (err: any) {
+    console.error('getProduct error:', err);
+    console.error('Attempted to fetch product with idOrSlug:', idOrSlug);
+    console.error('API endpoint tried: /product/' + encoded);
+    if (err?.response) {
+      console.error('Response status:', err.response.status);
+      console.error('Response data:', err.response.data);
+    }
+    throw err;
+  }
 }

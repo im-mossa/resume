@@ -13,7 +13,7 @@ export default function ProductCard({ product }: { product: Product }) {
             alt={product.name}
             fill
             className="object-cover"
-            sizes="(max-width: 768px) 100vw, 25vw"
+            // sizes="(max-width: 768px) 100vw, 25vw"
           />
         </div>
       ) : (

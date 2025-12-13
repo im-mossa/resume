@@ -22,30 +22,34 @@ export default async function HomePage() {
       </section>
       <section>
         <h2 className="text-xl font-bold mb-3">دسته‌بندی‌ها</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {categories.slice(0, 8).map((c) => (
-            <a
-              key={c.id}
-              href={`/category/${c.id}`}
-              className="border rounded p-4 flex items-center gap-3"
-            >
-              {c.imageUrl ? (
-                <div className="w-12 h-12 relative rounded overflow-hidden">
-                  <Image
-                    src={c.imageUrl}
-                    alt={c.name}
-                    width={48}
-                    height={48}
-                    className="object-cover"
-                  />
-                </div>
-              ) : (
-                <div className="w-12 h-12 bg-gray-200 rounded" />
-              )}
-              <span>{c.name}</span>
-            </a>
-          ))}
-        </div>
+        {categories.length > 0 ? (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {categories.slice(0, 8).map((c) => (
+              <a
+                key={c.id}
+                href={`/category/${c.id}`}
+                className="border rounded p-4 flex items-center gap-3"
+              >
+                {c.imageUrl ? (
+                  <div className="w-12 h-12 relative rounded overflow-hidden">
+                    <Image
+                      src={c.imageUrl}
+                      alt={c.name}
+                      width={48}
+                      height={48}
+                      className="object-cover"
+                    />
+                  </div>
+                ) : (
+                  <div className="w-12 h-12 bg-gray-200 rounded" />
+                )}
+                <span>{c.name}</span>
+              </a>
+            ))}
+          </div>
+        ) : (
+          <div className="text-gray-600">هیچ دسته‌ای یافت نشد.</div>
+        )}
       </section>
     </div>
   );

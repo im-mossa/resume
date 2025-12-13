@@ -20,10 +20,10 @@ export default function Header({ showSearch = true }: HeaderProps) {
 
         {/* ناوبری اصلی */}
         <nav className="flex items-center gap-4 text-sm text-gray-700">
-          <Link href={process.env.NEXT_PUBLIC_API_BASE + '/products'}>محصولات</Link>
-          <Link href={process.env.NEXT_PUBLIC_API_BASE + '/brands'}>برندها</Link>
-          <Link href={process.env.NEXT_PUBLIC_API_BASE + '/categories'}>دسته‌بندی‌ها</Link>
-          <Link href={process.env.NEXT_PUBLIC_API_BASE + '/cart'}>سبد خرید</Link>
+          <Link href="/products">محصولات</Link>
+          <Link href="/discovery">برندها</Link>
+          <Link href="/categories">دسته‌بندی‌ها</Link>
+          <Link href="/cart">سبد خرید</Link>
         </nav>
 
         {/* سرچ بار (اختیاری) */}

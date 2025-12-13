@@ -3,8 +3,13 @@ export function buildPublicImageUrl(path?: string | null): string | null {
   if (!path) return null;
   const isAbsolute = /^https?:\/\//i.test(path);
   if (isAbsolute) return path;
-  const base = process.env.NEXT_PUBLIC_BASE_URL ?? '';
-  return `${base}/static/${path.replace(/^\/+/, '')}`;
+
+  const cleanPath = path.replace(/^\/+/, '');
+
+  // Always use relative URLs for static images
+  // The rewrite rule in next.config.ts will proxy /static/* requests to the API server
+  // This works regardless of the API server's hostname
+  return `/static/${cleanPath}`;
 }
 
 // src/lib/utils/format.ts
