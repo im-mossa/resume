@@ -79,5 +79,7 @@ export async function getCategoriesTree(includeHidden: boolean): Promise<Categor
 export async function getCategoryById(id: string): Promise<Category> {
   const encoded = encodeURIComponent(id);
   const res: AxiosResponse = await apiClient.get(`/categories/${encoded}`);
-  return mapToCategory(res.data);
+  // Handle both direct object response and wrapped response { data: {...} }
+  const raw = res.data?.data ?? res.data;
+  return mapToCategory(raw);
 }

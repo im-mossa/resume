@@ -1,0 +1,44 @@
+Title: Stored XSS in Comments Section – example.com
+
+Severity: High
+Category: Stored Cross-Site Scripting (XSS)
+
+Affected Endpoint:
+https://example.com/post/123/comments
+
+Summary:
+The comments section of example.com does not properly sanitize user input. As a result, an attacker can inject JavaScript code that will be stored in the database and executed in the browser of every user who views the affected page.
+
+Steps to Reproduce:
+1. Log in to your account.
+2. Navigate to any post, for example:
+   https://example.com/post/123
+3. Scroll to the comments section.
+4. Submit the following payload as a comment:
+   <script>alert('XSS Test')</script>
+5. Refresh the page.
+6. The JavaScript code executes in the browser of any user who views the page.
+
+Impact:
+- Theft of session cookies
+- Account takeover
+- Phishing attacks
+- Arbitrary JavaScript execution in victims’ browsers
+- Full control over user interaction on the page
+
+Proof of Concept (PoC):
+Payload used:
+<script>alert('XSS Test')</script>
+
+Recommendation:
+- Sanitize user input on server-side using proper escaping (e.g., htmlspecialchars in PHP)
+- Implement Content Security Policy (CSP)
+- Validate and encode output before rendering it in HTML
+- Avoid rendering raw user input directly into the DOM
+
+Additional Notes:
+This vulnerability affects all users who view the compromised post. The attack persists until the malicious comment is removed.
+
+Reporter:
+Saeed
+Bug Bounty Researcher
